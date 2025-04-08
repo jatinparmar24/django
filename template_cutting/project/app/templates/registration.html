@@ -1,5 +1,41 @@
 {% extends "home.html" %}
 
+{% block title  %}
+Registration Page
+{% endblock  %}
+
 {% block content%}
 This Is Registration Section
+
+<div>
+    <form action="" align="center">
+        <label for="">Enter Name :-</label>
+        <input type="text"> <br> <br>
+
+        <label for="">Enter Number :-</label>
+        <input type="number"> <br> <br>
+
+        <label for="">Enter E-Mail :-</label>
+        <input type="email"> <br> <br>
+
+        <label for="">Education :-</label><br> <br>
+        <input type="text" value="MCA" readonly>
+        <input type="checkbox"> <br> <br>
+
+        <input type="text" value="BCA" readonly>
+        <input type="checkbox"> <br> <br>
+
+        <input type="text" value="DCA" readonly>
+        <input type="checkbox"> <br> <br>
+
+        <label for="">Post Image :-</label>
+        <input type="image"> <br> <br>
+
+        <label for="">Upload File :-</label>
+        <input type="file"> <br> <br>
+
+        <input type="submit">
+
+    </form>
+</div>
 {% endblock%}
