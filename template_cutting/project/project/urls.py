@@ -27,5 +27,5 @@ urlpatterns = [
     path('services/' ,views.services,name='services'),
     path('login/' ,views.login,name='login'),
     path('registration/' ,views.registration,name='registration'),
-    #   path('table/' ,views.table,name='table')
+    path('register/',views.register,name='register'),
 ]

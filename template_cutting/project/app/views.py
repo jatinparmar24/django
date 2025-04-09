@@ -22,3 +22,9 @@ def login(request):
 
 def registration(request):
     return render(request,'registration.html')
+
+def register(request):
+    print("register page")
+    print(request.method)
+    print(request.POST)
+    print(request.FILES)
