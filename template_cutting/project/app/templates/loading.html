@@ -1,9 +1,15 @@
 {% extends "home.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/style.css'  %}">
+
+{% endblock  %}
 
 {% block title %}
-Landing Page
+Loading Page
 {% endblock  %}
 
 {% block content %}
-This Is Loading Page
+<h1 class="color">Landing Page</h1>
 {% endblock  %}
