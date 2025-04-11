@@ -1,9 +1,13 @@
 {% extends "home.html" %}
 
+{% load static%}
+
 {% block title  %}
 Index Page
 {% endblock  %}
 
 {% block content%}
-This Is index Section
+This Is index Section <br>
+
+<img src="{% static 'image/gmfg.png' %}" alt="" width="100px",height="100px">
 {% endblock%}

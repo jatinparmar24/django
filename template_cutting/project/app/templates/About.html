@@ -1,9 +1,16 @@
 {% extends "home.html" %}
 
+{% load static%}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/style.css'  %}">
+{% endblock  %}
+
 {% block title  %}
 About Page
 {% endblock  %}
 
 {% block content%}
-This Is About Section
+<h1 class="color">This Is About Section</h1>
+
 {% endblock%}
