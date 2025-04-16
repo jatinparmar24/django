@@ -54,5 +54,26 @@ def register(request):
     # print(resume)
     print(username,email,detail,phone,dob,subscribe,gender,password,cpassword,resume)
 
+    user=Students.objects.filter(stuemial=email)
+    if user:
+        msg="Email Already Exixted "
+        return render(request,'registration.html',{'key':msg})
+
+    else:
+        if password==cpassword:
+            Students.objects.create(stuname=username,stuemial=email,studetails=detail,stuphone=phone,studob=dob,stuedu=subscribe,stugender=gender,stuimage=profilepic,sturesume=resume,stupass=password)
+            msg="Registration Successfull"
+            return render(request,'login.html',{'key':msg})
+
+        else:
+            msg="Check Password And Confirm Password again"
+            return render(request,'registration.html',{'key':msg})
+
+
+
+            
+       
+
+
    
-    Students.objects.create(stuname=username,stuemial=email,studetails=detail,stuphone=phone,studob=dob,stuedu=subscribe,stugender=gender,stuimage=profilepic,sturesume=resume,stupass=password)
+    # Students.objects.create(stuname=username,stuemial=email,studetails=detail,stuphone=phone,studob=dob,stuedu=subscribe,stugender=gender,stuimage=profilepic,sturesume=resume,stupass=password)

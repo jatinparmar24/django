@@ -1,9 +1,16 @@
 {% extends "home.html" %}
 
+{% load static %}
+
 {% block title  %}
 Services Page
 {% endblock  %}
 
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock  %}
+
 {% block content%}
-This Is services Section
+This Is Services Section <br>
+<h1 class="service">Applying css To check that if works here or not</h1>
 {% endblock%}

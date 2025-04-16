@@ -5,7 +5,8 @@ Registration Page
 {% endblock  %}
 
 {% block content%}
-This Is Registration Section
+This Is Registration Section <br> <br>
+{{key}} <br> <br>
 {% comment %} <a href="{% url 'index' %}">Back</a> {% endcomment %}
 
 <form action="{% url 'register' %}" method="post" enctype="multipart/form-data">
