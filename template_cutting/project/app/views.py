@@ -24,6 +24,33 @@ def login(request):
 def registration(request):
     return render(request,'registration.html')
 
+def logindata(request):
+    if request.method=='POST':
+        email=request.POST.get('email')
+        pasw=request.POST.get('password')
+        user=Students.objects.filter(stuemial=email)
+        if user:
+            userdata=Students.objects.get(stuemial=email)
+            print(userdata.stuname)
+            print(userdata.stuemial)
+            pass1=userdata.stupass
+            if pasw==pass1:
+                msg='Welcome To DashBoard'
+                return render(request,'loading.html',{'userdata':userdata})
+
+            else:
+                msg='Email And Password Not Matched'
+                return render(request,'login.html',{'msg':msg,'email':email})
+
+        else:
+            msg="Email Not registerd"
+            return render(request,'login.html',)
+
+    else:
+        return render(request,'login.html')
+
+
+
 def register(request):
     print("register page")
     print(request.method)

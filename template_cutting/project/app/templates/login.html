@@ -4,7 +4,23 @@
 Login Page
 {% endblock  %}
 
-{% block content%}
+{% block content %}
 This Is Login Section
 {% include "table.html" %}
-{% endblock%}
+
+{{msg}}
+
+<div>
+    <form action="{% url 'logindata' %}" method="post">
+
+        {% csrf_token %}
+        <label for="">Enter EMail</label>
+        <input type="text" name="email" value=""> <br>
+
+        <label for="">Enter Password</label>
+        <input type="text" name="password"> <br>
+
+        <input type="submit" value="Login">
+    </form>
+</div>
+{% endblock %}
