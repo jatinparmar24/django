@@ -6,6 +6,25 @@ from .models import Students
 def home(request):
     return render('request','loading.html')
 
+def index1(request,pk):
+    Students.objects.get(id=pk)
+    userdata={
+                    "id":userdata.id,
+                    "name":userdata.stuname,
+                    "email":userdata.stuemial,
+                    "des":userdata.studetails,
+                    "phone":userdata.stuphone,
+                    "dob":userdata.studob,
+                    "sub":userdata.stuedu,
+                    "gender":userdata.stugender,
+                    "image":userdata.stuimage,
+                    "resume":userdata.sturesume,
+                    "pass":userdata.stupass,
+                }
+    return render(request,'loading.html')
+    
+
+
 def About(request):
     return render(request,'About.html')
 
@@ -36,6 +55,19 @@ def logindata(request):
             pass1=userdata.stupass
             if pasw==pass1:
                 msg='Welcome To DashBoard'
+                userdata={
+                    "id":userdata.id,
+                    "name":userdata.stuname,
+                    "email":userdata.stuemial,
+                    "des":userdata.studetails,
+                    "phone":userdata.stuphone,
+                    "dob":userdata.studob,
+                    "sub":userdata.stuedu,
+                    "gender":userdata.stugender,
+                    "image":userdata.stuimage,
+                    "resume":userdata.sturesume,
+                    "pass":userdata.stupass,
+                }
                 return render(request,'loading.html',{'userdata':userdata})
 
             else:
@@ -44,10 +76,10 @@ def logindata(request):
 
         else:
             msg="Email Not registerd"
-            return render(request,'login.html',)
+            return render(request,'login.html',{'msg':msg})
 
     else:
-        return render(request,'login.html')
+        return render(request,'login.html',{'msg':msg})
 
 
 
