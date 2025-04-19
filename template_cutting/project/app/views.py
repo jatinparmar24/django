@@ -4,10 +4,10 @@ from .models import Students
 # Create your views here.
 
 def home(request):
-    return render('request','loading.html')
+    return render(request,'loading.html')
 
 def index1(request,pk):
-    Students.objects.get(id=pk)
+    userdata=Students.objects.get(id=pk)
     userdata={
                     "id":userdata.id,
                     "name":userdata.stuname,
@@ -21,18 +21,71 @@ def index1(request,pk):
                     "resume":userdata.sturesume,
                     "pass":userdata.stupass,
                 }
-    return render(request,'loading.html')
+    return render(request,'loading.html',{'userdata': userdata})
     
 
 
-def About(request):
-    return render(request,'About.html')
+def about(request):
+     return render(request,'about.html')
+
+
+def about1(request,pk):
+    userdata=Students.objects.get(id=pk)
+    userdata={
+                    "id":userdata.id,
+                    "name":userdata.stuname,
+                    "email":userdata.stuemial,
+                    "des":userdata.studetails,
+                    "phone":userdata.stuphone,
+                    "dob":userdata.studob,
+                    "sub":userdata.stuedu,
+                    "gender":userdata.stugender,
+                    "image":userdata.stuimage,
+                    "resume":userdata.sturesume,
+                    "pass":userdata.stupass,
+                }
+    return render(request,'about.html',{'userdata': userdata})
+
 
 def terms(request):
     return render(request,'terms.html')
 
+def terms1(request,pk):
+    userdata=Students.objects.get(id=pk)
+    userdata={
+                    "id":userdata.id,
+                    "name":userdata.stuname,
+                    "email":userdata.stuemial,
+                    "des":userdata.studetails,
+                    "phone":userdata.stuphone,
+                    "dob":userdata.studob,
+                    "sub":userdata.stuedu,
+                    "gender":userdata.stugender,
+                    "image":userdata.stuimage,
+                    "resume":userdata.sturesume,
+                    "pass":userdata.stupass,
+                }
+    return render(request,'terms.html',{'userdata': userdata})
+
 def services(request):
     return render(request,'services.html')
+
+def services1(request,pk):
+    userdata=Students.objects.get(id=pk)
+    userdata={
+                    "id":userdata.id,
+                    "name":userdata.stuname,
+                    "email":userdata.stuemial,
+                    "des":userdata.studetails,
+                    "phone":userdata.stuphone,
+                    "dob":userdata.studob,
+                    "sub":userdata.stuedu,
+                    "gender":userdata.stugender,
+                    "image":userdata.stuimage,
+                    "resume":userdata.sturesume,
+                    "pass":userdata.stupass,
+                }
+    return render(request,'services.html',{'userdata': userdata})
 
 def index(request):
     return render(request,'index.html')
@@ -68,7 +121,7 @@ def logindata(request):
                     "resume":userdata.sturesume,
                     "pass":userdata.stupass,
                 }
-                return render(request,'loading.html',{'userdata':userdata})
+                return render(request,'dashboard.html',{'userdata':userdata})
 
             else:
                 msg='Email And Password Not Matched'

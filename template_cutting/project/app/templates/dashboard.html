@@ -8,6 +8,8 @@ DashBoard Page
 {% block content%}
 This Is dashBoard Section <br>
 {{userdata.name}} <br>
-{{userdata.id}}
+{{userdata.id}} <br>
+<img src="{{userdata.image.url}}" alt="" height="200px" width="200px"> <br>
+<a href="{{userdata.file.url}}" download="">Download</a>
 
 {% endblock%}

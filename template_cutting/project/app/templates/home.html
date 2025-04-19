@@ -27,13 +27,13 @@
           <a class="nav-link active" aria-current="page" href="{% url 'index1' pk=userdata.id %}">Index</a>
         </li>
          <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'About' %}">About</a>
+          <a class="nav-link active" aria-current="page" href="{% url 'about1' pk=userdata.id %}">About</a>
         </li>
          <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'services' %}">Services</a>
+          <a class="nav-link active" aria-current="page" href="{% url 'services1' pk=userdata.id %}">Services</a>
         </li>
          <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'terms' %}">Terms</a>
+          <a class="nav-link active" aria-current="page" href="{% url 'terms1' pk=userdata.id %}">Terms</a>
         </li>
          <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Logout</a>
@@ -46,11 +46,11 @@
       </form>
     </div>
   </div>
-</nav>
+ {% else %}
 
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-      {% else%}
+
+     
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Navbar</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,7 +62,7 @@
           <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Index</a>
         </li>
          <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'About' %}">About</a>
+          <a class="nav-link active" aria-current="page" href="{% url 'about' %}">About</a>
         </li>
          <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{% url 'services' %}">Services</a>
@@ -83,8 +83,9 @@
       </form>
     </div>
   </div>
-</nav>
+
 {% endif %}
+</nav>
 {% block content %}
 This Is Home page
 
