@@ -5,6 +5,10 @@
     font-family: 'Gilroy';
 }
 
+body{
+    overflow-x: hidden;
+}
+
 #homediv{
     width: 90%;
     height: 550px;
@@ -129,7 +133,7 @@
 #footer h1{
     margin-top: 2%;
     margin-left: 25%;
-    font-size: 30px;
+    font-size: 40px;
 }
 
 /* about section */
@@ -140,18 +144,336 @@
     margin-top: 2%;
     margin-left: 5%;
     margin-right: 2%;
-    /* border: 1px solid black; */
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
     gap: 10px;
 }
 
 #aboutdiv div{
     width: 300px;
-    height: 300px;
+    height: 400px;
     margin-left: 3%;
     border: 1px solid black;
-   
+    background-image: url('/static/image/nature.jpg');
+    background-position: center;
+    background-size: cover;
+    position: relative;
 }
+
+#aboutdiv div h5{
+   
+ position: absolute;
+ top: 270px;
+ left: 50px;
+}
+
+#aboutdiv div p{
+   
+ position: absolute;
+ top: 300px;
+ left: 60px;
+}
+
+#aboutdiv div button{
+ width: 150px;
+ height: 30px;
+ border-radius: 30px;
+ position: absolute;
+ top: 350px;
+ left: 70px;
+}
+
+/* services section starts from here */
+
+#sec3{
+    width: 100%;
+    height: 93vh;
+    border: 1px solid black;
+    position: relative;
+} 
+
+.sec3head{
+    position: absolute;
+    top: 30px;
+    left: 38%;
+    font-size: 50px;
+}
+
+
+/* center div */
+
+#sec3 .sdiv1{
+    position: absolute;
+    top: 50%;
+    left: 48%;
+    transform: translate(-50% , -50%);
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 15px red;
+    box-sizing: border-box;
+    text-align: center;
+    transition: .5s;
+}
+
+#sec3 .sdiv1:hover{
+    border-radius: 0%;
+}
+
+
+#sec3 .sdiv1::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: red;
+    z-index: -1;
+    transform: rotate(-45deg);
+}
+
+#sec3 .sdiv1 p{
+    margin: 0%;
+    padding: 0%;
+    color: aliceblue;
+    font-size: 18px;
+    padding: 20px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: .5s;
+}
+#sec3 .sdiv1:hover p{
+    box-shadow: 0 0 50px rgba(0,0,0, .5);
+}
+
+/* center div end */
+
+
+/* left 1 div */
+
+#sec3 .sdivl1{
+    position: absolute;
+    top: 150px;
+    left: 170px;
+    transform: translate(-50% , -50%);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 15px red;
+    box-sizing: border-box;
+    text-align: center;
+    transition: .5s;
+}
+
+#sec3 .sdivl1:hover{
+    border-radius: 0%;
+}
+
+
+#sec3 .sdivl1::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: red;
+    z-index: -1;
+    transform: rotate(-45deg);
+}
+
+#sec3 .sdivl1 p{
+    margin: 0%;
+    padding: 0%;
+    color: aliceblue;
+    font-size: 18px;
+    padding: 20px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: .5s;
+}
+#sec3 .sdivl1:hover p{
+    box-shadow: 0 0 50px rgba(0,0,0, .5);
+}
+
+/* left 1 div end */
+
+
+
+/* right 1 div */
+#sec3 .sdivr1{
+    position: absolute;
+    top: 150px;
+    right: 10px;
+    transform: translate(-50% , -50%);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 15px red;
+    box-sizing: border-box;
+    text-align: center;
+    transition: .5s;
+}
+
+#sec3 .sdivr1:hover{
+    border-radius: 0%;
+}
+
+
+#sec3 .sdivr1::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: red;
+    z-index: -1;
+    transform: rotate(-45deg);
+}
+
+#sec3 .sdivr1 p{
+    margin: 0%;
+    padding: 0%;
+    color: aliceblue;
+    font-size: 18px;
+    padding: 20px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: .5s;
+}
+#sec3 .sdivr1:hover p{
+    box-shadow: 0 0 50px rgba(0,0,0, .5);
+}
+
+/* right 1 div end */
+
+
+
+/* left 2 div start */
+
+#sec3 .sdivl2{
+    position: absolute;
+    top: 450px;
+    left: 170px;
+    transform: translate(-50% , -50%);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 15px red;
+    box-sizing: border-box;
+    text-align: center;
+    transition: .5s;
+}
+
+#sec3 .sdivl2:hover{
+    border-radius: 0%;
+}
+
+
+#sec3 .sdivl2::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: red;
+    z-index: -1;
+    transform: rotate(-45deg);
+}
+
+#sec3 .sdivl2 p{
+    margin: 0%;
+    padding: 0%;
+    color: aliceblue;
+    font-size: 18px;
+    padding: 20px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: .5s;
+}
+#sec3 .sdivl2:hover p{
+    box-shadow: 0 0 50px rgba(0,0,0, .5);
+}
+
+
+/* left 2 div end */
+
+
+
+/* right 2 div start  */
+
+
+/* right 2 div end */
+
+#sec3 .sdivr2{
+    position: absolute;
+    top: 450px;
+    right: 10px;
+    transform: translate(-50% , -50%);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 15px red;
+    box-sizing: border-box;
+    text-align: center;
+    transition: .5s;
+}
+
+#sec3 .sdivr2:hover{
+    border-radius: 0%;
+}
+
+
+#sec3 .sdivr2::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: red;
+    z-index: -1;
+    transform: rotate(-45deg);
+}
+
+#sec3 .sdivr2 p{
+    margin: 0%;
+    padding: 0%;
+    color: aliceblue;
+    font-size: 18px;
+    padding: 20px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: .5s;
+}
+#sec3 .sdivr2:hover p{
+    box-shadow: 0 0 50px rgba(0,0,0, .5);
+}
+
+/* services section ends here */
+
+
+
+
+
+
+
+
+
+
+
 
 /* about section ends here */
