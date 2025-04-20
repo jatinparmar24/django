@@ -1,12 +1,41 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block title %}
 Home Page
 {% endblock  %}
 
+{% block css %}
+ <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
 
 
 {% block content %}
-<h1>Home Page</h1>
+<div id="homediv">
+
+    <p class="home1">Lorem ipsum dolor sit amet consectetur, <br> adipisicing elit.Id nesciunt repellendus iusto laboriosam 
+        cumque <br> dolorum consequatur voluptatum     voluptatem est. reprehenderit <br> culpa, magni iure maiores sed!</p>
+    <h3 class="home2"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, debitis.</p></h3>
+    <h3 class="home3">The Places Are Waiting For You</h3>
+    <p class="home4">Search Here <input type="search"> <button>Search</button></p>
+    <h1 class="home5">Need Property Find Here</h1>
+
+</div>
+
+<div id="home2div">
+
+    <div class="home2div1"></div>
+
+
+    <div class="home2div2">
+        <h1><acronym title="">About Property</acronym></h1>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque cum, tenetur earum deserunt reiciendis commodi voluptatibus minus optio enim consequatur ut mollitia, voluptatem dolorum ullam non! Inventore placeat suscipit, id itaque error explicabo autem distinctio repellendus illo commodi illum voluptatem.</p>
+        <button>Search Details</button>
+    </div>
+</div>
+
+
+
 {% endblock  %}
 

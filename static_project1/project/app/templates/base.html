@@ -9,7 +9,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <title>{% block title %}Hello, world!{% endblock %}</title>
+
+    {% load static%}
+    
     {% block css %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     {% endblock  %}
   </head>
   <body>
@@ -23,11 +27,13 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
               </li>
+
               <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'about' %}">About Us</a>
               </li>
+             
              
              
             </ul>
@@ -44,6 +50,47 @@
 This Is Home page
 
 {% endblock %}
+
+<footer id="footer">
+
+
+  <div class="footmaindiv">
+
+    <div>
+      <h3>Office</h3>
+      <h4>New York</h4>
+      <h4>Canada</h4>
+      <h4>Mexico</h4>
+    </div>
+
+    <div>
+      <h3>Work</h3>
+      <h4>Details</h4>
+      <h4>Buy Property</h4>
+      <h4>Sell Property</h4>
+    </div>
+
+    <div>
+      <h3>Teams</h3>
+      <h4>Manager</h4>
+      <h4>Executive</h4>
+      <h4>Team Head</h4>
+    </div>
+
+    <div>
+      <h3>Social Media</h3>
+      <h4>Youtube</h4>
+      <h4>Whatsapp</h4>
+      <h4>Instagram</h4>
+
+    </div>
+
+  </div>
+
+  <h1>NEW,YORK USA ,123@ Deal Property</h1>
+
+
+</footer>
 
 
   </body>
