@@ -468,12 +468,37 @@ body{
 
 
 
-
-
-
-
-
-
-
-
 /* about section ends here */
+
+/* login section */
+
+.userbox {
+    padding: 20px;
+    max-width: 100%;
+    font-family: sans-serif;
+  }
+  
+  .usertable {
+    width: 100%;
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  
+  .usertable th{
+    border: 1px solid black;
+    padding: 10px;
+    text-align: left;
+  }
+
+  .usertable td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .usertable img {
+    display: block;
+    max-width: 100px;
+  }
+  
+  

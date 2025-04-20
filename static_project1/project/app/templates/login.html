@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+Login Page
+{% endblock  %}
+
+{% block css %}
+ <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+This Is Login Section
+
+
+{{msg}}
+
+<div>
+    <form action="{% url 'logindata' %}" method="post">
+
+        {% csrf_token %}
+        <label for="">Enter EMail</label>
+        <input type="text" name="email" value=""> <br>
+
+        <label for="">Enter Password</label>
+        <input type="text" name="password"> <br>
+
+        <input type="submit" value="Login">
+    </form>
+</div>
+
+{% endblock%}
