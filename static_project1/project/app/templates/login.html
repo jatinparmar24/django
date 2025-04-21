@@ -12,24 +12,26 @@ Login Page
 
 
 {% block content %}
+<h1 class="loginhead">This Is Login Section</h1>
 
-This Is Login Section
+{% if msg %}
+  <h3 class="errormsg">{{ msg }}</h3>
+{% endif %}
 
+<div class="logindiv">
+  <form action="{% url 'logindata' %}" method="post" class="loginform">
+    {% csrf_token %}
+    
+    <label for="email">Email</label>
+    <input type="text" name="email" id="email" placeholder="Enter your email" required>
 
-{{msg}}
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" placeholder="Enter your password" required>
 
-<div>
-    <form action="{% url 'logindata' %}" method="post">
-
-        {% csrf_token %}
-        <label for="">Enter EMail</label>
-        <input type="text" name="email" value=""> <br>
-
-        <label for="">Enter Password</label>
-        <input type="text" name="password"> <br>
-
-        <input type="submit" value="Login">
-    </form>
+    <input type="submit" value="Login">
+  </form>
 </div>
+
+
 
 {% endblock%}

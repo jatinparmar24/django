@@ -12,9 +12,11 @@ Home Page
 
 
 {% block content%}
-<h1>dashboard</h1>
+<h1>Dashboard</h1>
+
 <div class="userbox">
   <h2>Welcome, {{ userdata.name }}</h2>
+
   <table class="usertable" border="1">
     <tr>
       <th>Email</th>
@@ -38,7 +40,7 @@ Home Page
       <td>{{ userdata.sub }}</td>
       <td>{{ userdata.des }}</td>
       {% if userdata.image %}
-        <td><img src="{{ userdata.image.url }}" alt="Profile" width="100"></td>
+        <td><img src="{{ userdata.image.url }}" alt="Profile"></td>
       {% endif %}
       {% if userdata.resume %}
         <td><a href="{{ userdata.resume.url }}" target="_blank">Download</a></td>
@@ -46,6 +48,7 @@ Home Page
     </tr>
   </table>
 </div>
+
 
 
 

@@ -11,6 +11,8 @@ Home Page
 {% endblock %}
 
 
+
+
 {% block content %}
 <div id="homediv">
 
@@ -25,7 +27,17 @@ Home Page
 
 <div id="home2div">
 
-    <div class="home2div1"></div>
+    <div class="home2div1">
+        <video autoplay muted loop playsinline class="bg-video">
+          <source src="{% static 'video/djangovid.mp4' %}" type="video/mp4">
+          Your browser does not support HTML5 video.
+        </video>
+        <div class="overlay-content">
+          <h1>Welcome to My Site</h1>
+          <p>Engaging content goes here</p>
+        </div>
+      </div>
+      
 
 
     <div class="home2div2">
