@@ -660,7 +660,7 @@ body {
   .home1 {
    font-size: 1rem;
    margin-top: 15%;
-   color: black;
+   color: color;
   }
 
    .home2 {
@@ -674,6 +674,13 @@ body {
 
  .home4 button {
       width: 70%;
+      margin-left: 9%;
+      margin-top: 2%;
+  }
+
+  .home5{
+    margin-left: 20%;
+    font-size: 26px;
   }
 
   #home2div {
@@ -712,7 +719,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f8f9fa; 
+    background-color: #1e1e2f; 
   }
 
   .sec3head {
@@ -728,7 +735,9 @@ body {
   #sec3 .sdivl2,
   #sec3 .sdivr2 {
     position: static;
-    margin: 15px 0;
+    margin: 35px;
+    margin-left: 50%;
+    margin-top: 30%;
     width: 220px;
     height: 220px;
     border-radius: 50%;
