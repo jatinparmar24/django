@@ -10,3 +10,6 @@ class UserProfile(models.Model):
     bio=models.CharField(max_length=50, blank=True, null=True,db_index=True, help_text="write a Sort Bio")
     is_active=models.BooleanField(default=False, db_index=True)
     Qualification=models.CharField(max_length=100, choices=quali , null=True,verbose_name='Quali',db_index=True)
+
+
+
