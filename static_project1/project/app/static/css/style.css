@@ -17,6 +17,7 @@ body{
     box-sizing: border-box;
 } 
 
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -25,173 +26,222 @@ body {
 }
 /* Home Section */
 #homediv {
-    width: 90%;
-    height: 550px;
-    border: 1px solid black;
-    margin: 3%;
-    margin-left: 5%;
-    border-top-right-radius: 160px;
-    border-bottom-left-radius: 160px;
-    background-color: #3498db; 
-    background-image: url('/static/image/djangofirstimg.jpeg');
-    background-position: center;
-    background-size: cover;
-    position: relative;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); 
+  background: linear-gradient(to bottom right, #f0f4f8, #d9e2ec); /* Soft real estate themed colors */
+  padding: 60px 20px;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-/* Text Styling */
 .home1 {
-    margin-top: 8%;
-    margin-left: 3%;
-    margin-right: 5%;
-    line-height: 30px;
-    color: white;
-    font-size: 18px;
+  font-size: 22px;
+  font-weight: 400;
+  color: #333;
+  margin-bottom: 20px;
 }
 
-.home2 {
-    margin-left: 3%;
-    color: white;
+.home2 p {
+  font-size: 18px;
+  color: #555;
 }
 
 .home3 {
-    margin-left: 25%;
-    color: white;
-    font-size: 2rem;
+  font-size: 28px;
+  font-weight: 600;
+  color: #0d6efd; /* Bootstrap primary color */
+  margin: 20px 0;
 }
 
 .home4 {
-    margin-left: 3%;
-    font-size: 25px;
-    color: white;
+  font-size: 20px;
+  margin: 20px 0;
+  color: #333;
 }
 
-.home4 input {
-    width: 180px;
-    height: 40px;
-    margin-top: 2%;
-    border-radius: 20px;
-    padding: 5px;
+.home4 input[type="search"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-left: 10px;
 }
 
 .home4 button {
-    width: 150px;
-    height: 40px;
-    border-radius: 20px;
-    background-color: #f39c12;
-    color: white;
-    border: none;
-    cursor: pointer;
+  padding: 10px 20px;
+  margin-left: 10px;
+  border: none;
+  background-color: #0d6efd;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.home4 button:hover {
+  background-color: #0b5ed7;
 }
 
 .home5 {
-    margin-left: 3%;
-    margin-top: 5%;
-    color: white;
+  margin-top: 30px;
+  font-size: 26px;
+  color: #222;
+  font-weight: 600;
 }
 
-/* Home Section 2 */
+/* Second Home Section with Video */
 #home2div {
-    width: 100%;
-    height: 90vh;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-wrap: wrap;
-    background-color: #f4f4f4;  
-    padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #e9ecef;
+  padding: 60px 20px;
+  justify-content: center;
+  align-items: center;
 }
 
-#home2div div {
-    width: 400px;
-    height: 400px;
-    border: 1px solid black;
-    margin: 10px;
-    border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); 
+.home2div1 {
+  position: relative;
+  flex: 1 1 400px;
+  margin: 10px;
+  max-width: 600px;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
+.bg-video {
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+}
 
+.overlay-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+}
 
+.overlay-content h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+}
+
+.overlay-content p {
+  font-size: 18px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+/* About Property Section */
 .home2div2 {
-    align-content: center;
-    line-height: 30px;
-    border-bottom-right-radius: 100px;
-    border-top-left-radius: 100px;
-    background-color: #ffffff;  
-    padding: 20px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  flex: 1 1 400px;
+  margin: 10px;
+  max-width: 500px;
+  background-color: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  text-align: center;
 }
 
 .home2div2 h1 {
-    margin-left: 15%;
-    color: #333;
+  font-size: 28px;
+  color: #0d6efd;
+  margin-bottom: 20px;
 }
 
 .home2div2 p {
-    margin-left: 2%;
-    margin-right: 2%;
-    color: #555;
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 20px;
 }
 
 .home2div2 button {
-    width: 200px;
-    font-size: 25px;
-    border-radius: 30px;
-    margin-left: 20%;
-    background-color: #f39c12;
-    color: white;
-    border: none;
-    cursor: pointer;
+  padding: 10px 25px;
+  border: none;
+  background-color: #0d6efd;
+  color: white;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
+
+.home2div2 button:hover {
+  background-color: #0b5ed7;
+}
+
 
 
 /* footer starts form here */
 #footer {
-    background-color: #333;
-    color: white;
-    padding: 40px 0;
-    font-family: Arial, sans-serif;
-  }
-  
-  .footmaindiv {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-  }
-  
-  .footer-section {
-    flex: 1;
-    min-width: 200px;
-    margin: 10px;
-  }
-  
-  .footer-section h3 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-    color: #f1c40f; 
-  }
-  
-  .footer-section h4 {
-    font-size: 1rem;
-    margin: 5px 0;
-  }
-  
-  .footer-brand {
-    text-align: center;
-    font-size: 1.2rem;
-    margin-top: 20px;
-    color: #f1c40f; 
-  }
-  
-  .footer-section h4:hover {
-    color: #f39c12; 
-    
-    cursor: pointer;
-  }
-  
+  background-color: #f8f9fa;
+  padding: 40px 20px;
+  color: #333;
+  font-family: 'Poppins', sans-serif;
+  min-height: 40vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Main footer sections */
+.footmain {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  margin-bottom: 30px;
+}
+
+/* Each footer section */
+.footersection {
+  flex: 1 1 200px;
+  min-width: 200px;
+  text-align: center;
+}
+
+/* Section Headings */
+.footersection h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #0d6efd;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* Section Items */
+.footersection h4 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #555;
+  transition: color 0.3s, transform 0.3s;
+  cursor: pointer;
+}
+
+.footersection h4:hover {
+  color: #0d6efd;
+  transform: translateY(-3px);
+}
+
+/* Footer bottom text */
+.textcenter {
+  text-align: center;
+}
+
+.footerbrand {
+  font-size: 18px;
+  color: #6c757d;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+
 
 /* about section */
 
@@ -684,14 +734,13 @@ body {
   }
 
   #home2div {
-      flex-direction: column;
-      height: auto;
+    flex-direction: column;
   }
-    #home2div div {
-        width: 90%;
-        height: auto;
-        margin-bottom: 20px;
-    }
+
+  .home2div1,
+  .home2div2 {
+    max-width: 100%;
+  }
 
     /* about */
 
