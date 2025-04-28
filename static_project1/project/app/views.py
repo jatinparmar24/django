@@ -96,6 +96,8 @@ def dashboard(request, pk):
 
 
 
+
+
 def login(request):
     return render(request,'login.html')
 

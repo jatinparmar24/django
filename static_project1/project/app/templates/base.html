@@ -19,10 +19,10 @@
   <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         
-          <a href="#" class="text-decoration-none text-dark"><span>P</span>roperty-<span>D</span>eal</a>
+          <a href="#" class="text-decoration-none text-dark"><span style="font-size: 25px;  color: #0d6efd;">P</span>roperty-<span style="font-size: 25px;  color: #0d6efd;">D</span>eal</a>
         
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,26 +30,39 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <ul id="ulhead" class="navbar-nav me-auto mb-2 mb-lg-0">
             {% if userdata %}
               <li class="nav-item">
                 <a class="nav-link active" href="{% url 'home1' pk=userdata.id %}">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="{% url 'about1' pk=userdata.id %}">About Us</a>
+                <a class="nav-link active" href="{% url 'about1' pk=userdata.id %}">About</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link active" href="{% url 'service1' pk=userdata.id %}">Services</a>
               </li>
+
               <li class="nav-item">
+                <a class="nav-link active" href="{% url 'dashboard' pk=userdata.id %}">DashBoard</a>
+              </li>
+
+              <li class="nav-item">
+
                 <a class="nav-link active" href="{% url 'home' %}">Logout</a>
               </li>
+
+              <li class="userdetail">
+                <span>{{userdata.name}}</span>
+                <img src="{{userdata.image.url}}" alt="">
+              </li>
+
+
             {% else %}
               <li class="nav-item">
                 <a class="nav-link active" href="{% url 'home' %}">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="{% url 'about' %}">About Us</a>
+                <a class="nav-link active" href="{% url 'about' %}">About </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link active" href="{% url 'service' %}">Services</a>
@@ -63,10 +76,11 @@
             {% endif %}
           </ul>
 
-          <form class="d-flex">
+          <!-- <form id="search" class="d-flex">
+         
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="height: 38px;">
             <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
+          </form> -->
         </div>
       </div>
     </nav>

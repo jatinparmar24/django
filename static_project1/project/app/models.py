@@ -11,6 +11,6 @@ class Students(models.Model):
     studob      =   models.DateField()
     stuedu      =   models.CharField(max_length=50)
     stugender   =   models.CharField(max_length=50)
-    stuimage    =   models.ImageField(upload_to='image/')
+    stuimage    =   models.ImageField(upload_to='image/', null=True, blank=True)
     sturesume   =   models.FileField(upload_to='file/')
     stupass     =   models.CharField(max_length=50)
