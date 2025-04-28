@@ -781,6 +781,22 @@ body {
 /* Responsive Styles */
 @media screen and (max-width: 768px) {
 
+
+  .sec3head {
+    font-size: 36px;
+}
+#sec3 .sdiv1,
+#sec3 .sdivl1,
+#sec3 .sdivr1,
+#sec3 .sdivl2,
+#sec3 .sdivr2 {
+    width: 180px;
+    height: 180px;
+}
+#sec3 {
+    padding-top: 60px;
+}
+
 /* dashboard */
 
 .userbox {
@@ -1001,6 +1017,21 @@ body {
 
 
 @media (max-width: 480px) {
+
+
+  .sec3head {
+    font-size: 30px;
+}
+#sec3 .sdiv1,
+#sec3 .sdivl1,
+#sec3 .sdivr1,
+#sec3 .sdivl2,
+#sec3 .sdivr2 {
+    width: 150px;
+    height: 150px;
+}
+
+
   .userbox {
     width: 95%;
     padding: 10px;
@@ -1078,5 +1109,42 @@ body {
   .table td img {
     width: 45px;
     height: 45px;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 350px;
+    background: #ffffff; /* Same as your navbar color */
+    z-index: 9999;
+    padding: 2rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.4s ease;
+  }
+
+  .navbar-collapse.show {
+    transform: translateX(0);
+  }
+
+  .navbar-collapse.collapsing {
+    transition: none;
+    transform: translateX(100%);
+  }
+
+  .navbar-toggler {
+    z-index: 10000;
+  }
+
+  .btn-close {
+    font-size: 1.5rem;
+    background: none;
+    border: none;
   }
 }

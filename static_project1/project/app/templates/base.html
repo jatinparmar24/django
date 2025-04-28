@@ -19,17 +19,23 @@
   <body>
 
     <!-- Navbar -->
-    <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light" style="position: relative;">
       <div class="container-fluid">
-        
-          <a href="#" class="text-decoration-none text-dark"><span style="font-size: 25px;  color: #0d6efd;">P</span>roperty-<span style="font-size: 25px;  color: #0d6efd;">D</span>eal</a>
-        
+    
+        <a href="#" class="text-decoration-none text-dark">
+          <span style="font-size: 25px; color: #0d6efd;">P</span>roperty-<span style="font-size: 25px; color: #0d6efd;">D</span>eal
+        </a>
+    
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-
+    
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    
+          <!-- Close Button -->
+          <button type="button" class="btn-close ms-auto mb-3 d-lg-none" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-label="Close"></button>
+    
           <ul id="ulhead" class="navbar-nav me-auto mb-2 mb-lg-0">
             {% if userdata %}
               <li class="nav-item">
@@ -41,28 +47,22 @@
               <li class="nav-item">
                 <a class="nav-link active" href="{% url 'service1' pk=userdata.id %}">Services</a>
               </li>
-
               <li class="nav-item">
                 <a class="nav-link active" href="{% url 'dashboard' pk=userdata.id %}">DashBoard</a>
               </li>
-
               <li class="nav-item">
-
                 <a class="nav-link active" href="{% url 'home' %}">Logout</a>
               </li>
-
               <li class="userdetail">
                 <span>{{userdata.name}}</span>
                 <img src="{{userdata.image.url}}" alt="">
               </li>
-
-
             {% else %}
               <li class="nav-item">
                 <a class="nav-link active" href="{% url 'home' %}">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="{% url 'about' %}">About </a>
+                <a class="nav-link active" href="{% url 'about' %}">About</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link active" href="{% url 'service' %}">Services</a>
@@ -75,15 +75,12 @@
               </li>
             {% endif %}
           </ul>
-
-          <!-- <form id="search" class="d-flex">
-         
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="height: 38px;">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form> -->
+    
         </div>
+    
       </div>
     </nav>
+    
 
     <!-- Content Block -->
     <div class="container my-5">
