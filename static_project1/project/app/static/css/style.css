@@ -833,7 +833,7 @@ body {
 
       
  #homediv {
-   height: 600px;
+   height: 650px;
    padding: 15px;
   }
 
@@ -915,8 +915,8 @@ body {
     margin: 35px;
     margin-left: 50%;
     margin-top: 30%;
-    width: 220px;
-    height: 220px;
+    width: 250px;
+    height: 250px;
     border-radius: 50%;
     box-shadow: 0 0 0 10px #3498db; 
     background-color: #3498db;
@@ -1027,8 +1027,10 @@ body {
 #sec3 .sdivr1,
 #sec3 .sdivl2,
 #sec3 .sdivr2 {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
+    margin-top: 45%;
+    margin-left: 100%;
 }
 
 
