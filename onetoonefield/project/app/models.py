@@ -4,7 +4,7 @@ from django.db import models
 
 
 class Adhaar(models.Model):
-    adharno=models.IntegerField()
+    adharno=models.IntegerField(unique=True)
     createdby=models.CharField(max_length=50)
     alloted_date=models.DateTimeField()
 
@@ -15,4 +15,7 @@ class Citizen(models.Model):
     name=models.CharField(max_length=50)
     email=models.EmailField()
     contact=models.IntegerField()
-    adharno=models.OneToOneField(Adhaar,on_delete=models.PROTECT)
+    adharno=models.OneToOneField(Adhaar,on_delete=models.PROTECT,to_field='adharno')
+
+    def __str__(self):
+        return self.name+' '+str(self.contact)
