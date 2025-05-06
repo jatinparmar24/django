@@ -20,8 +20,5 @@ from app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('fuel/',views.fuel,name='fuel'),
-    path('car/',views.car,name='car'),
-    # path('home/',views.home,name='home'),
-
+    path('student/',views.student,name='student'),
 ]

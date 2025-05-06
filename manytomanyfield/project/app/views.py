@@ -23,3 +23,19 @@ def car(request):
     for fuel in fuel_type:
         print(fuel.fuel_name)
 
+# for both car and fuel and with forward and reverse acces
+
+# def home(request):
+#     # forward access (carmodel to fuelmodel)
+#     car=CarModel.objects.get(car_name='Toyato')
+#     fuel_type=car.fuel_name.all()
+
+#     for fuel in fuel_type:
+#         print(fuel.fuel_name)
+
+#     # reverse access from fuel to car model with related name
+#     fuel=FuelModel.objects.get(fuel_name='Petrol')
+#     car_using_petrol=fuel.cars.all()
+
+#     for car in car_using_petrol:
+#         print(car.car_name)
