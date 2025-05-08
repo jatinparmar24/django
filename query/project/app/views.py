@@ -8,13 +8,13 @@ def student(request):
     all_data=Student.objects.all()[0]  # it support indecing 
     print(all_data)
 
-    all_data=Student.objects.all()[:2] # it support slicing but not negative
+    all_data=Student.objects.all()[0:2] # it support slicing but not negative
     print(all_data)
 
     all_data=Student.objects.all().reverse()
     print(all_data)
     
-    order_by = return multiple values
+    #order_by = return multiple values
     all_data=Student.objects.order_by('stu_name') #  in ascending order
     print(all_data)
 
@@ -33,8 +33,8 @@ def student(request):
 
 
 
-    print(all_data.values())
-    print(all_data.values_list())
+    #print(all_data.values())
+    #print(all_data.values_list())
 
     #above method return multiple record  = all , filter, order_by , exclude
 

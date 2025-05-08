@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="{% url 'landing' %}">Back</a>
+
+    <table border="1">
+
+        <tr>
+            <th>S>No</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Contact</th>
+            <th>City</th>
+        </tr>
+
+        {% for i in data %}
+        <tr>
+            <td >{{forloop.counter}}</td>
+            <td>{{i.stu_name}}</td>
+            <td>{{i.stu_email}}</td>
+            <td>{{i.stu_contact}}</td>
+            <td>{{i.stu_city}}</td>
+            
+        </tr>
+
+        {% endfor %}
+
+    </table>
+</body>
+</html>
