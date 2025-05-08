@@ -21,7 +21,7 @@ from app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.landing,name='landing'),
-    path('index/',views.index,name='index'),
+    # path('index/',views.index,name='index'),
     path('first/',views.first,name='first'),
     path('last/',views.last,name='last'),
     path('asc/',views.asc,name='asc'),
