@@ -11,17 +11,17 @@ Home Page
 {% endblock %}
 
 {% block content %}
-<h1>Dashboard</h1>
-<a href="{% url 'alldata1' pk=userdata.id %}" style="text-decoration: none;">Admin Dashboard</a> &nbsp; &nbsp;
+<h1 class="dashboard-title">Dashboard</h1>
+<div class="dashboard-links">
+  <a href="{% url 'alldata1' pk=userdata.id %}" class="dashboard-link">Admin Dashboard</a>
+  <a href="{% url 'dashboard' pk=userdata.id %}" class="dashboard-link">User Data</a>
+  <a href="{% url 'first' pk=userdata.id %}" class="dashboard-link">First 5 Data</a>
+  <a href="{% url 'last' pk=userdata.id %}" class="dashboard-link">Last 5 Data</a>
+  <a href="{% url 'asc' pk=userdata.id %}" class="dashboard-link">Data IN ASC</a>
+  <a href="{% url 'desc' pk=userdata.id %}" class="dashboard-link">Data IN DESC</a>
+  <a href="{% url 'alld' pk=userdata.id %}" class="dashboard-link">All Data</a>
+</div>
 
-
-<a href="{% url 'dashboard' pk=userdata.id %} ">Data</a> &nbsp; &nbsp;
-
-<a href="{% url 'first' pk=userdata.id %}">First 5 Data</a>&nbsp; &nbsp;
-<a href="{% url 'last' pk=userdata.id %}">Last 5 Data</a>&nbsp; &nbsp;
-<a href="{% url 'asc' pk=userdata.id %}">Data IN ASC</a>&nbsp; &nbsp;
-<a href="{% url 'desc' pk=userdata.id %}">Data IN DESC</a>&nbsp; &nbsp;
-<a href="{% url 'alld' pk=userdata.id %}">All Data</a> 
 
 
 {% if userdata %}
