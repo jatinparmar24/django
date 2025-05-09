@@ -14,3 +14,11 @@ class Students(models.Model):
     stuimage    =   models.ImageField(upload_to='image/', null=True, blank=True)
     sturesume   =   models.FileField(upload_to='file/')
     stupass     =   models.CharField(max_length=50)
+
+
+
+class Items(models.Model):
+    item        = models.CharField(max_length=100)
+    shop        = models.CharField(max_length=100)
+    quantity    = models.IntegerField()
+    color       = models.CharField()

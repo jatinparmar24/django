@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import Students
+from .models import Students,Items
 
 
 # Create your views here.
@@ -102,7 +102,7 @@ def login(request):
     return render(request,'login.html')
 
 def registration(request):
-    return render(request,'registration.html')
+    return render(request,'registration.html',{'key':key})
 
 
 
@@ -176,3 +176,27 @@ def register(request):
             msg="Check Password And Confirm Password again"
             return render(request,'registration.html',{'key':msg})
 
+
+def first(request):
+    # Get the current logged-in user
+    student = Students.objects.get(id=request.user.id)  # Ensure you fetch the student data using user ID
+    
+    context = {
+        "id": student.id,
+        "name": student.stuname,
+        "email": student.stuemial,
+        "des": student.studetails,
+        "phone": student.stuphone,
+        "dob": student.studob,
+        "sub": student.stuedu,
+        "gender": student.stugender,
+        "image": student.stuimage,
+        "resume": student.sturesume,
+        "pass": student.stupass,
+    }
+
+    # Fetch the first 5 items from the Items model
+    key = Items.objects.all()[:5]
+
+    # Pass both the user data (userdata) and the first 5 items (key) to the template
+    return render(request, 'dashboard.html', {'userdata': context, 'key': key})

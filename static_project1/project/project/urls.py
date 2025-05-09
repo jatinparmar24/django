@@ -35,6 +35,8 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('dashboard/<int:pk>/', views.dashboard, name='dashboard'),
     path('alldata/', views.alldata, name='alldata'),
+    path('first/', views.first, name='first'),
+
 
 
     
