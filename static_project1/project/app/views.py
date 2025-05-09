@@ -76,6 +76,25 @@ def alldata(request):
     users = Students.objects.all()
     return render(request, 'alldata.html', {'users': users})
 
+def alldata1(request,pk):
+    users = Students.objects.all()
+    student = Students.objects.get(id=pk)
+
+    context = {
+        "id": student.id,
+        "name": student.stuname,
+        "email": student.stuemial,
+        "des": student.studetails,
+        "phone": student.stuphone,
+        "dob": student.studob,
+        "sub": student.stuedu,
+        "gender": student.stugender,
+        "image": student.stuimage,
+        "resume": student.sturesume,
+        "pass": student.stupass,
+    }
+    return render(request, 'alldata.html', {'users': users, 'userdata': context})
+
 
 def dashboard(request, pk):
     student = Students.objects.get(id=pk)
@@ -117,6 +136,7 @@ def logindata(request):
             if pasw == user.stupass:
                 return redirect('dashboard', pk=user.id)
             else:
+
                 msg = 'Email and Password Not Matched'
         else:
             msg = "Email Not Registered"
@@ -177,26 +197,28 @@ def register(request):
             return render(request,'registration.html',{'key':msg})
 
 
-def first(request):
-    # Get the current logged-in user
-    student = Students.objects.get(id=request.user.id)  # Ensure you fetch the student data using user ID
-    
-    context = {
-        "id": student.id,
-        "name": student.stuname,
-        "email": student.stuemial,
-        "des": student.studetails,
-        "phone": student.stuphone,
-        "dob": student.studob,
-        "sub": student.stuedu,
-        "gender": student.stugender,
-        "image": student.stuimage,
-        "resume": student.sturesume,
-        "pass": student.stupass,
-    }
 
-    # Fetch the first 5 items from the Items model
-    key = Items.objects.all()[:5]
+def first(request,pk):
+    userdata=Students.objects.get(id=pk)
+    key = Items.objects.all()[:5]  
+    return render(request, 'dashboard.html', {'userdata':userdata,'key':key})
 
-    # Pass both the user data (userdata) and the first 5 items (key) to the template
-    return render(request, 'dashboard.html', {'userdata': context, 'key': key})
+def last(request,pk):
+    userdata=Students.objects.get(id=pk)
+    key = Items.objects.order_by('-id')[:5] 
+    return render(request, 'dashboard.html', {'userdata':userdata,'key':key})
+
+def asc(request,pk):
+    userdata=Students.objects.get(id=pk)
+    key = Items.objects.order_by('item')  
+    return render(request, 'dashboard.html', {'userdata':userdata,'key':key})
+
+def desc(request,pk):
+    userdata=Students.objects.get(id=pk)
+    key = Items.objects.order_by('-item')
+    return render(request, 'dashboard.html', {'userdata':userdata,'key':key})
+
+def alld(request,pk):
+    userdata=Students.objects.get(id=pk)
+    key = Items.objects.all() 
+    return render(request, 'dashboard.html', {'userdata':userdata,'key':key})

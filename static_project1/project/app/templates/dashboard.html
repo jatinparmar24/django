@@ -12,77 +12,86 @@ Home Page
 
 {% block content %}
 <h1>Dashboard</h1>
-<a href="{% url 'alldata' %}" style="text-decoration: none;">Admin Dashboard</a>
+<a href="{% url 'alldata1' pk=userdata.id %}" style="text-decoration: none;">Admin Dashboard</a> &nbsp; &nbsp;
 
-<!-- Form for Show Data button -->
-<form method="get">
-  <div style="width: 50px; height: 50px; border-radius: 50px; background-image: url('{{ userdata.image.url }}'); background-size: cover;"></div>
-  <button type="submit" name="show" value="true">Show Data</button>
-</form>
 
-<!-- Link to First 5 Data -->
-<a href="{% url 'first' %}?first=true">First 5 Data</a> <!-- This will pass the 'first=true' parameter to load the first 5 records -->
+<a href="{% url 'dashboard' pk=userdata.id %} ">Data</a> &nbsp; &nbsp;
 
-<!-- Condition to show the user's data when 'show' is set to 'true' -->
-{% if request.GET.show == "true" %}
-<div class="userbox">
-  <h2>Welcome, {{ userdata.name }}</h2>
+<a href="{% url 'first' pk=userdata.id %}">First 5 Data</a>&nbsp; &nbsp;
+<a href="{% url 'last' pk=userdata.id %}">Last 5 Data</a>&nbsp; &nbsp;
+<a href="{% url 'asc' pk=userdata.id %}">Data IN ASC</a>&nbsp; &nbsp;
+<a href="{% url 'desc' pk=userdata.id %}">Data IN DESC</a>&nbsp; &nbsp;
+<a href="{% url 'alld' pk=userdata.id %}">All Data</a> 
 
-  <table class="usertable" border="1">
-    <tr>
-      <th>Email</th>
-      <th>Phone</th>
-      <th>DOB</th>
-      <th>Gender</th>
-      <th>Education</th>
-      <th>Details</th>
-      {% if userdata.image %}
-        <th>Profile Picture</th>
-      {% endif %}
-      {% if userdata.resume %}
-        <th>Resume</th>
-      {% endif %}
-    </tr>
-    <tr>
-      <td>{{ userdata.email }}</td>
-      <td>{{ userdata.phone }}</td>
-      <td>{{ userdata.dob }}</td>
-      <td>{{ userdata.gender }}</td>
-      <td>{{ userdata.sub }}</td>
-      <td>{{ userdata.des }}</td>
-      {% if userdata.image %}
-        <td><img src="{{ userdata.image.url }}" alt="Profile" width="100" height="100" style="object-fit: cover;"></td>
-      {% endif %}
-      {% if userdata.resume %}
-        <td><a href="{{ userdata.resume.url }}" target="_blank">Download</a></td>
-      {% endif %}
-    </tr>
-  </table>
-</div>
-{% endif %}
 
-<!-- Condition to show First 5 Data when 'first' is set to 'true' -->
-{% if request.GET.first == "true" %}
-  <h2>First 5 Data</h2>
-  <table border="1">
-    <tr>
-      <th>S.No</th>
-      <th>Item</th>
-      <th>Shop</th>
-      <th>Quantity</th>
-      <th>Color</th>
-    </tr>
+{% if userdata %}
+    {% if key %}
+    
+    <div class="userbox">
 
-    {% for i in key %}
+      <table class="usertable" border="1">
       <tr>
-        <td>{{ forloop.counter }}</td>
-        <td>{{ i.item }}</td>
-        <td>{{ i.shop }}</td>
-        <td>{{ i.quantity }}</td>
-        <td>{{ i.color }}</td>
+        <th>S.No</th>
+        <th>Item</th>
+        <th>Shop</th>
+        <th>Quantity</th>
+        <th>Color</th>
       </tr>
-    {% endfor %}
-  </table>
+      {% for i in key %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ i.item }}</td>
+          <td>{{ i.shop }}</td>
+          <td>{{ i.quantity }}</td>
+          <td>{{ i.color }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+
+    </div>
+    {% else %}
+
+    <div class="userbox">
+      <h2>Welcome, {{ userdata.name }}</h2>
+
+      <table class="usertable" border="1">
+        <tr>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>DOB</th>
+          <th>Gender</th>
+          <th>Education</th>
+          <th>Details</th>
+          {% if userdata.image %}
+            <th>Profile Picture</th>
+          {% endif %}
+          {% if userdata.resume %}
+            <th>Resume</th>
+          {% endif %}
+        </tr>
+        <tr>
+          <td>{{ userdata.email }}</td>
+          <td>{{ userdata.phone }}</td>
+          <td>{{ userdata.dob }}</td>
+          <td>{{ userdata.gender }}</td>
+          <td>{{ userdata.sub }}</td>
+          <td>{{ userdata.des }}</td>
+          {% if userdata.image %}
+            <td><img src="{{ userdata.image.url }}" alt="Profile" width="100" height="100" style="object-fit: cover;"></td>
+          {% endif %}
+          {% if userdata.resume %}
+            <td><a href="{{ userdata.resume.url }}" target="_blank">Download</a></td>
+          {% endif %}
+        </tr>
+      </table>
+    </div>
+    {% endif %}
+
+
+
 {% endif %}
+
+
+
 
 {% endblock %}

@@ -51,6 +51,9 @@
                 <a class="nav-link active" href="{% url 'dashboard' pk=userdata.id %}">DashBoard</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link active" href="{% url 'alldata1' pk=userdata.id %}">Admin</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link active" href="{% url 'home' %}">Logout</a>
               </li>
               <li class="userdetail">
@@ -66,6 +69,9 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link active" href="{% url 'service' %}">Services</a>
+              </li>
+               <li class="nav-item">
+                <a class="nav-link active" href="{% url 'alldata' %}">Admin</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link active" href="{% url 'login' %}">Login</a>
