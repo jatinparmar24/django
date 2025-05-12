@@ -21,4 +21,4 @@ class Items(models.Model):
     item        = models.CharField(max_length=100)
     shop        = models.CharField(max_length=100)
     quantity    = models.IntegerField()
-    color       = models.CharField()
+    color       = models.CharField(max_length=50)

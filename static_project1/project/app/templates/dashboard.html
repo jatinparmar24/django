@@ -63,10 +63,10 @@ Home Page
      <form action="{% url 'edit_data' pk1=userdata.id pk2=edit_data.id %}" method="post">
      
        {% csrf_token %}
-       <input type="text",name='item' value={{edit_data.item}}>
-       <input type="text",name='shop' value={{edit_data.shop}}>
-       <input type="number",name='quantity' value={{edit_data.quantity}}>
-       <input type="text",name='color' value={{edit_data.color}}>
+       <input type="text" name='item' value={{edit_data.item}}>
+       <input type="text" name='shop' value={{edit_data.shop}}>
+       <input type="number" name='quantity' value={{edit_data.quantity}}>
+       <input type="text" name='color' value={{edit_data.color}}>
      
        <input type="submit" value="Update">
      </form>

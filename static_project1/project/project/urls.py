@@ -46,10 +46,5 @@ urlpatterns = [
     path('edit_data/<int:pk1>/<int:pk2>/', views.edit_data, name='edit_data'),
  
 
-    
-
-
-
-
-    
+     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

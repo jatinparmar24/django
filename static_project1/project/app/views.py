@@ -252,31 +252,14 @@ def edit(request,pk1,pk2):
 
 def edit_data(request, pk1, pk2):
     if request.method == 'POST':
-        edit = Items.objects.get(id=pk2)
-        shop_id = request.POST.get('shop')
+        item = Items.objects.get(id=pk2)
+        item.item = request.POST.get('item')
+        item.shop = request.POST.get('shop')
+        item.quantity = request.POST.get('quantity')
+        item.color = request.POST.get('color')
+        item.save()
+    return redirect('alld', pk=pk1)
 
-        edit.name = request.POST.get('item')
-        
-        edit.quantity = request.POST.get('quantity')
-        edit.color = request.POST.get('color')
-        edit.save()
-
-        userdata = Students.objects.get(id=pk1)
-        userdata = {
-            "id": userdata.id,
-            "name": userdata.stuname,
-            "email": userdata.stuemial,
-            "des": userdata.studetails,
-            "phone": userdata.stuphone,
-            "dob": userdata.studob,
-            "sub": userdata.stuedu,
-            "gender": userdata.stugender,
-            "image": userdata.stuimage,
-            "resume": userdata.sturesume,
-            "pass": userdata.stupass,
-        }
-
-        return render(request, 'dashboard.html', {'userdata': userdata})
 
 
 
