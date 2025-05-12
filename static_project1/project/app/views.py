@@ -132,7 +132,7 @@ def logindata(request):
         pasw = request.POST.get('password')
         user = Students.objects.filter(stuemial=email).first()
 
-        if user:
+        if user: 
             if pasw == user.stupass:
                 return redirect('dashboard', pk=user.id)
             else:
@@ -198,7 +198,12 @@ def register(request):
 
 
 
+def dash(request):
+    return render(request,'login.html')
+
+
 def first(request,pk):
+    print(pk)
     userdata=Students.objects.get(id=pk)
     key = Items.objects.all()[:5]  
     return render(request, 'dashboard.html', {'userdata':userdata,'key':key})
@@ -222,3 +227,61 @@ def alld(request,pk):
     userdata=Students.objects.get(id=pk)
     key = Items.objects.all() 
     return render(request, 'dashboard.html', {'userdata':userdata,'key':key})
+
+
+def edit(request,pk1,pk2):
+    userdata = Students.objects.get(id=pk1)
+    userdata = {
+        "id": userdata.id,
+        "name": userdata.stuname,
+        "email": userdata.stuemial,
+        "des": userdata.studetails,
+        "phone": userdata.stuphone,
+        "dob": userdata.studob,
+        "sub": userdata.stuedu,
+        "gender": userdata.stugender,
+        "image": userdata.stuimage,
+        "resume": userdata.sturesume,
+        "pass": userdata.stupass,
+    }
+
+    edit_data=Items.objects.get(id=pk2)
+    return render(request, 'dashboard.html', {'userdata': userdata,'edit_data':edit_data})
+   
+
+
+def edit_data(request, pk1, pk2):
+    if request.method == 'POST':
+        edit = Items.objects.get(id=pk2)
+        shop_id = request.POST.get('shop')
+
+        edit.name = request.POST.get('item')
+        
+        edit.quantity = request.POST.get('quantity')
+        edit.color = request.POST.get('color')
+        edit.save()
+
+        userdata = Students.objects.get(id=pk1)
+        userdata = {
+            "id": userdata.id,
+            "name": userdata.stuname,
+            "email": userdata.stuemial,
+            "des": userdata.studetails,
+            "phone": userdata.stuphone,
+            "dob": userdata.studob,
+            "sub": userdata.stuedu,
+            "gender": userdata.stugender,
+            "image": userdata.stuimage,
+            "resume": userdata.sturesume,
+            "pass": userdata.stupass,
+        }
+
+        return render(request, 'dashboard.html', {'userdata': userdata})
+
+
+
+        
+
+# def delete(request,pk1,pk2):
+#     print(pk1)
+#     print(pk2)

@@ -34,6 +34,7 @@ urlpatterns = [
     path('logindata/', views.logindata, name='logindata'),
     path('register/', views.register, name='register'),
     path('alldata/', views.alldata, name='alldata'),
+    path('dash/', views.dash, name='dash'),
     path('alldata1/<int:pk>/', views.alldata1, name='alldata1'),
     path('dashboard/<int:pk>/', views.dashboard, name='dashboard'),
     path('first/<int:pk>/', views.first, name='first'),
@@ -41,6 +42,10 @@ urlpatterns = [
     path('asc/<int:pk>/', views.asc, name='asc'),
     path('desc/<int:pk>/', views.desc, name='desc'),
     path('alld/<int:pk>/', views.alld, name='alld'),
+    path('edit/<int:pk1>/<int:pk2>/', views.edit, name='edit'),
+    path('edit_data/<int:pk1>/<int:pk2>/', views.edit_data, name='edit_data'),
+ 
+
     
 
 

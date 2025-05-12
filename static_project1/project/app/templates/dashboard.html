@@ -32,21 +32,45 @@ Home Page
       <table class="usertable" border="1">
       <tr>
         <th>S.No</th>
+        <th>ID</th>
         <th>Item</th>
         <th>Shop</th>
         <th>Quantity</th>
         <th>Color</th>
+        <th>Edit</th>
+        <th>Delete</th>
       </tr>
       {% for i in key %}
         <tr>
           <td>{{ forloop.counter }}</td>
+          <td>{{i.id}}</td>
           <td>{{ i.item }}</td>
           <td>{{ i.shop }}</td>
           <td>{{ i.quantity }}</td>
           <td>{{ i.color }}</td>
+           <td>
+           <form action="{% url 'edit' pk1=userdata.id pk2=i.id %}">
+            <button>Edit</button>
+          </form>
+         </td>
+
+        
         </tr>
       {% endfor %}
     </table>
+
+    {% elif edit_data %}
+     <form action="{% url 'edit_data' pk1=userdata.id pk2=edit_data.id %}" method="post">
+     
+       {% csrf_token %}
+       <input type="text",name='item' value={{edit_data.item}}>
+       <input type="text",name='shop' value={{edit_data.shop}}>
+       <input type="number",name='quantity' value={{edit_data.quantity}}>
+       <input type="text",name='color' value={{edit_data.color}}>
+     
+       <input type="submit" value="Update">
+     </form>
+
 
     </div>
     {% else %}
@@ -69,6 +93,7 @@ Home Page
             <th>Resume</th>
           {% endif %}
         </tr>
+        
         <tr>
           <td>{{ userdata.email }}</td>
           <td>{{ userdata.phone }}</td>
@@ -82,6 +107,9 @@ Home Page
           {% if userdata.resume %}
             <td><a href="{{ userdata.resume.url }}" target="_blank">Download</a></td>
           {% endif %}
+
+        
+
         </tr>
       </table>
     </div>
@@ -90,6 +118,7 @@ Home Page
 
 
 {% endif %}
+
 
 
 
