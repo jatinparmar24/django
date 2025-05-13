@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Login {% endblock %}
+
+{% block content %}
+
+{{messages}}
+
+<form action="{% url 'admin_login' %}" method="POST" autocomplete="off">
+  {% csrf_token %}
+  <input type="email" name="email" required placeholder="Enter Email" autocomplete="off" ><br>
+  <input type="password" name="password" required placeholder="Password" autocomplete="off"><br>
+  <button type="submit">Login</button>
+</form>
+
+{% endblock %}
