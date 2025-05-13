@@ -620,7 +620,7 @@ body {
   width: 80%;
   max-width: 1000px;
   margin: 30px auto;
-  padding: 25px;
+  padding: 10px;
   background-color: #f4f7f6;
   border-radius: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
@@ -643,8 +643,8 @@ body {
 
 .usertable th,
 .usertable td {
-  padding: 12px;
-  text-align: left;
+  padding: 2px;
+  text-align: center;
   border: 1px solid #ddd;
 }
 
@@ -665,10 +665,32 @@ body {
 
 .usertable td img {
   border-radius: 5px;
-  width: 80px;
-  height: 80px;
+  width: 40px;
+  height: 40px;
   object-fit: cover;
 }
+
+
+
+.btn-delete {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #e63946; /* Soft red */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-delete:hover {
+  background-color: #d62828;
+  transform: scale(1.03);
+}
+
 
 /* .usertable td a {
   color: #007bff;

@@ -125,7 +125,7 @@ def registration(request):
 
 
 
-
+ 
 def logindata(request):
     if request.method == 'POST':
         email = request.POST.get('email')
@@ -203,7 +203,6 @@ def dash(request):
 
 
 def first(request,pk):
-    print(pk)
     userdata=Students.objects.get(id=pk)
     key = Items.objects.all()[:5]  
     return render(request, 'dashboard.html', {'userdata':userdata,'key':key})
@@ -258,13 +257,16 @@ def edit_data(request, pk1, pk2):
         item.quantity = request.POST.get('quantity')
         item.color = request.POST.get('color')
         item.save()
-    return redirect('alld', pk=pk1)
+    return redirect('alld', pk=pk2)
 
 
 
 
         
 
-# def delete(request,pk1,pk2):
-#     print(pk1)
-#     print(pk2)
+def delete(request, pk1, pk2):
+    delete_data=Items.objects.get(id=pk2)
+    delete_data.delete()
+    return redirect('alld',pk=pk2)
+
+        

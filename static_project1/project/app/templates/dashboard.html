@@ -50,9 +50,11 @@ Home Page
           <td>{{ i.color }}</td>
            <td>
            <form action="{% url 'edit' pk1=userdata.id pk2=i.id %}">
-            <button>Edit</button>
+            <button class="btn-delete">Edit</button>
           </form>
          </td>
+         <td><a href="{% url 'delete' pk1=userdata.id pk2=i.id %}" class="btn-delete"
+                       onclick="return confirm('Are you sure you want to delete this item?');" style="text-decoration: none;">Delete</a></td>
 
         
         </tr>

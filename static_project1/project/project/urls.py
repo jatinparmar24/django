@@ -44,6 +44,8 @@ urlpatterns = [
     path('alld/<int:pk>/', views.alld, name='alld'),
     path('edit/<int:pk1>/<int:pk2>/', views.edit, name='edit'),
     path('edit_data/<int:pk1>/<int:pk2>/', views.edit_data, name='edit_data'),
+    path('delete/<int:pk1>/<int:pk2>/', views.delete, name='delete'),
+
  
 
      

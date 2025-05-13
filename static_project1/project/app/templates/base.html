@@ -56,10 +56,7 @@
               <li class="nav-item">
                 <a class="nav-link active" href="{% url 'home' %}">Logout</a>
               </li>
-              <li class="userdetail">
-                <span>{{userdata.name}}</span>
-                <img src="{{userdata.image.url}}" alt="">
-              </li>
+              
             {% else %}
               <li class="nav-item">
                 <a class="nav-link active" href="{% url 'home' %}">Home</a>
