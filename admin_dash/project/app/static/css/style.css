@@ -109,13 +109,21 @@ body {
   background: #ddd;
 }
 
+.admindiv{
+  width: 100%;
+  height: 60vh;
+  border: 1px solid black;
+}
 
 /* Footer */
+
 .footer {
-  background: #2c2c54;
-  color: #f1f1f1;
-  padding: 60px 20px 20px;
+  background: #FF7E5F;
+  color: #f1f1f1; 
+  padding: 40px 20px;
+ 
 }
+
 
 .footer-container {
   display: grid;
@@ -125,45 +133,56 @@ body {
   margin: auto;
 }
 
+
 .footer-column h3, .footer-column h4 {
   margin-bottom: 15px;
-  color: #ffffff;
+  color: #ffffff; 
+  font-size: 18px;
+  font-weight: bold;
 }
+
 
 .footer-column p, .footer-column ul, .footer-column form {
   font-size: 14px;
-  color: #ccc;
+  color: #ddd; 
+  line-height: 1.6;
 }
+
 
 .footer-column ul {
   list-style: none;
   padding: 0;
 }
 
+
 .footer-column ul li {
   margin-bottom: 8px;
 }
 
+
 .footer-column ul li a {
-  color: #ccc;
+  color: #ddd;
   text-decoration: none;
   transition: color 0.3s;
 }
 
 .footer-column ul li a:hover {
-  color: #ffffff;
+  color: #ffffff; 
 }
+
 
 .social-icons a {
   margin-right: 10px;
   display: inline-block;
   opacity: 0.8;
-  transition: opacity 0.3s;
+  transition: opacity 0.3s ease, transform 0.2s ease;
 }
 
 .social-icons a:hover {
   opacity: 1;
+  transform: scale(1.1); 
 }
+
 
 .newsletter-form input[type="email"] {
   padding: 8px;
@@ -171,23 +190,137 @@ body {
   border: none;
   border-radius: 4px;
   margin-bottom: 10px;
+  font-size: 14px;
+  background-color: #444; 
+  color: white;
 }
 
 .newsletter-form button {
   padding: 8px 12px;
-  background: #ffcc00;
+  background: #FF7E5F; 
   border: none;
   border-radius: 4px;
-  color: #000;
+  color: #fff;
   cursor: pointer;
   font-weight: bold;
+  transition: background-color 0.3s ease;
 }
+
+.newsletter-form button:hover {
+  background-color: #feb47b;
+}
+
 
 .footer-bottom {
   text-align: center;
-  margin-top: 40px;
+  margin-top: 20px;
   border-top: 1px solid #444;
-  padding-top: 20px;
+  padding-top: 10px;
   font-size: 13px;
-  color: #999;
+  color: #ccc; 
+}
+
+/* login page css */
+
+/* Styling for the entire section with a 60vh height */
+#login_body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  background: linear-gradient(135deg, #FF7E5F, #feb47b); /* Smooth gradient background */
+  padding: 20px;
+}
+
+/* Login Box Styling */
+.login_box {
+  background-color: white;
+  padding: 40px;
+  width: 350px;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Error message */
+.error {
+  color: red;
+  margin-bottom: 15px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Form fields */
+.login_box input {
+  width: 100%;
+  padding: 14px;
+  margin: 15px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+/* Input Focus Styling */
+.login_box input:focus {
+  border-color: #FF7E5F;
+  box-shadow: 0 0 8px rgba(255, 126, 95, 0.5);
+}
+
+/* Button Styling */
+.login_box button {
+  width: 100%;
+  padding: 15px;
+  background-color: #FF7E5F;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Button Hover Effect */
+.login_box button:hover {
+  background-color: #feb47b;
+  transform: scale(1.05);
+}
+
+/* Hover Effect for Login Box (using ::before) */
+.login_box::before {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background-color: rgba(255, 126, 95, 0.2);
+  border-radius: 50%;
+  top: -70px;
+  right: -70px;
+  transition: all 0.3s ease-in-out;
+}
+
+.login_box:hover::before {
+  top: -50px;
+  right: -50px;
+}
+
+/* Additional Visual Effects */
+.login_box::after {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background-color: rgba(255, 126, 95, 0.1);
+  border-radius: 50%;
+  bottom: -60px;
+  left: -60px;
+  transition: all 0.3s ease-in-out;
+}
+
+.login_box:hover::after {
+  bottom: -40px;
+  left: -40px;
 }

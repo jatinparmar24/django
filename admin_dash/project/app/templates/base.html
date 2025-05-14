@@ -33,8 +33,13 @@
           <a class="nav-link" href="#">User Detail</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Login</a>
+          {% if request.session.logged_in %}
+            <a class="nav-link" href="{% url 'admin_logout' %}">Logout</a>
+          {% else %}
+            <a class="nav-link" href="{% url 'admin_login' %}">Login</a>
+          {% endif %}
         </li>
+
        
         
       </ul>
@@ -81,8 +86,8 @@
       <h4>Newsletter</h4>
       <p>Join our newsletter to stay updated on deals & offers.</p>
       <form class="newsletter-form">
-        <input type="email" placeholder="Your Email" required />
-        <button type="submit">Subscribe</button>
+        <input type="email" placeholder="Your Email"/>
+        <button type="submit" aria-readonly="true">Subscribe</button>
       </form>
     </div>
   </div>

@@ -2,12 +2,9 @@ from django.db import models
 
 # Create your models here.
 
-class Admin(models.Model):
-    email = models.EmailField(unique=True)
-    password = models.CharField(max_length=100)
-    is_logged_in = models.BooleanField(default=False) 
-
 class Employee(models.Model):
-    email = models.EmailField(unique=True)
-    password = models.CharField(max_length=100)
-    is_logged_in = models.BooleanField(default=False)  
+    emp_name=models.CharField(max_length=20)
+    emp_contact=models.IntegerField()
+    emp_age=models.IntegerField()
+    emp_email=models.EmailField(unique=True)
+    emp_pass=models.CharField(max_length=20,unique=True)

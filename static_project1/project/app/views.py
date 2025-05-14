@@ -268,5 +268,6 @@ def delete(request, pk1, pk2):
     delete_data=Items.objects.get(id=pk2)
     delete_data.delete()
     return redirect('alld',pk=pk2)
+    
 
         
