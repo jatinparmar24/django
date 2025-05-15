@@ -3,37 +3,41 @@
 {% block title %} Admin dashboard{% endblock %}
 
 {% block content %}
-<div class="admindiv">
-    <a href="{% url 'add_emp' %}?show_form=true" class="create-employee-link">Create Employee</a>
 
-    {% if show_form %}
-        <div class="form-container">
-            <form method="post" enctype="multipart/form-data" class="employee-form">
-                {% csrf_token %}
-                
-                <label for="name">Name:</label>
-                <input type="text" name="name" required class="input-field"><br><br>
 
-                <label for="phone">Phone:</label>
-                <input type="tel" name="phone" pattern="[0-9]{10}" required class="input-field"><br><br>
-
-                <label for="dob">DOB:</label>
-                <input type="date" name="dob" required class="input-field"><br><br>
-
-                <label for="email">Email:</label>
-                <input type="email" name="email" required class="input-field"><br><br>
-
-                <label for="password">Password:</label>
-                <input type="password" name="password" required class="input-field"><br><br>
-
-                <label for="profile-pic">Profile Picture:</label>
-                <input type="file" name="profile-pic" accept=".jpg,.jpeg,.png" class="input-field"><br><br>
-
-                <input type="submit" value="Register" class="submit-btn">
-            </form>
-        </div>
-    {% endif %}
+  <div class="admin_tab">
+  <a href="{% url 'add_emp' %}?show_form=1" class="create-employee-link">Create Employee</a>
 </div>
+
+{% if show_form %}
+  <div class="form-container">
+    <form method="post" enctype="multipart/form-data" action="{% url 'add_emp' %}">
+      {% csrf_token %}
+      
+      <label for="name">Name:</label>
+      <input type="text" name="name" required><br><br>
+
+      <label for="phone">Phone:</label>
+      <input type="tel" name="phone" pattern="[0-9]{10}" required><br><br>
+
+      <label for="dob">DOB:</label>
+      <input type="date" name="dob" min="1990-01-01" max="2020-01-01" required><br><br>
+
+      <label for="email">Email:</label>
+      <input type="email" name="email" required><br><br>
+
+      <label for="password">Password:</label>
+      <input type="password" name="password" required><br><br>
+
+      <label for="profile-pic">Profile Picture:</label>
+      <input type="file" name="profile-pic" accept=".jpg,.jpeg,.png"><br><br>
+
+      <input type="submit" value="Register">
+    </form>
+  </div>
+{% endif %}
+
+    
 
 
 {% endblock %}

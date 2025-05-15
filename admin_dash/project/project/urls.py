@@ -24,9 +24,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home,name='home'),
     path('admindata/', views.admindata,name='admindata'),
-    path('adminpage/', views.adminpage,name='adminpage'),
+    path('home1/', views.home1,name='home1'),
+    path('admindata1/', views.admindata1,name='admindata1'),
+    path('userlogin/', views.userlogin,name='userlogin'),
+    path('login/', views.login,name='login'),
+    path('logout/', views.logout,name='logout'),
     path('admin_login/', views.admin_login,name='admin_login'),
-    path('admin_logout/', views.admin_logout, name='admin_logout'),
     path('add_emp/', views.add_emp, name='add_emp'),
 
 
