@@ -6,14 +6,16 @@
 
 
   <div class="admin_tab">
-  <a href="{% url 'add_emp' %}?show_form=1" class="create-employee-link">Create Employee</a>
+  <a href="{% url 'add_emp' %}?show_form=1" class="create-employee-link">Create Employee</a> <br>
+  <a href="{% url 'show_all_emp' %}" class="create-employee-link">Show Employee</a> <br>
 </div>
 
+<!-- Form Section -->
 {% if show_form %}
   <div class="form-container">
     <form method="post" enctype="multipart/form-data" action="{% url 'add_emp' %}">
       {% csrf_token %}
-      
+
       <label for="name">Name:</label>
       <input type="text" name="name" required><br><br>
 
@@ -36,6 +38,40 @@
     </form>
   </div>
 {% endif %}
+
+<!-- Employee Table Section -->
+{% if show_all %}
+  <table border="1">
+    <tr>
+      <th>S.NO</th>
+      <th>Name</th>
+      <th>Contact</th>
+      <th>DOB</th>
+      <th>Email</th>
+      <th>Password</th>
+      <th>Profile</th>
+    </tr>
+
+    {% for i in emp_data %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ i.emp_name }}</td>
+        <td>{{ i.emp_contact }}</td>
+        <td>{{ i.emp_dob }}</td>
+        <td>{{ i.emp_email }}</td>
+        <td>{{ i.emp_pass}}</td>
+        <td>
+          {% if i.emp_image %}
+            <img src="{{ i.emp_image.url }}" alt="Profile" width="50" height="50" style="object-fit: cover; border-radius: 50%;">
+          {% else %}
+            No Image
+          {% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endif %}
+
 
     
 

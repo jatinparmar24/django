@@ -9,7 +9,9 @@
 
      <div class="login_box">
           {% if messages %}
-           <h3 class="error">{{ messages }}</h3>
+            {% for message in messages %}
+                <p style="color: red;">{{ message }}</p>
+            {% endfor %}
           {% endif %}
        
           <form action="{% url 'admin_login' %}" method="POST">

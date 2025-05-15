@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from .models import Employee 
+from django.contrib import messages
 
 
 
@@ -17,7 +18,7 @@ def admindata(request):
 # Admin data view
 def admindata1(request):
     is_admin = request.session.get('is_admin', False)
-    show_form = request.GET.get('show_form') == '1'  # True if URL contains ?show_form=1
+    show_form = request.GET.get('show_form') == '1' 
     return render(request, 'admindata.html', {'data': is_admin, 'show_form': show_form})
 
 # Home view
@@ -40,38 +41,43 @@ def userlogin(request):
 def login(request):
     return render(request,'login.html')
 
-from django.shortcuts import render, redirect
 
 # Admin login view
 def admin_login(request):
     if request.method == 'POST':
-        email = "admin@gmail.com"
-        password = "ad"
-        e = request.POST.get('email')
-        p = request.POST.get('password')
+        admin_email = "admin@gmail.com"
+        admin_password = "ad"
 
-        if e == email and p == password:
-            request.session['is_admin'] = True 
-            return redirect('admindata1')       
-        else:
-            messages = "Please Enter Valid Email"
-            return render(request, 'login.html', {'messages': messages})
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+
+        if not email or not password:
+            messages.error(request, "Both fields are required.")
+            return render(request, 'login.html')
+
+        # Admin Login
+        if email == admin_email and password == admin_password:
+            request.session['is_admin'] = True
+            return redirect('admindata1')
+
+        try:
+            employee = Employee.objects.get(emp_email=email, emp_pass=password)
+            request.session['user_id'] = employee.id  
+            return render(request, 'userdetail.html', {'employee': employee})
+        except Employee.DoesNotExist:
+            messages.error(request, "Invalid email or password.")
+
     return render(request, 'login.html')
-
 
 
 def logout(request):
     request.session.flush() 
     return redirect('home')
 
-def add_employe(request):
-    return render(request,'admindata.html')
-
 
 
 def add_emp(request):
     if not request.session.get('is_admin'):
-        # Redirect to login if not admin
         return redirect('admin_login')
 
     if request.method == 'POST':
@@ -95,3 +101,9 @@ def add_emp(request):
     return render(request, 'admindata.html', {'data': True, 'show_form': True})
 
 
+def show_all_emp(request):
+    emp_data=Employee.objects.all()
+    return render(request,'admindata.html',{'emp_data':emp_data,'show_all': True})
+
+def userdetail(request):
+    return render(request,'userdetail.html')

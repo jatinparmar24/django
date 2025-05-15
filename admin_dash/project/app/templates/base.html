@@ -23,11 +23,12 @@
             aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        {% if data %}
-          <!-- Admin logged in -->
+
+        {% if request.session.is_admin %}
+          <!-- Admin Navbar -->
           <li class="nav-item">
             <a class="nav-link active" href="{% url 'home1' %}">Home</a>
           </li>
@@ -40,8 +41,19 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'logout' %}">Logout</a>
           </li>
+
+        {% elif request.session.user_id %}
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'home' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'userdetail' %}">User Detail</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+          </li>
+
         {% else %}
-          <!-- Normal user -->
           <li class="nav-item">
             <a class="nav-link active" href="{% url 'home' %}">Home</a>
           </li>
@@ -55,6 +67,7 @@
             <a class="nav-link" href="{% url 'login' %}">Login</a>
           </li>
         {% endif %}
+        
       </ul>
     </div>
   </div>
