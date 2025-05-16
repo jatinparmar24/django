@@ -60,14 +60,17 @@ def admin_login(request):
             request.session['is_admin'] = True
             return redirect('admindata1')
 
+        # User Login
         try:
             employee = Employee.objects.get(emp_email=email, emp_pass=password)
-            request.session['user_id'] = employee.id  
-            return render(request, 'userdetail.html', {'employee': employee})
+            request.session['user_email'] = employee.emp_email
+            request.session['user_id'] = employee.id  # Add this line
+            return redirect('user_info')
         except Employee.DoesNotExist:
             messages.error(request, "Invalid email or password.")
 
     return render(request, 'login.html')
+
 
 
 def logout(request):
@@ -107,3 +110,55 @@ def show_all_emp(request):
 
 def userdetail(request):
     return render(request,'userdetail.html')
+
+
+def user_info(request):
+    email = request.session.get('user_email')
+    if not email:
+        return redirect('login')
+
+    show_table = request.GET.get('show_table') == '1'
+
+    user_data = None
+    if show_table:
+        user_data = Employee.objects.filter(emp_email=email)
+
+    return render(request, 'userdetail.html', {
+        'user_data': user_data,
+        'show_table': show_table,
+    })
+
+
+def edit_emp(request, id):
+    try:
+        emp = Employee.objects.get(id=id)
+    except Employee.DoesNotExist:
+        return redirect('show_employees')
+
+    if request.method == 'POST':
+        emp.emp_name = request.POST.get('name')
+        emp.emp_contact = request.POST.get('contact')
+        emp.emp_dob = request.POST.get('dob')
+        emp.emp_email = request.POST.get('email')
+        emp.emp_pass = request.POST.get('pass')
+        
+        if request.FILES.get('image'):
+            emp.emp_image = request.FILES['image']
+        
+        emp.save()
+        # Instead of redirect, continue to show form with updated data
+
+    emp_data = Employee.objects.all()
+    return render(request, 'admindata.html', {
+        'show_all': True,
+        'emp_data': emp_data,
+        'edit_employee': emp
+    })
+
+def delete_employee(request, id):
+    try:
+        emp = Employee.objects.get(id=id)
+        emp.delete()
+    except Employee.DoesNotExist:
+        pass
+    return redirect('admindata1')

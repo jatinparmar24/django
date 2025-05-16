@@ -43,6 +43,7 @@
           </li>
 
         {% elif request.session.user_id %}
+          <!-- Logged-in User Navbar -->
           <li class="nav-item">
             <a class="nav-link active" href="{% url 'home' %}">Home</a>
           </li>
@@ -54,6 +55,7 @@
           </li>
 
         {% else %}
+          <!-- Not logged in -->
           <li class="nav-item">
             <a class="nav-link active" href="{% url 'home' %}">Home</a>
           </li>
@@ -72,6 +74,7 @@
     </div>
   </div>
 </nav>
+
 
 
   {% block content %}

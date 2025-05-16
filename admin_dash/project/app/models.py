@@ -11,7 +11,7 @@ class Employee(models.Model):
     emp_image    =   models.ImageField(upload_to='image/', null=True, blank=True)
 
     def __str__(self):
-        return self.name
+        return self.emp_name
 
   
 
