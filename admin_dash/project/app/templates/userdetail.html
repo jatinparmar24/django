@@ -13,50 +13,94 @@
 
 <div style="height: 100vh;">
 
+  <div>
+    <!-- <a href="{% url 'user_ask' %}?show_table=1">User Profile</a>
+    <a href="{% url 'user_ask' %}?show_form=1">Information</a>  -->
+    <a href="{% url 'user_info' %}">Information</a> 
+    <a href="{% url 'all_emp' %}">Information</a> 
+    <a href="{% url 'info_update' %}">Information</a> 
+  </div>
 
-      
-      <div>
-         <a href="{% url 'user_info' %}?show_table=1">User Profile</a>
-      </div>
-
-      {% if show_table %}
-      <div>
-            {% if user_data %}
-               <table border="1">
-                 <tr>
-                   <th>S.NO</th>
-                   <th>Name</th>
-                   <th>Contact</th>
-                   <th>DOB</th>
-                   <th>Email</th>
-                   <th>Password</th>
-                   <th>Profile</th>
-                 </tr>
-             
-                   {% for i in user_data %}
-                   <tr>
-                     <td>{{ forloop.counter }}</td>
-                     <td>{{ i.emp_name }}</td>
-                     <td>{{ i.emp_contact }}</td>
-                     <td>{{ i.emp_dob }}</td>
-                     <td>{{ i.emp_email }}</td>
-                     <td>{{ i.emp_pass}}</td>
-                     <td>
-                       {% if i.emp_image %}
-                         <img src="{{ i.emp_image.url }}" alt="Profile" width="50" height="50" style="object-fit: cover; border-radius: 50%;">
-                       {% else %}
-                         No Image
-                       {% endif %}
-                     </td>
-                   </tr>
-                 {% endfor %}
-               </table>
+  {% if show_table %}
+  <div>
+   
+      <table border="1">
+        <tr>
+          <th>S.NO</th>
+          <th>Name</th>
+          <th>Contact</th>
+          <th>DOB</th>
+          <th>Email</th>
+          <th>Department</th>
+          <th>Profile</th>
+        </tr>
+        {% for i in user_data %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ i.emp_name }}</td>
+          <td>{{ i.emp_contact }}</td>
+          <td>{{ i.emp_dob }}</td>
+          <td>{{ i.emp_email }}</td>
+          <td>{{ i.emp_depart }}</td>
+          <td>
+            {% if i.emp_image %}
+              <img src="{{ i.emp_image.url }}" alt="Profile" width="50" height="50" style="object-fit: cover; border-radius: 50%;">
+            {% else %}
+              No Image
             {% endif %}
-      </div>
-      {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    
+  </div>
+  {% endif %}
 
+  {% if user_ask %}
+  <div>
+    <form action="{% url 'user_ask' %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <label for="name">Name:</label>
+      <input type="text" name="name" value="{{ employee.emp_name }}" readonly><br><br>
 
+      <label for="phone">Phone:</label>
+      <input type="tel" name="phone" pattern="[0-9]{10}" value="{{ employee.emp_contact }}" readonly><br><br>
+
+      <label for="email">Email:</label>
+      <input type="email" name="email" value="{{ employee.emp_email }}" readonly><br><br>
+
+      <label for="info">Ask From Admin:</label>
+      <input type="text" name="info"><br><br>
+
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+  {% endif %}
+
+  
+{% if all_submitted %}
+<div style="margin-top: 40px;">
+  <h3>question Asked</h3>
+  <table border="1" style="width: 100%; border-collapse: collapse;">
+    <tr>
+      <th>Name</th>
+      <th>Contact</th>
+      <th>Email</th>
+      <th>Question for Admin</th>
+    </tr>
+    {% for emp in all_submitted %}
+    <tr>
+      <td>{{ emp.emp_name }}</td>
+      <td>{{ emp.emp_contact }}</td>
+      <td>{{ emp.emp_email }}</td>
+      <td>{{ emp.emp_info }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endif %}
 
 </div>
+
 
 {% endblock%}

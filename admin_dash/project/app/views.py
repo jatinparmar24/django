@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
-from .models import Employee 
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
+from .models import Employee ,UserRequest
 
 
 
@@ -65,6 +66,7 @@ def admin_login(request):
             employee = Employee.objects.get(emp_email=email, emp_pass=password)
             request.session['user_email'] = employee.emp_email
             request.session['user_id'] = employee.id  # Add this line
+            request.session['employee_id'] = employee.id
             return redirect('user_info')
         except Employee.DoesNotExist:
             messages.error(request, "Invalid email or password.")
@@ -90,6 +92,7 @@ def add_emp(request):
         emp_email   = request.POST.get('email')
         emp_pass    = request.POST.get('password')
         emp_image   = request.FILES.get('profile-pic')
+        emp_depart  = request.POST.get('emp_depart') 
 
         Employee.objects.create(
             emp_name=emp_name,
@@ -97,11 +100,13 @@ def add_emp(request):
             emp_dob=emp_dob,
             emp_email=emp_email,
             emp_pass=emp_pass,
-            emp_image=emp_image
+            emp_image=emp_image,
+            emp_depart=emp_depart  
         )
-        return redirect('admindata1')  
+        return redirect('admindata1')
 
     return render(request, 'admindata.html', {'data': True, 'show_form': True})
+
 
 
 def show_all_emp(request):
@@ -129,7 +134,7 @@ def user_info(request):
     })
 
 
-def edit_emp(request, id):
+def edit_emp(request,id):
     try:
         emp = Employee.objects.get(id=id)
     except Employee.DoesNotExist:
@@ -146,7 +151,6 @@ def edit_emp(request, id):
             emp.emp_image = request.FILES['image']
         
         emp.save()
-        # Instead of redirect, continue to show form with updated data
 
     emp_data = Employee.objects.all()
     return render(request, 'admindata.html', {
@@ -162,3 +166,43 @@ def delete_employee(request, id):
     except Employee.DoesNotExist:
         pass
     return redirect('admindata1')
+
+    
+
+def user_ask(request):
+    emp_id = request.session.get('employee_id')
+
+    if not emp_id:
+        return redirect('login')  # redirect if not logged in
+
+    try:
+        employee = Employee.objects.get(id=emp_id)
+    except Employee.DoesNotExist:
+        request.session.flush()
+        return redirect('login')
+
+    if request.method == 'POST':
+        # Update employee info with submitted form data
+        info = request.POST.get('info', '').strip()
+        if info:
+            employee.emp_info = info
+            employee.save()
+        # After POST, redirect to same page with ?show_form=1 so form stays visible
+        return redirect(f"{request.path}?show_form=1")
+
+    show_form = request.GET.get('show_form') == '1'
+    show_table = request.GET.get('show_table') == '1'
+
+    # Query all employees who have submitted info (non-empty emp_info)
+    all_submitted = Employee.objects.exclude(emp_info__exact='').exclude(emp_info__isnull=True)
+
+    context = {
+        'employee': employee,             # Current logged-in employee object
+        'show_table': show_table,         # Whether to show profile table
+        'user_data': Employee.objects.all(),
+        'user_ask': show_form,            # Whether to show the form
+        'all_submitted': all_submitted,   # Employees with submitted info
+    }
+    return render(request, 'userdetail.html', context)
+
+
