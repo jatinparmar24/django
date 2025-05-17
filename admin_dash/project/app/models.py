@@ -23,11 +23,13 @@ class Employee(models.Model):
     def __str__(self):
         return self.emp_name
 
-
-class UserRequest(models.Model):
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    info = models.TextField()
+class NewEntry(models.Model):
+    info_name    = models.CharField(max_length=50)
+    info_contact = models.IntegerField()
+    info_dob     = models.DateField()
+    info_resume  = models.CharField(max_length=200)
+    info_image   = models.ImageField(upload_to='image/', null=True, blank=True)
+    admin_opinion = models.TextField(null=True, blank=True) 
 
     def __str__(self):
-        return f"{self.employee.emp_name} - Request"
-
+        return self.info_name

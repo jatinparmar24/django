@@ -14,91 +14,118 @@
 <div style="height: 100vh;">
 
   <div>
-    <!-- <a href="{% url 'user_ask' %}?show_table=1">User Profile</a>
-    <a href="{% url 'user_ask' %}?show_form=1">Information</a>  -->
-    <a href="{% url 'user_info' %}">Information</a> 
-    <a href="{% url 'all_emp' %}">Information</a> 
-    <a href="{% url 'info_update' %}">Information</a> 
-  </div>
+  <a href="{% url 'view_user' %}">View My Info</a>
+  <a href="{% url 'find_user' %}">Resume for Job</a>
+</div>
 
-  {% if show_table %}
-  <div>
-   
-      <table border="1">
-        <tr>
-          <th>S.NO</th>
-          <th>Name</th>
-          <th>Contact</th>
-          <th>DOB</th>
-          <th>Email</th>
-          <th>Department</th>
-          <th>Profile</th>
-        </tr>
-        {% for i in user_data %}
-        <tr>
-          <td>{{ forloop.counter }}</td>
-          <td>{{ i.emp_name }}</td>
-          <td>{{ i.emp_contact }}</td>
-          <td>{{ i.emp_dob }}</td>
-          <td>{{ i.emp_email }}</td>
-          <td>{{ i.emp_depart }}</td>
-          <td>
-            {% if i.emp_image %}
-              <img src="{{ i.emp_image.url }}" alt="Profile" width="50" height="50" style="object-fit: cover; border-radius: 50%;">
-            {% else %}
-              No Image
-            {% endif %}
-          </td>
-        </tr>
-        {% endfor %}
-      </table>
-    
-  </div>
-  {% endif %}
+{% if messages %}
+  {% for message in messages %}
+    <p style="color: green;">{{ message }}</p>
+  {% endfor %}
+{% endif %}
 
-  {% if user_ask %}
-  <div>
-    <form action="{% url 'user_ask' %}" method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      <label for="name">Name:</label>
-      <input type="text" name="name" value="{{ employee.emp_name }}" readonly><br><br>
 
-      <label for="phone">Phone:</label>
-      <input type="tel" name="phone" pattern="[0-9]{10}" value="{{ employee.emp_contact }}" readonly><br><br>
-
-      <label for="email">Email:</label>
-      <input type="email" name="email" value="{{ employee.emp_email }}" readonly><br><br>
-
-      <label for="info">Ask From Admin:</label>
-      <input type="text" name="info"><br><br>
-
-      <input type="submit" value="Submit">
-    </form>
-  </div>
-  {% endif %}
-
-  
-{% if all_submitted %}
-<div style="margin-top: 40px;">
-  <h3>question Asked</h3>
-  <table border="1" style="width: 100%; border-collapse: collapse;">
+{% if view_user %}
+<!-- for user Information -->
+  <table border="1">
     <tr>
+      <th>S.NO</th>
       <th>Name</th>
       <th>Contact</th>
+      <th>DOB</th>
       <th>Email</th>
-      <th>Question for Admin</th>
+      <th>Department</th>
+      <th>Profile</th>
     </tr>
-    {% for emp in all_submitted %}
-    <tr>
-      <td>{{ emp.emp_name }}</td>
-      <td>{{ emp.emp_contact }}</td>
-      <td>{{ emp.emp_email }}</td>
-      <td>{{ emp.emp_info }}</td>
-    </tr>
+
+    {% for i in emp_data %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ i.emp_name }}</td>
+        <td>{{ i.emp_contact }}</td>
+        <td>{{ i.emp_dob }}</td>
+        <td>{{ i.emp_email }}</td>
+        <td>{{ i.emp_depart }}</td>
+        <td>
+          {% if i.emp_image %}
+            <img src="{{ i.emp_image.url }}" alt="Profile" width="50" height="50" style="object-fit: cover; border-radius: 50%;">
+          {% else %}
+            No Image
+          {% endif %}
+        </td>
+      </tr>
     {% endfor %}
   </table>
-</div>
 {% endif %}
+<!-- user information table ends here -->
+
+<!-- for employee info -->
+
+{% if find_user %}
+<form action="{% url 'find_user'%}" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+
+  <label for="name">Name</label>
+  <input type="text" name="name">
+
+  <label for="phone">Contact:</label>
+  <input type="tel" name="contact" pattern="[0-9]{10}" required><br><br>
+
+  <label for="dob">DOB:</label>
+  <input type="date" name="dob" min="1990-01-01" max="2020-01-01" required><br><br>
+
+  <label for="name">Information</label>
+  <input type="text" name="resume">
+
+  <label for="profile-pic">Profile Picture:</label>
+  <input type="file" name="profile-pic" accept=".jpg,.jpeg,.png"><br><br>
+
+  <input type="submit" value="To Admin">
+</form>
+{% endif %}
+
+
+<!-- employe info ends here -->
+
+{% if show_resumes %}
+  <h3>Your Resume(s) and Admin Feedback</h3>
+  
+  {% if resumes %}
+    <table border="1" style="margin-top:10px;">
+      <tr>
+        <th>S.NO</th>
+        <th>Name</th>
+        <th>Contact</th>
+        <th>DOB</th>
+        <th>Resume</th>
+        <th>Profile</th>
+        <th>Admin Opinion</th>
+      </tr>
+      {% for r in resumes %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ r.info_name }}</td>
+        <td>{{ r.info_contact }}</td>
+        <td>{{ r.info_dob }}</td>
+        <td>{{ r.info_resume }}</td>
+        <td>
+          {% if r.info_image %}
+            <img src="{{ r.info_image.url }}" alt="Profile" width="50" height="50" style="object-fit: cover; border-radius: 50%;">
+          {% else %}
+            No Image
+          {% endif %}
+        </td>
+        <td>{{ r.admin_opinion|default:"No opinion yet" }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  {% else %}
+    <p>You have not submitted any resumes yet.</p>
+  {% endif %}
+{% endif %}
+
+
+  
 
 </div>
 

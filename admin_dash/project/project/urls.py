@@ -27,16 +27,24 @@ urlpatterns = [
     path('home1/', views.home1,name='home1'),
     path('admindata1/', views.admindata1,name='admindata1'),
     path('userlogin/', views.userlogin,name='userlogin'),
+    path('userdetail/', views.userdetail,name='userdetail'),
     path('login/', views.login,name='login'),
     path('logout/', views.logout,name='logout'),
     path('admin_login/', views.admin_login,name='admin_login'),
     path('add_emp/', views.add_emp, name='add_emp'),
     path('show_all_emp/', views.show_all_emp, name='show_all_emp'),
-    path('userdetail/', views.userdetail, name='userdetail'),
-    path('user_ask/', views.user_ask, name='user_ask'),
-    path('user_info/', views.user_info, name='user_info'),
     path('edit_emp/<int:id>/', views.edit_emp, name='edit_emp'),
     path('delete_employee/<int:id>/', views.delete_employee, name='delete_employee'),
+    path('view_user/',views.view_user,name='view_user'),
+    path('find_user/', views.find_user, name='find_user'),
+    path('show_resumes/', views.show_resumes, name='show_resumes'),
+    path('admin_manage_resumes/', views.admin_manage_resumes, name='admin_manage_resumes'),
+    path('user_resumes/', views.user_resumes, name='user_resumes'),
+
+
+
+    
+
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
-from .models import Employee ,UserRequest
+from .models import Employee,NewEntry
 
 
 
@@ -32,6 +32,28 @@ def logout(request):
     return redirect('home')
 
 
+def userdetail(request):
+    user_email = request.session.get('user_email')
+    emp_data = None
+    resumes = None
+
+    if user_email:
+        try:
+            # Get employee info
+            emp_data = Employee.objects.filter(emp_email=user_email)
+
+            # Get resumes related to this user, matching contact or email
+            resumes = NewEntry.objects.filter(info_contact__in=[emp.emp_contact for emp in emp_data])
+        except Employee.DoesNotExist:
+            emp_data = None
+            resumes = None
+
+    return render(request, 'userdetail.html', {
+        'emp_data': emp_data,
+        'resumes': resumes,
+        'view_user': True,     # to show employee info table as before
+        'show_resumes': True   # flag to show resumes with admin opinions
+    })
 
 
 
@@ -67,7 +89,7 @@ def admin_login(request):
             request.session['user_email'] = employee.emp_email
             request.session['user_id'] = employee.id  # Add this line
             request.session['employee_id'] = employee.id
-            return redirect('user_info')
+            return redirect('userdetail')
         except Employee.DoesNotExist:
             messages.error(request, "Invalid email or password.")
 
@@ -113,25 +135,6 @@ def show_all_emp(request):
     emp_data=Employee.objects.all()
     return render(request,'admindata.html',{'emp_data':emp_data,'show_all': True})
 
-def userdetail(request):
-    return render(request,'userdetail.html')
-
-
-def user_info(request):
-    email = request.session.get('user_email')
-    if not email:
-        return redirect('login')
-
-    show_table = request.GET.get('show_table') == '1'
-
-    user_data = None
-    if show_table:
-        user_data = Employee.objects.filter(emp_email=email)
-
-    return render(request, 'userdetail.html', {
-        'user_data': user_data,
-        'show_table': show_table,
-    })
 
 
 def edit_emp(request,id):
@@ -169,40 +172,74 @@ def delete_employee(request, id):
 
     
 
-def user_ask(request):
-    emp_id = request.session.get('employee_id')
+def view_user(request):
+    user_id = request.session.get('user_id')  
+    if user_id:
+        emp_data = Employee.objects.filter(id=user_id)
+        return render(request, 'userdetail.html', {'emp_data': emp_data, 'view_user': True})
+    else:
+        return redirect('login')  
 
-    if not emp_id:
-        return redirect('login')  # redirect if not logged in
+def find_user(request):
+    if request.method == 'POST':
+        name     = request.POST.get('name')
+        contact  = request.POST.get('contact')
+        dob      = request.POST.get('dob')
+        resume   = request.POST.get('resume')
+        image    = request.FILES.get('profile-pic')
 
-    try:
-        employee = Employee.objects.get(id=emp_id)
-    except Employee.DoesNotExist:
-        request.session.flush()
-        return redirect('login')
+        NewEntry.objects.create(
+            info_name=name,
+            info_contact=contact,
+            info_dob=dob,
+            info_resume=resume,
+            info_image=image
+        )
+
+        messages.success(request, "Your information has been submitted.")
+        return redirect('userdetail')
+
+    return render(request, 'userdetail.html', {'find_user': True})
+
+
+# for admin to show that resume
+def show_resumes(request):
+    if not request.session.get('is_admin'):
+        return redirect('admin_login')
+
+    resumes = NewEntry.objects.all()
+    return render(request, 'admindata.html', {
+        'resumes': resumes,
+        'show_resumes': True
+    })
+
+
+def admin_manage_resumes(request):
+    if not request.session.get('is_admin'):
+        return redirect('admin_login')
 
     if request.method == 'POST':
-        # Update employee info with submitted form data
-        info = request.POST.get('info', '').strip()
-        if info:
-            employee.emp_info = info
-            employee.save()
-        # After POST, redirect to same page with ?show_form=1 so form stays visible
-        return redirect(f"{request.path}?show_form=1")
+        resume_id = request.POST.get('resume_id')
+        opinion = request.POST.get('admin_opinion')
 
-    show_form = request.GET.get('show_form') == '1'
-    show_table = request.GET.get('show_table') == '1'
+        try:
+            resume = NewEntry.objects.get(id=resume_id)
+            resume.admin_opinion = opinion
+            resume.save()
+            messages.success(request, "Admin opinion updated successfully.")
+        except NewEntry.DoesNotExist:
+            messages.error(request, "Resume not found.")
 
-    # Query all employees who have submitted info (non-empty emp_info)
-    all_submitted = Employee.objects.exclude(emp_info__exact='').exclude(emp_info__isnull=True)
-
-    context = {
-        'employee': employee,             # Current logged-in employee object
-        'show_table': show_table,         # Whether to show profile table
-        'user_data': Employee.objects.all(),
-        'user_ask': show_form,            # Whether to show the form
-        'all_submitted': all_submitted,   # Employees with submitted info
-    }
-    return render(request, 'userdetail.html', context)
+    resumes = NewEntry.objects.all()
+    return render(request, 'admin_manage_resumes.html', {'resumes': resumes})
 
 
+def user_resumes(request):
+    user_email = request.session.get('user_email')
+    try:
+        employee = Employee.objects.get(emp_email=user_email)
+        resumes = NewEntry.objects.filter(info_contact=employee.emp_contact)
+    except Employee.DoesNotExist:
+        resumes = []
+
+    return render(request, 'user_resumes.html', {'resumes': resumes})
