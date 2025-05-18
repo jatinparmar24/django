@@ -37,9 +37,9 @@ urlpatterns = [
     path('delete_employee/<int:id>/', views.delete_employee, name='delete_employee'),
     path('view_user/',views.view_user,name='view_user'),
     path('find_user/', views.find_user, name='find_user'),
-    path('show_resumes/', views.show_resumes, name='show_resumes'),
-    path('admin_manage_resumes/', views.admin_manage_resumes, name='admin_manage_resumes'),
-    path('user_resumes/', views.user_resumes, name='user_resumes'),
+    path('show_resume/', views.show_resume, name='show_resume'),
+    path('admin_resumes/', views.admin_resumes, name='admin_resumes'),
+    
 
 
 

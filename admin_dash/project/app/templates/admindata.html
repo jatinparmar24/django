@@ -8,7 +8,7 @@
   <div class="admin_tab">
   <a href="{% url 'add_emp' %}?show_form=1" class="create-employee-link">Create Employee</a> <br>
   <a href="{% url 'show_all_emp' %}" class="create-employee-link">Show Employee</a> <br>
-  <a href="{% url 'show_resumes' %}" class="create-employee-link">View All Resumes</a>
+  <a href="{% url 'admin_resumes' %}?show=true" class="create-employee-link">View All Resumes</a>
 
 </div>
 
@@ -125,42 +125,37 @@
 
 {% endif %}
 
-{% if show_resumes %}
+{% if admin_resumes %}
   <h2>Submitted Resumes</h2>
-  <table border="1">
+<table border="1" cellpadding="5" style="margin-bottom: 30px;">
+  <tr>
+    <th>S.NO</th>
+    <th>Name</th>
+    <th>Contact</th>
+    <th>DOB</th>
+    <th>Resume Info</th>
+    <th>Profile Picture</th>
+  </tr>
+
+  {% for entry in resumes %}
     <tr>
-      <th>S.NO</th>
-      <th>Name</th>
-      <th>Contact</th>
-      <th>DOB</th>
-      <th>Resume Info</th>
-      <th>Profile Picture</th>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ entry.info_name }}</td>
+      <td>{{ entry.info_contact }}</td>
+      <td>{{ entry.info_dob }}</td>
+      <td>{{ entry.info_resume }}</td>
+      <td>
+        {% if entry.info_image %}
+          <img src="{{ entry.info_image.url }}" alt="Profile" width="50" height="50" style="object-fit: cover; border-radius: 50%;">
+        {% else %}
+          No Image
+        {% endif %}
+      </td>
     </tr>
-
-    {% for entry in resumes %}
-      <tr>
-        <td>{{ forloop.counter }}</td>
-        <td>{{ entry.info_name }}</td>
-        <td>{{ entry.info_contact }}</td>
-        <td>{{ entry.info_dob }}</td>
-        <td>{{ entry.info_resume }}</td>
-        <td>
-          {% if entry.info_image %}
-            <img src="{{ entry.info_image.url }}" alt="Profile" width="50" height="50" style="object-fit: cover; border-radius: 50%;">
-          {% else %}
-            No Image
-          {% endif %}
-        </td>
-      </tr>
-    {% endfor %}
-  </table>
-{% endif %}
-
-
+  {% endfor %}
+</table>
 
 <h2>Manage Resumes</h2>
-
-
 
 <table border="1" cellpadding="5">
   <tr>
@@ -198,6 +193,12 @@
   </tr>
   {% endfor %}
 </table>
+
+
+  
+{% endif %}
+
+
 
 
     

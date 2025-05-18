@@ -16,6 +16,8 @@
   <div>
   <a href="{% url 'view_user' %}">View My Info</a>
   <a href="{% url 'find_user' %}">Resume for Job</a>
+  <a href="{% url 'show_resume' %}?show_resumes=true">Resume for Job</a>
+
 </div>
 
 {% if messages %}
@@ -23,6 +25,7 @@
     <p style="color: green;">{{ message }}</p>
   {% endfor %}
 {% endif %}
+
 
 
 {% if view_user %}
@@ -86,12 +89,9 @@
 
 
 <!-- employe info ends here -->
-
 {% if show_resumes %}
-  <h3>Your Resume(s) and Admin Feedback</h3>
-  
   {% if resumes %}
-    <table border="1" style="margin-top:10px;">
+    <table border="1" style="margin-top: 10px;">
       <tr>
         <th>S.NO</th>
         <th>Name</th>
@@ -116,11 +116,11 @@
           {% endif %}
         </td>
         <td>{{ r.admin_opinion|default:"No opinion yet" }}</td>
+
       </tr>
       {% endfor %}
     </table>
-  {% else %}
-    <p>You have not submitted any resumes yet.</p>
+
   {% endif %}
 {% endif %}
 

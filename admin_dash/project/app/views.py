@@ -87,7 +87,7 @@ def admin_login(request):
         try:
             employee = Employee.objects.get(emp_email=email, emp_pass=password)
             request.session['user_email'] = employee.emp_email
-            request.session['user_id'] = employee.id  # Add this line
+            request.session['user_id'] = employee.id  
             request.session['employee_id'] = employee.id
             return redirect('userdetail')
         except Employee.DoesNotExist:
@@ -176,9 +176,12 @@ def view_user(request):
     user_id = request.session.get('user_id')  
     if user_id:
         emp_data = Employee.objects.filter(id=user_id)
-        return render(request, 'userdetail.html', {'emp_data': emp_data, 'view_user': True})
+        return render(request, 'userdetail.html', {
+            'emp_data': emp_data,
+            'view_user': True,   # flag to show the table
+        })
     else:
-        return redirect('login')  
+        return redirect('login')
 
 def find_user(request):
     if request.method == 'POST':
@@ -203,43 +206,40 @@ def find_user(request):
 
 
 # for admin to show that resume
-def show_resumes(request):
-    if not request.session.get('is_admin'):
-        return redirect('admin_login')
 
-    resumes = NewEntry.objects.all()
-    return render(request, 'admindata.html', {
+
+def show_resume(request):
+    show_resumes = request.GET.get('show_resumes', 'false').lower() == 'true'
+    resumes = []
+
+    if show_resumes:
+        resumes = NewEntry.objects.all()  # Or filter by user/session if needed
+
+    return render(request, 'userdetail.html', {
+        'show_resumes': show_resumes,
         'resumes': resumes,
-        'show_resumes': True
     })
 
 
-def admin_manage_resumes(request):
-    if not request.session.get('is_admin'):
-        return redirect('admin_login')
-
+def admin_resumes(request):
     if request.method == 'POST':
         resume_id = request.POST.get('resume_id')
-        opinion = request.POST.get('admin_opinion')
+        opinion = request.POST.get('admin_opinion', '')# can use .strip() to remove unwanted extra space
 
-        try:
-            resume = NewEntry.objects.get(id=resume_id)
-            resume.admin_opinion = opinion
-            resume.save()
-            messages.success(request, "Admin opinion updated successfully.")
-        except NewEntry.DoesNotExist:
-            messages.error(request, "Resume not found.")
+        if resume_id and opinion is not None:
+            try:
+                resume = NewEntry.objects.get(id=resume_id)
+                resume.admin_opinion = opinion
+                resume.save()
+            except NewEntry.DoesNotExist:
+                pass  
+
+        return redirect('admin_resumes')
 
     resumes = NewEntry.objects.all()
-    return render(request, 'admin_manage_resumes.html', {'resumes': resumes})
 
+    return render(request, 'admindata.html', {
+        'admin_resumes': True,
+        'resumes': resumes,
+    })
 
-def user_resumes(request):
-    user_email = request.session.get('user_email')
-    try:
-        employee = Employee.objects.get(emp_email=user_email)
-        resumes = NewEntry.objects.filter(info_contact=employee.emp_contact)
-    except Employee.DoesNotExist:
-        resumes = []
-
-    return render(request, 'user_resumes.html', {'resumes': resumes})
