@@ -11,14 +11,21 @@
 
 {% block content %}
 
-<div style="height: 100vh;">
+<div style="height: 150vh;">
 
-  <div>
-  <a href="{% url 'view_user' %}">View My Info</a>
-  <a href="{% url 'find_user' %}">Resume for Job</a>
-  <a href="{% url 'show_resume' %}?show_resumes=true">Resume for Job</a>
+  <div class="admin_tab">
+  <a href="{% url 'view_user' %}" class="create-employee-link">View My Info</a>
+  <a href="{% url 'find_user' %}" class="create-employee-link">Resume for Job</a>
+  <form action="{% url 'show_resume' %}" method="post" style="display:inline;">
+  {% csrf_token %}
+  <input type="hidden" name="show_resumes" value="true">
+  <button type="submit" class="create-employee-link">
+    Admin Reply
+     </button>
+    </form>
 
-</div>
+
+  </div>
 
 {% if messages %}
   {% for message in messages %}
@@ -30,7 +37,8 @@
 
 {% if view_user %}
 <!-- for user Information -->
-  <table border="1">
+  <table class="styled-table">
+    <thead>
     <tr>
       <th>S.NO</th>
       <th>Name</th>
@@ -40,7 +48,8 @@
       <th>Department</th>
       <th>Profile</th>
     </tr>
-
+    </thead>
+    <tbody>
     {% for i in emp_data %}
       <tr>
         <td>{{ forloop.counter }}</td>
@@ -58,6 +67,7 @@
         </td>
       </tr>
     {% endfor %}
+    </tbody>
   </table>
 {% endif %}
 <!-- user information table ends here -->
@@ -65,14 +75,14 @@
 <!-- for employee info -->
 
 {% if find_user %}
-<form action="{% url 'find_user'%}" method="post" enctype="multipart/form-data">
+<form id="myform" action="{% url 'find_user'%}" method="post" enctype="multipart/form-data" class="styled-form" >
   {% csrf_token %}
 
   <label for="name">Name</label>
   <input type="text" name="name">
 
   <label for="phone">Contact:</label>
-  <input type="tel" name="contact" pattern="[0-9]{10}" required><br><br>
+  <input type="tel" name="contact"  pattern="[1-9][0-9]{9}" required><br><br>
 
   <label for="dob">DOB:</label>
   <input type="date" name="dob" min="1990-01-01" max="2020-01-01" required><br><br>
@@ -85,13 +95,26 @@
 
   <input type="submit" value="To Admin">
 </form>
+
+<script>
+  const form = document.getElementById('myform');
+  if (form) {
+    form.addEventListener('submit', function(event) {
+      const contactInput = this.elements['contact'].value;
+      if (/^(\d)\1{9}$/.test(contactInput)) {
+        alert("Contact number cannot have all digits the same.");
+        event.preventDefault();
+      }
+    });
+  }
+</script>
 {% endif %}
 
 
 <!-- employe info ends here -->
 {% if show_resumes %}
   {% if resumes %}
-    <table border="1" style="margin-top: 10px;">
+    <table class="styled-table">
       <tr>
         <th>S.NO</th>
         <th>Name</th>
@@ -130,4 +153,6 @@
 </div>
 
 
+
 {% endblock%}
+

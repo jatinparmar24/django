@@ -68,7 +68,7 @@ def login(request):
 # Admin login view
 def admin_login(request):
     if request.method == 'POST':
-        admin_email = "admin@gmail.com"
+        admin_email = "admin@email.com"
         admin_password = "ad"
 
         email = request.POST.get('email')
@@ -102,32 +102,51 @@ def logout(request):
     return redirect('home')
 
 
-
 def add_emp(request):
     if not request.session.get('is_admin'):
         return redirect('admin_login')
 
+    show_form = False
+
     if request.method == 'POST':
-        emp_name    = request.POST.get('name')
-        emp_contact = request.POST.get('phone')
-        emp_dob     = request.POST.get('dob')
-        emp_email   = request.POST.get('email')
-        emp_pass    = request.POST.get('password')
-        emp_image   = request.FILES.get('profile-pic')
-        emp_depart  = request.POST.get('emp_depart') 
+        if 'show_form' in request.POST:
+            show_form = request.POST.get('show_form') == '1'
+        else:
+            emp_name    = request.POST.get('name')
+            emp_contact = request.POST.get('phone')
+            emp_dob     = request.POST.get('dob')
+            emp_email   = request.POST.get('email')
+            emp_pass    = request.POST.get('password')
+            emp_image   = request.FILES.get('profile-pic')
+            emp_depart  = request.POST.get('emp_depart')
 
-        Employee.objects.create(
-            emp_name=emp_name,
-            emp_contact=emp_contact,
-            emp_dob=emp_dob,
-            emp_email=emp_email,
-            emp_pass=emp_pass,
-            emp_image=emp_image,
-            emp_depart=emp_depart  
-        )
-        return redirect('admindata1')
+            # Check if email or password already exists
+            email_exists = Employee.objects.filter(emp_email=emp_email).exists()
+            password_exists = Employee.objects.filter(emp_pass=emp_pass).exists()
 
-    return render(request, 'admindata.html', {'data': True, 'show_form': True})
+            if email_exists:
+                messages.error(request, 'Email already exists. Please use a different email.')
+                show_form = True  # to show form again with the error
+            elif password_exists:
+                messages.error(request, 'Password already exists. Please use a different password.')
+                show_form = True
+            else:
+                Employee.objects.create(
+                    emp_name=emp_name,
+                    emp_contact=emp_contact,
+                    emp_dob=emp_dob,
+                    emp_email=emp_email,
+                    emp_pass=emp_pass,
+                    emp_image=emp_image,
+                    emp_depart=emp_depart  
+                )
+                return redirect('admindata1')
+
+    return render(request, 'admindata.html', {
+        'data': True,
+        'show_form': show_form
+    })
+
 
 
 
@@ -209,16 +228,23 @@ def find_user(request):
 
 
 def show_resume(request):
-    show_resumes = request.GET.get('show_resumes', 'false').lower() == 'true'
+    show_resumes = False
     resumes = []
 
+    if request.method == 'POST':
+        show_resumes = request.POST.get('show_resumes', 'false').lower() == 'true'
+    else:
+       
+        show_resumes = request.GET.get('show_resumes', 'false').lower() == 'true'
+
     if show_resumes:
-        resumes = NewEntry.objects.all()  # Or filter by user/session if needed
+        resumes = NewEntry.objects.all()
 
     return render(request, 'userdetail.html', {
         'show_resumes': show_resumes,
         'resumes': resumes,
     })
+
 
 
 def admin_resumes(request):

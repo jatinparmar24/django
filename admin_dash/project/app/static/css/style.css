@@ -774,41 +774,140 @@ input[type="file"] + label.file-label {
 
 /* edit section in admin edit ends here*/
 
-/* Resume Section */
-.resume-section {
-  margin-top: 50px;
+/* Resume Section with tables */
+.submitted-resumes-table,
+.manage-resumes-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 30px 0;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
 }
 
-.resume-section h2 {
-  margin-bottom: 15px;
-  color: #333;
+.submitted-resumes-table th,
+.manage-resumes-table th {
+  background-color: #007bff;
+  color: #fff;
+  text-align: left;
+  padding: 12px 15px;
 }
 
-/* Messages Styling */
-.messages {
-  margin: 20px 0;
+.submitted-resumes-table td,
+.manage-resumes-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #e0e0e0;
+  vertical-align: middle;
 }
 
-.messages p {
+.submitted-resumes-table tr:nth-child(even),
+.manage-resumes-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.submitted-resumes-table img,
+.manage-resumes-table img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+.opinion-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.opinion-form textarea {
+  width: 100%;
   padding: 10px;
+  resize: vertical;
+  border: 1px solid #ccc;
   border-radius: 6px;
-  font-weight: bold;
-  color: white;
+  font-family: inherit;
 }
 
-.messages .success {
+.opinion-form button {
+  padding: 8px 12px;
   background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
-.messages .error {
-  background-color: #dc3545;
+.opinion-form button:hover {
+  background-color: #218838;
 }
 
 /* admin dashbaord end here */
 
 
+/* userdetail */
+
+.styled-form {
+  max-width: 600px;
+  background: #fff;
+  padding: 30px 25px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 20px auto;
+  box-sizing: border-box;
+}
+
+.styled-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #444;
+  margin-top: 18px;
+}
+
+.styled-form input[type="text"],
+.styled-form input[type="tel"],
+.styled-form input[type="date"],
+.styled-form input[type="file"] {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.styled-form input[type="text"]:focus,
+.styled-form input[type="tel"]:focus,
+.styled-form input[type="date"]:focus,
+.styled-form input[type="file"]:focus {
+  border-color: #007bff;
+}
+
+.styled-form input[type="submit"] {
+  margin-top: 25px;
+  background-color: #007bff;
+  color: white;
+  padding: 14px 30px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background-color 0.3s ease;
+}
+
+.styled-form input[type="submit"]:hover {
+  background-color: #0056b3;
+}
 
 
+/* userdetail */
 
 
 
@@ -818,6 +917,110 @@ input[type="file"] + label.file-label {
 
 
 /* media query starts here */
+
+
+@media (max-width: 480px) {
+  /* admin */
+  .modern-form-container {
+    padding: 15px;
+  }
+
+  .form-group input[type="text"],
+  .form-group input[type="tel"],
+  .form-group input[type="email"],
+  .form-group input[type="password"],
+  .form-group input[type="date"],
+  .form-group input[type="file"],
+  .form-group select {
+    font-size: 13px;
+    padding: 10px 8px;
+  }
+
+  .form-group label {
+    font-size: 12px;
+  }
+
+  .form-action input[type="submit"] {
+    font-size: 13px;
+    padding: 10px 16px;
+  }
+
+    .styled-table {
+    font-size: 12px;
+    margin: 15px 5px;
+  }
+  .styled-table thead {
+    display: none; /* Hide headers on very small screens */
+  }
+  .styled-table,
+  .styled-table tbody,
+  .styled-table tr,
+  .styled-table td {
+    display: block;
+    width: 100%;
+  }
+  .styled-table tr {
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ddd;
+  }
+  .styled-table td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+    border-bottom: 1px solid #eee;
+  }
+  .styled-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 16px;
+    width: 45%;
+    padding-left: 10px;
+    font-weight: 600;
+    text-align: left;
+    color: #007bff;
+  }
+  .styled-table img {
+    width: 40px;
+    height: 40px;
+    position: static;
+    margin-bottom: 8px;
+  }
+  .edit-btn,
+  .delete-btn {
+    width: 48%;
+    padding: 8px 0;
+    font-size: 14px;
+    display: inline-block;
+    text-align: center;
+    margin-bottom: 6px;
+  }
+
+  /* admin */
+
+  /* userdetail */
+    .styled-form {
+    padding: 15px 10px;
+  }
+
+  .styled-form label {
+    font-size: 14px;
+  }
+
+  .styled-form input[type="text"],
+  .styled-form input[type="tel"],
+  .styled-form input[type="date"],
+  .styled-form input[type="file"] {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+
+  .styled-form input[type="submit"] {
+    font-size: 15px;
+  }
+
+  /* userdetail */
+}
+
 
 @media (max-width: 575.98px) {
  
@@ -897,6 +1100,68 @@ input[type="file"] + label.file-label {
   .reasons-grid {
     grid-template-columns: repeat(3, 1fr) !important;
   }
+
+  /* admin */
+  .modern-form-container {
+    max-width: 90%;
+    padding: 20px;
+    margin: 20px auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  .form-group input[type="text"],
+  .form-group input[type="tel"],
+  .form-group input[type="email"],
+  .form-group input[type="password"],
+  .form-group input[type="date"],
+  .form-group input[type="file"],
+  .form-group select {
+    padding: 12px 10px;
+    font-size: 14px;
+  }
+
+  .form-group label {
+    font-size: 13px;
+  }
+
+  .form-action input[type="submit"] {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+
+  .styled-table {
+    font-size: 13px;
+    margin: 20px 10px;
+  }
+  .styled-table th,
+  .styled-table td {
+    padding: 10px 8px;
+  }
+  .styled-table img {
+    width: 30px;
+    height: 30px;
+  }
+  .edit-btn,
+  .delete-btn {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+
+  /* admin */
+
+  /* userdetail */
+  .styled-form {
+    max-width: 90%;
+    padding: 20px 15px;
+  }
+
+  .styled-form input[type="submit"] {
+    width: 100%;
+    padding: 14px 0;
+  }
+
+  /* userdetail */
 }
 
 
@@ -913,5 +1178,7 @@ input[type="file"] + label.file-label {
   .reasons-grid {
     grid-template-columns: repeat(3, 1fr) !important;
   }
+
+  
 }
 
