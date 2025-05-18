@@ -5,12 +5,14 @@
 {% block content %}
 
 
-  <div class="admin_tab">
-  <a href="{% url 'add_emp' %}?show_form=1" class="create-employee-link">Create Employee</a> <br>
-  <a href="{% url 'show_all_emp' %}" class="create-employee-link">Show Employee</a> <br>
-  <a href="{% url 'admin_resumes' %}?show=true" class="create-employee-link">View All Resumes</a>
+  <section class="admindashborad">
 
-</div>
+    <div class="admin_tab">
+     <a href="{% url 'add_emp' %}?show_form=1" class="create-employee-link">Create Employee</a> <br>
+     <a href="{% url 'show_all_emp' %}" class="create-employee-link">Show Employee</a> <br>
+     <a href="{% url 'admin_resumes' %}?show=true" class="create-employee-link">View All Resumes</a>
+
+    </div>
 
 {% if messages %}
   {% for message in messages %}
@@ -22,47 +24,64 @@
 
 <!-- Form Section -->
 {% if show_form %}
-  <div class="form-container">
-    <form method="post" enctype="multipart/form-data" action="{% url 'add_emp' %}">
-      {% csrf_token %}
+<div class="modern-form-container">
+  <form method="post" enctype="multipart/form-data" action="{% url 'add_emp' %}" autocomplete="off">
+    {% csrf_token %}
 
-      <label for="name">Name:</label>
-      <input type="text" name="name" required><br><br>
+    <div class="form-group">
+      <input type="text" name="name" required placeholder=" " />
+      <label>Name</label>
+    </div>
 
-      <label for="phone">Phone:</label>
-      <input type="tel" name="phone" pattern="[0-9]{10}" required><br><br>
+    <div class="form-group">
+      <input type="tel" name="phone" required pattern="[0-9]{10}" placeholder=" " />
+      <label>Phone</label>
+    </div>
 
-      <label for="dob">DOB:</label>
-      <input type="date" name="dob" min="1990-01-01" max="2020-01-01" required><br><br>
+    <div class="form-group">
+      <input type="date" name="dob" required min="1990-01-01" max="2020-01-01" placeholder=" " />
+      <label>DOB</label>
+    </div>
 
-      <label for="department">Department:</label>
-       <select name="emp_depart" required>
-         <option value="" aria-readonly="true">Select Department</option>
-         <option value="HR">Human Resources</option>
-         <option value="IT">Information Technology</option>
-         <option value="FIN">Finance</option>
-         <option value="MKT">Marketing</option>
-         <option value="OPS">Operations</option>
-       </select><br><br>
+    <div class="form-group">
+      <select name="emp_depart" required>
+        <option value="" disabled selected hidden>Select Department</option>
+        <option value="HR">Human Resources</option>
+        <option value="IT">Information Technology</option>
+        <option value="FIN">Finance</option>
+        <option value="MKT">Marketing</option>
+        <option value="OPS">Operations</option>
+      </select>
+      <label>Department</label>
+    </div>
 
+    <div class="form-group">
+      <input type="email" name="email" required placeholder=" " />
+      <label>Email</label>
+    </div>
 
-      <label for="email">Email:</label>
-      <input type="email" name="email" required><br><br>
+    <div class="form-group">
+      <input type="password" name="password" required placeholder=" " />
+      <label>Password</label>
+    </div>
 
-      <label for="password">Password:</label>
-      <input type="password" name="password" required><br><br>
+    <div class="form-group">
+      <input type="file" name="profile-pic" accept=".jpg,.jpeg,.png" />
+      <label class="file-label">Profile Picture</label>
+    </div>
 
-      <label for="profile-pic">Profile Picture:</label>
-      <input type="file" name="profile-pic" accept=".jpg,.jpeg,.png"><br><br>
+    <div class="form-action">
+      <input type="submit" value="Register" />
+    </div>
+  </form>
+</div>
 
-      <input type="submit" value="Register">
-    </form>
-  </div>
 {% endif %}
 
 <!-- Employee Table Section -->
 {% if show_all %}
-  <table border="1">
+  <table class="styled-table">
+  <thead>
     <tr>
       <th>S.NO</th>
       <th>Name</th>
@@ -74,7 +93,8 @@
       <th>Edit</th>
       <th>Delete</th>
     </tr>
-
+  </thead>
+  <tbody>
     {% for i in emp_data %}
       <tr>
         <td>{{ forloop.counter }}</td>
@@ -90,37 +110,49 @@
             No Image
           {% endif %}
         </td>
-        <td>
-          <a href="{% url 'edit_emp' i.id %}">Edit</a> 
-        </td>
-        <td>
-          <a href="{% url 'delete_employee' i.id %}" onclick="return confirm('Are you sure you want to delete this employee?');">Delete</a>
-        </td>
+        <td><a href="{% url 'edit_emp' i.id %}" class="edit-btn">Edit</a></td>
+        <td><a href="{% url 'delete_employee' i.id %}" onclick="return confirm('Are you sure you want to delete this employee?');" class="delete-btn">Delete</a></td>
       </tr>
     {% endfor %}
-  </table>
+  </tbody>
+</table>
+
 {% endif %}
 
 {% if edit_employee %}
-<form action="{% url 'edit_emp' edit_employee.id %}" method="post" enctype="multipart/form-data">
+<form action="{% url 'edit_emp' edit_employee.id %}" method="post" enctype="multipart/form-data" class="edit-employee-form">
   {% csrf_token %}
 
-  <input type="text" name="name" value="{{ edit_employee.emp_name }}">
-  <input type="text" name="contact" value="{{ edit_employee.emp_contact }}">
-  <input type="date" name="dob" value="{{ edit_employee.emp_dob|date:'Y-m-d' }}">
-  <input type="email" name="email" value="{{ edit_employee.emp_email }}">
-  <input type="text" name="pass" value="{{ edit_employee.emp_pass }}">
+  <h2>Edit Employee Details</h2>
 
+  <label>Name:</label>
+  <input type="text" name="name" value="{{ edit_employee.emp_name }}" required>
+
+  <label>Contact:</label>
+  <input type="text" name="contact" value="{{ edit_employee.emp_contact }}" required>
+
+  <label>DOB:</label>
+  <input type="date" name="dob" value="{{ edit_employee.emp_dob|date:'Y-m-d' }}" required>
+
+  <label>Email:</label>
+  <input type="email" name="email" value="{{ edit_employee.emp_email }}" required>
+
+  <label>Password:</label>
+  <input type="text" name="pass" value="{{ edit_employee.emp_pass }}" required>
+
+  <label>Current Profile Image:</label>
   {% if edit_employee.emp_image %}
-    <img src="{{ edit_employee.emp_image.url }}" alt="Current Image" width="50" style="border-radius: 10px; object-fit: cover;">
+    <img src="{{ edit_employee.emp_image.url }}" alt="Current Image" class="preview-img">
   {% else %}
-    <p>No profile image uploaded.</p>
+    <p class="no-img-text">No profile image uploaded.</p>
   {% endif %}
 
-  <input type="file" name="image">
+  <label>Upload New Image:</label>
+  <input type="file" name="image" accept="image/*">
 
-  <input type="submit" value="Update">
+  <input type="submit" value="Update" class="submit-btn">
 </form>
+
 
 
 {% endif %}
@@ -199,9 +231,6 @@
 {% endif %}
 
 
-
-
-    
-
+</section>
 
 {% endblock %}

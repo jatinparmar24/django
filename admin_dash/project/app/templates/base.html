@@ -14,10 +14,9 @@
 
 </head>
 <body>
-
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Apna Bazzar</a>
+    <a class="navbar-brand" href="#">Hire US</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
             aria-expanded="false" aria-label="Toggle navigation">
@@ -26,7 +25,6 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
         {% if request.session.is_admin %}
           <!-- Admin Navbar -->
           <li class="nav-item">
@@ -41,7 +39,6 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'logout' %}">Logout</a>
           </li>
-
         {% elif request.session.user_id %}
           <!-- Logged-in User Navbar -->
           <li class="nav-item">
@@ -53,7 +50,6 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'logout' %}">Logout</a>
           </li>
-
         {% else %}
           <!-- Not logged in -->
           <li class="nav-item">
@@ -69,11 +65,17 @@
             <a class="nav-link" href="{% url 'login' %}">Login</a>
           </li>
         {% endif %}
-        
       </ul>
+
+      <!-- Compact search form -->
+      <form class="navbar-search-form" role="search" method="GET" action="{}">
+        <input type="search" name="q" placeholder="Search" aria-label="Search" class="search-input" />
+        <button type="submit" class="search-btn">🔍</button>
+      </form>
     </div>
   </div>
 </nav>
+
 
 
 
@@ -81,50 +83,45 @@
 
   {% endblock %}
 
- <footer class="footer">
+  <footer class="footer">
   <div class="footer-container">
-    
-    <div class="footer-column">
-      <h3>Apna Bazzar</h3>
-      <p>Your one-stop shop for everything you love. Quality, style, and value in every purchase.</p>
+    <div class="footer-about">
+      <h3>Hire US</h3>
+      <p>Your trusted platform to find and hire top talent easily and efficiently.</p>
     </div>
 
-  
-    <div class="footer-column">
+    <div class="footer-links">
       <h4>Quick Links</h4>
       <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Shop</a></li>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'userlogin' %}">Login</a></li>
+        <li><a href="{% url 'admindata' %}">Admin</a></li>
       </ul>
     </div>
 
-   
-    <div class="footer-column">
-      <h4>Follow Us</h4>
-      <div class="social-icons">
-        <a href="#"><img src="" alt="Facebook" /></a>
-        <a href="#"><img src="" alt="Instagram" /></a>
-        <a href="#"><img src="" alt="Twitter" /></a>
-        <a href="#"><img src="" alt="YouTube" /></a>
-      </div>
+    <div class="footer-contact">
+      <h4>Contact Us</h4>
+      <p>Email: hireus@gmail.com</p>
+      <p>Phone: 555 123-4567</p>
+      <p>Address: 123 Main St, NEW YORK, USA</p>
     </div>
 
-    <div class="footer-column">
-      <h4>Newsletter</h4>
-      <p>Join our newsletter to stay updated on deals & offers.</p>
-      <form class="newsletter-form">
-        <input type="email" placeholder="Your Email"/>
-        <button type="submit" aria-readonly="true">Subscribe</button>
-      </form>
+    <div class="footer-social">
+      <h4>Follow Us</h4>
+      <a href="#" aria-label="Facebook" class="social-icon">🌐</a>
+      <a href="#" aria-label="Twitter" class="social-icon">🐦</a>
+      <a href="#" aria-label="LinkedIn" class="social-icon">💼</a>
+      <a href="#" aria-label="Instagram" class="social-icon">📸</a>
     </div>
   </div>
 
   <div class="footer-bottom">
-    <p> 2025 Apna Bazzar. All rights reserved.</p>
+    <p> 2025 Hire US. All rights reserved.</p>
   </div>
 </footer>
+
+
+
 
 
 
