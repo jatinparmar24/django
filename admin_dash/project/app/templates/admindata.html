@@ -95,14 +95,36 @@
   const form = document.getElementById('myform');
   if (form) {
     form.addEventListener('submit', function(event) {
-      const contactInput = this.elements['contact'].value;
-      if (/^(\d)\1{9}$/.test(contactInput)) {
-        alert("Contact number cannot have all digits the same.");
+      const name = this.elements['name'].value.trim();
+      const email = this.elements['email'].value.trim();
+      const password = this.elements['password'].value;
+
+      // Name validation: Only alphabets
+      const nameRegex = /^[A-Za-z\s]+$/;
+      if (!nameRegex.test(name)) {
+        alert("Name should contain only alphabetic characters.");
         event.preventDefault();
+        return;
+      }
+
+      // Email validation: must end with '@email.com'
+      if (!email.endsWith('@email.com')) {
+        alert("Email must end with @email.com.");
+        event.preventDefault();
+        return;
+      }
+
+      // Password validation
+      const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/;
+      if (!passwordRegex.test(password)) {
+        alert("Password must be at least 8 characters long and include a letter, a number, and a symbol.");
+        event.preventDefault();
+        return;
       }
     });
   }
 </script>
+
 
 {% endif %}
 

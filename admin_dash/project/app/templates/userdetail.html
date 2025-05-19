@@ -97,17 +97,27 @@
 </form>
 
 <script>
+
   const form = document.getElementById('myform');
   if (form) {
     form.addEventListener('submit', function(event) {
-      const contactInput = this.elements['contact'].value;
-      if (/^(\d)\1{9}$/.test(contactInput)) {
-        alert("Contact number cannot have all digits the same.");
+      const name = this.elements['name'].value.trim();
+      const email = this.elements['email'].value.trim();
+      const password = this.elements['password'].value;
+
+      // Name validation: Only alphabets
+      const nameRegex = /^[A-Za-z\s]+$/;
+      if (!nameRegex.test(name)) {
+        alert("Name should contain only alphabetic characters.");
         event.preventDefault();
+        return;
       }
+
+
     });
   }
 </script>
+
 {% endif %}
 
 

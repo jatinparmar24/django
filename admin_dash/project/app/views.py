@@ -123,7 +123,7 @@ def add_emp(request):
             # Check if email or password already exists
             email_exists = Employee.objects.filter(emp_email=emp_email).exists()
             password_exists = Employee.objects.filter(emp_pass=emp_pass).exists()
-
+            
             if email_exists:
                 messages.error(request, 'Email already exists. Please use a different email.')
                 show_form = True  # to show form again with the error
