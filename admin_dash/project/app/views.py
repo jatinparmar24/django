@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from .models import Employee,NewEntry
+from django.db.models import Q
 
 
 
@@ -269,3 +270,13 @@ def admin_resumes(request):
         'resumes': resumes,
     })
 
+
+
+# to search
+
+def search_emp(request):
+    pk=request.POST.get('search')
+    print('emp_name')
+    all_data=Employee.objects.filter(Q(emp_name__icontains=pk) | Q(emp_contact__icontains=pk) | Q(emp_dob__icontains=pk) | Q(emp_email__icontains=pk) | Q(emp_depart__icontains=pk))
+
+    return render(request,'admindata.html',{'emp_data':all_data})

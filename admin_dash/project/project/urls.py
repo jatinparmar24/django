@@ -39,6 +39,7 @@ urlpatterns = [
     path('find_user/', views.find_user, name='find_user'),
     path('show_resume/', views.show_resume, name='show_resume'),
     path('admin_resumes/', views.admin_resumes, name='admin_resumes'),
+    path('search_emp/',views.search_emp,name='search_emp'),
     
 
 
