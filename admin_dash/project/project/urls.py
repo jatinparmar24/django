@@ -40,6 +40,7 @@ urlpatterns = [
     path('show_resume/', views.show_resume, name='show_resume'),
     path('admin_resumes/', views.admin_resumes, name='admin_resumes'),
     path('search_emp/',views.search_emp,name='search_emp'),
+    path('search_with_detail/',views.search_with_detail,name='search_with_detail'),
     
 
 

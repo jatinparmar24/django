@@ -154,6 +154,20 @@
   </form>
 </div>
 
+
+<div>
+   <form action="{% url 'search_with_detail' %}" method="post">
+          {% csrf_token %}
+          <input type="text" name="name" placeholder="name" value="none">
+          <input type="text" name="contact" placeholder="contact" value="none">
+          <input type="text" name="dob" placeholder="dob" value="none">
+          <input type="text" name="email" placeholder="email" value="none">
+          <input type="text" name="depart" placeholder="depart" value="none">
+          <button>Search</button>
+
+        </form>
+</div>
+
   <table class="styled-table">
   <thead>
     <tr>

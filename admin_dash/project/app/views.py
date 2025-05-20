@@ -276,7 +276,19 @@ def admin_resumes(request):
 
 def search_emp(request):
     pk=request.POST.get('search')
-    print('emp_name')
     all_data=Employee.objects.filter(Q(emp_name__icontains=pk) | Q(emp_contact__icontains=pk) | Q(emp_dob__icontains=pk) | Q(emp_email__icontains=pk) | Q(emp_depart__icontains=pk))
 
     return render(request,'admindata.html',{'emp_data':all_data})
+
+def search_with_detail(request):
+    name=request.POST.get('name')
+    contact=request.POST.get('contact')
+    dob=request.POST.get('dob')
+    email=request.POST.get('email')
+    depart=request.POST.get('depart')
+    
+    info=Employee.objects.filter(Q(emp_name__icontains=name) | Q(emp_contact__icontains=contact) | Q(emp_dob__icontains=dob) | Q(emp_email__icontains=email) | Q(emp_depart__icontains=depart))
+
+    return render(request,'admindata.html',{'emp_data':info})
+
+
