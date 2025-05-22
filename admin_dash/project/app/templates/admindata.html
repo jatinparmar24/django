@@ -152,17 +152,17 @@
     <input type="text" name="search">
     <button>Search</button>
   </form>
-</div>
+</div> <br> <br>
 
 
 <div>
    <form action="{% url 'search_with_detail' %}" method="post">
           {% csrf_token %}
-          <input type="text" name="name" placeholder="name" value="none">
-          <input type="text" name="contact" placeholder="contact" value="none">
-          <input type="text" name="dob" placeholder="dob" value="none">
-          <input type="text" name="email" placeholder="email" value="none">
-          <input type="text" name="depart" placeholder="depart" value="none">
+          <input type="text" name="name" placeholder="name" >
+          <input type="text" name="contact" placeholder="contact" >
+          <input type="text" name="dob" placeholder="dob" >
+          <input type="text" name="email" placeholder="email" >
+          <input type="text" name="depart" placeholder="depart" >
           <button>Search</button>
 
         </form>
@@ -327,6 +327,8 @@
 {% endif %}
 
 {% if admin_resumes %}
+
+<div class="table-wrapper">
   <h2>Submitted Resumes</h2>
   <table class="submitted-resumes-table">
     <tr>
@@ -354,6 +356,9 @@
       </tr>
     {% endfor %}
   </table>
+  </div>
+
+  <div class="table-wrapper">
 
   <h2>Manage Resumes</h2>
   <table class="manage-resumes-table">
@@ -391,6 +396,7 @@
       </tr>
     {% endfor %}
   </table>
+  </div>
 {% endif %}
 
 

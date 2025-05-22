@@ -1,5 +1,7 @@
 from django.db import models
-from datetime import date
+from datetime import date,timedelta
+from django.utils import timezone
+
 
 # question first
 
@@ -61,3 +63,38 @@ class Promotion(Offer):
 
     def __str__(self):
         return f"Promotion: {self.p_name}"
+
+
+
+# third question 
+
+
+class Book(models.Model):
+    title = models.CharField(max_length=255)
+    published_date = models.DateField()
+
+    def __str__(self):
+        return self.title
+
+class OrderedBook(Book):
+    class Meta:
+        proxy = True
+        ordering = ['-published_date']
+
+
+class FormattedBook(Book):
+    class Meta:
+        proxy = True
+
+    def formatted_book_info(self):
+        return f"{self.title} (Published: {self.published_date.strftime('%B %d, %Y')})"  # month,day,year
+
+
+class RecentBook(Book):
+
+    class Meta:
+        proxy = True
+
+    def get_last_year_book(self):
+        one_year_ago = timezone.now().date() - timedelta(days=365)
+        return self.objects.filter(published_date__gte=one_year_ago)

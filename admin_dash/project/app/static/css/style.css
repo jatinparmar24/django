@@ -5,6 +5,8 @@
   box-sizing: border-box;
 }
 
+
+
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -246,7 +248,7 @@ h3 {
 .about {
   width: 100%;
   max-width: 1100px;
-  margin: 0 auto;
+  margin: -10px auto -40px;
   padding: clamp(40px, 8vw, 60px) 20px;
   color: #444;
   text-align: center;
@@ -297,7 +299,7 @@ h3 {
 .services {
   width: 100%;
   max-width: 1100px;
-  margin: 0 auto;
+  margin: -40px auto;
   padding: clamp(40px, 8vw, 60px) 20px;
   text-align: center;
 }
@@ -305,7 +307,7 @@ h3 {
 .service-grid {
   display: grid;
   gap: clamp(20px, 4vw, 32px);
-  margin-top: 40px;
+  margin-top: 20px;
   grid-template-columns: repeat(3, 1fr);
 }
 
@@ -332,7 +334,7 @@ h3 {
 .why-choose-us {
   width: 100%;
   max-width: 1100px;
-  margin: 0 auto 80px;
+  margin: 0 auto 20px;
   padding: clamp(40px, 8vw, 60px) 20px;
   text-align: center;
 }
@@ -776,6 +778,12 @@ input[type="file"] + label.file-label {
 /* edit section in admin edit ends here*/
 
 /* Resume Section with tables */
+
+.table-wrapper {
+  overflow-x: auto;
+  width: 100%;
+}
+
 .submitted-resumes-table,
 .manage-resumes-table {
   width: 100%;
@@ -1147,6 +1155,35 @@ input[type="file"] + label.file-label {
   .delete-btn {
     font-size: 12px;
     padding: 5px 10px;
+  }
+  .submitted-resumes-table th,
+  .submitted-resumes-table td,
+  .manage-resumes-table th,
+  .manage-resumes-table td {
+    padding: 10px;
+    font-size: 13px;
+    white-space: nowrap; /* prevent text wrapping */
+  }
+
+  .opinion-form {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .opinion-form textarea {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .opinion-form button {
+    font-size: 13px;
+    padding: 8px 10px;
+  }
+
+  .submitted-resumes-table img,
+  .manage-resumes-table img {
+    width: 40px;
+    height: 40px;
   }
 
   /* admin */
