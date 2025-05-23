@@ -362,7 +362,7 @@
       <th>Resume Info</th>
       <th>Profile Picture</th>
     </tr>
-    {% for entry in resumes %}
+    {% for entry in submitted_page %}
       <tr>
         <td>{{ forloop.counter }}</td>
         <td>{{ entry.info_name }}</td>
@@ -379,10 +379,30 @@
       </tr>
     {% endfor %}
   </table>
+
+  <!-- Pagination for Submitted Resumes -->
+  <div class="pagination">
+    <span class="step-links">
+      {% if submitted_page.has_previous %}
+        <a href="?submitted_page=1">&laquo; first</a>
+        <a href="?submitted_page={{ submitted_page.previous_page_number }}">previous</a>
+      {% endif %}
+
+      <span class="current">
+        Page {{ submitted_page.number }} of {{ submitted_page.paginator.num_pages }}.
+      </span>
+
+      {% if submitted_page.has_next %}
+        <a href="?submitted_page={{ submitted_page.next_page_number }}">next</a>
+        <a href="?submitted_page={{ submitted_page.paginator.num_pages }}">last &raquo;</a>
+      {% endif %}
+    </span>
   </div>
+</div>
 
-  <div class="table-wrapper">
+<hr>
 
+<div class="table-wrapper">
   <h2>Manage Resumes</h2>
   <table class="manage-resumes-table">
     <tr>
@@ -395,7 +415,7 @@
       <th>Admin Opinion</th>
       <th>Update Opinion</th>
     </tr>
-    {% for r in resumes %}
+    {% for r in manage_page %}
       <tr>
         <td>{{ forloop.counter }}</td>
         <td>{{ r.info_name }}</td>
@@ -421,7 +441,28 @@
       </tr>
     {% endfor %}
   </table>
+
+  <!-- Pagination for Manage Resumes -->
+  <div class="pagination">
+    <span class="step-links">
+      {% if manage_page.has_previous %}
+        <a href="?manage_page=1">&laquo; first</a>
+        <a href="?manage_page={{ manage_page.previous_page_number }}">previous</a>
+      {% endif %}
+
+      <span class="current">
+        Page {{ manage_page.number }} of {{ manage_page.paginator.num_pages }}.
+      </span>
+
+      {% if manage_page.has_next %}
+        <a href="?manage_page={{ manage_page.next_page_number }}">next</a>
+        <a href="?manage_page={{ manage_page.paginator.num_pages }}">last &raquo;</a>
+      {% endif %}
+    </span>
   </div>
+</div>
+
+<!-- for pagination -->
 {% endif %}
 
 

@@ -11,7 +11,7 @@
 
 {% block content %}
 
-<div style="height: 150vh;">
+<div >
 
   <div class="admin_tab">
   <a href="{% url 'view_user' %}" class="create-employee-link">View My Info</a>
@@ -149,13 +149,29 @@
           {% endif %}
         </td>
         <td>{{ r.admin_opinion|default:"No opinion yet" }}</td>
-
       </tr>
       {% endfor %}
     </table>
 
+    <!-- Pagination controls -->
+    <div class="pagination">
+      <span>
+        {% if resumes.has_previous %}
+          <a href="?show_resumes=true&page=1">&laquo; first</a>
+          <a href="?show_resumes=true&page={{ resumes.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span>Page {{ resumes.number }} of {{ resumes.paginator.num_pages }}</span>
+
+        {% if resumes.has_next %}
+          <a href="?show_resumes=true&page={{ resumes.next_page_number }}">next</a>
+          <a href="?show_resumes=true&page={{ resumes.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+      </span>
+    </div>
   {% endif %}
 {% endif %}
+
 
 
   

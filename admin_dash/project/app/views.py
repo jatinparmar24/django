@@ -162,9 +162,9 @@ def show_all_emp(request):
 
     return render(request, 'admindata.html', {
         'show_all': True,
-        'emp_data': page_obj,            # ✅ use page_obj here
-        'start_index': start_index,      # ✅ pass correct start_index
-        'edit_employee': None            # optional; use None or don't include if not editing
+        'emp_data': page_obj,          
+        'start_index': start_index,      
+        'edit_employee': None            
     })
 
 def edit_emp(request, emp_id):
@@ -245,6 +245,7 @@ def find_user(request):
 # for admin to show that resume
 
 
+
 def show_resume(request):
     show_resumes = False
     resumes = []
@@ -252,11 +253,13 @@ def show_resume(request):
     if request.method == 'POST':
         show_resumes = request.POST.get('show_resumes', 'false').lower() == 'true'
     else:
-       
         show_resumes = request.GET.get('show_resumes', 'false').lower() == 'true'
 
     if show_resumes:
-        resumes = NewEntry.objects.all()
+        all_resumes = NewEntry.objects.all().order_by('id')  
+        paginator = Paginator(all_resumes, 5)
+        page_number = request.GET.get('page')
+        resumes = paginator.get_page(page_number)
 
     return render(request, 'userdetail.html', {
         'show_resumes': show_resumes,
@@ -264,11 +267,32 @@ def show_resume(request):
     })
 
 
-
 def admin_resumes(request):
     if request.method == 'POST':
+        action = request.POST.get('action')
+
+        if action == 'toggle_show':
+            # Show the page with both tables paginated (like GET)
+            resumes_all = NewEntry.objects.all()
+
+            submitted_page_number = request.GET.get('submitted_page')
+            manage_page_number = request.GET.get('manage_page')
+
+            submitted_paginator = Paginator(resumes_all, 5)
+            manage_paginator = Paginator(resumes_all, 5)
+
+            submitted_page = submitted_paginator.get_page(submitted_page_number)
+            manage_page = manage_paginator.get_page(manage_page_number)
+
+            return render(request, 'admindata.html', {
+                'submitted_page': submitted_page,
+                'manage_page': manage_page,
+                'admin_resumes': True,   # so your template shows tables
+            })
+
+        # Else handle opinion update POST
         resume_id = request.POST.get('resume_id')
-        opinion = request.POST.get('admin_opinion', '')# can use .strip() to remove unwanted extra space
+        opinion = request.POST.get('admin_opinion', '')
 
         if resume_id and opinion is not None:
             try:
@@ -280,13 +304,23 @@ def admin_resumes(request):
 
         return redirect('admin_resumes')
 
-    resumes = NewEntry.objects.all()
+    # GET request: normal page load
+    resumes_all = NewEntry.objects.all()
+
+    submitted_page_number = request.GET.get('submitted_page')
+    manage_page_number = request.GET.get('manage_page')
+
+    submitted_paginator = Paginator(resumes_all, 5)
+    manage_paginator = Paginator(resumes_all, 5)
+
+    submitted_page = submitted_paginator.get_page(submitted_page_number)
+    manage_page = manage_paginator.get_page(manage_page_number)
 
     return render(request, 'admindata.html', {
-        'admin_resumes': True,
-        'resumes': resumes,
+        'submitted_page': submitted_page,
+        'manage_page': manage_page,
+        'admin_resumes': True,   # important for template to display tables
     })
-
 
 
 # to search
