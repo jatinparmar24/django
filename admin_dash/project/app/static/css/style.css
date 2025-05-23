@@ -933,7 +933,259 @@ input[type="file"] + label.file-label {
 
 /* pagination */
 
+/* for userdetail search bar */
+.search-order-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 10px 15px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
 
+/* Style order links */
+.order-links {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-link {
+  display: inline-block;
+  padding: 8px 16px;
+  text-decoration: none;
+  background-color: #4a90e2;
+  color: white;
+  font-weight: 600;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-link:hover,
+.btn-link:focus {
+  color: #1a1a1a;
+  background-color: #357ABD;
+}
+
+/* Search form styles */
+.search-form {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 8px;
+  flex-grow: 1;
+  max-width: 350px;
+}
+
+.search-input {
+  flex-grow: 1;
+  padding: 8px 12px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #4a90e2;
+}
+
+/* Search button styles */
+.search-btn {
+  padding: 8px 20px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-btn:hover,
+.search-btn:focus {
+  background-color: #357ABD;
+}
+
+
+/* for userdetail search bar */
+
+/* for manage admin */
+/* Manage Resumes Container */
+.manage-resumes-header {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 0 15px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.manage-resumes-header h2 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: #333;
+  text-align: center;
+}
+
+
+.manage-resumes-header .order-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+
+.manage-resumes-header .order-links a {
+  color: #0066cc;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 8px 16px;
+  border: 1px solid #0066cc;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.manage-resumes-header .order-links a:hover,
+.manage-resumes-header .order-links a:focus {
+  background-color: #0066cc;
+  color: #fff;
+  outline: none;
+}
+
+
+.manage-resumes-header form {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+
+.manage-resumes-header input[type="text"] {
+  flex: 1 1 200px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.manage-resumes-header input[type="text"]:focus {
+  border-color: #0066cc;
+  outline: none;
+}
+
+
+.manage-resumes-header button {
+  padding: 8px 18px;
+  background-color: #0066cc;
+  border: none;
+  color: white;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.manage-resumes-header button:hover,
+.manage-resumes-header button:focus {
+  background-color: #004999;
+  outline: none;
+}
+
+
+/* for manage admin */
+
+
+/* for submitted admin */
+/* Submitted Resumes Container */
+.submitted-resumes-header {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 0 15px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.submitted-resumes-header h2 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: #333;
+  text-align: center;
+}
+
+
+.submitted-resumes-header .order-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+
+.submitted-resumes-header .order-links a {
+  color: #0066cc;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 8px 16px;
+  border: 1px solid #0066cc;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.submitted-resumes-header .order-links a:hover,
+.submitted-resumes-header .order-links a:focus {
+  background-color: #0066cc;
+  color: #fff;
+  outline: none;
+}
+
+
+.submitted-resumes-header form {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+
+.submitted-resumes-header input[type="text"] {
+  flex: 1 1 200px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.submitted-resumes-header input[type="text"]:focus {
+  border-color: #0066cc;
+  outline: none;
+}
+
+
+.submitted-resumes-header button {
+  padding: 8px 18px;
+  background-color: #0066cc;
+  border: none;
+  color: white;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submitted-resumes-header button:hover,
+.submitted-resumes-header button:focus {
+  background-color: #004999;
+  outline: none;
+}
+
+/* for submitted admin */
 
 
 
@@ -1043,7 +1295,62 @@ input[type="file"] + label.file-label {
   }
 
   /* userdetail */
+
+  /* for search */
+    .search-order-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .order-links {
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .search-form {
+    max-width: 100%;
+  }
+
+  /* for search */
+  .manage-resumes-header .order-links {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .manage-resumes-header form {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .manage-resumes-header input[type="text"] {
+    width: 100%;
+  }
+
+  .manage-resumes-header button {
+    width: 100%;
+  }
+
+  .submitted-resumes-header .order-links {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .submitted-resumes-header form {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .submitted-resumes-header input[type="text"] {
+    width: 100%;
+  }
+
+  .submitted-resumes-header button {
+    width: 100%;
+  }
+
+
 }
+
 
 
 @media (max-width: 575.98px) {

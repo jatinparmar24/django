@@ -379,3 +379,230 @@ def search_with_detail(request):
         'start_index': start_index,
         'show_all': True
     })
+
+
+# for ordering data
+def orderby_name(request):
+    emp_list = Employee.objects.all().order_by('emp_name')  
+    paginator = Paginator(emp_list, 5)  
+    
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    start_index = (page_obj.number - 1) * paginator.per_page + 1
+
+    return render(request, 'admindata.html', {
+        'emp_data': page_obj,
+        'page_obj': page_obj,
+        'start_index': start_index
+    })
+
+def name_in_desc(request):
+    emp_list = Employee.objects.all().order_by('-emp_name')  
+    paginator = Paginator(emp_list, 5)  
+    
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    start_index = (page_obj.number - 1) * paginator.per_page + 1
+
+    return render(request, 'admindata.html', {
+        'emp_data': page_obj,
+        'page_obj': page_obj,
+        'start_index': start_index
+    })
+
+
+def orderby_name_admin(request):
+    submitted_list = NewEntry.objects.all().order_by('info_name')
+    submitted_paginator = Paginator(submitted_list, 5)
+    submitted_page_number = request.GET.get('page')
+    submitted_page = submitted_paginator.get_page(submitted_page_number)
+    start_index_submitted = (submitted_page.number - 1) * submitted_paginator.per_page + 1
+
+    
+    manage_list = NewEntry.objects.all()  
+    manage_paginator = Paginator(manage_list, 5)
+    manage_page_number = request.GET.get('manage_page')
+    manage_page = manage_paginator.get_page(manage_page_number)
+    start_index_manage = (manage_page.number - 1) * manage_paginator.per_page + 1
+
+    return render(request, 'admindata.html', {
+        'submitted_page': submitted_page,
+        'manage_page': manage_page,
+        'start_index': start_index_submitted,
+        'start_index_manage': start_index_manage,
+        'admin_resumes': True,
+    })
+
+
+def orderby_name_admin_desc(request):
+    submitted_list = NewEntry.objects.all().order_by('-info_name')
+    submitted_paginator = Paginator(submitted_list, 5)
+    submitted_page_number = request.GET.get('page')
+    submitted_page = submitted_paginator.get_page(submitted_page_number)
+    start_index_submitted = (submitted_page.number - 1) * submitted_paginator.per_page + 1
+
+    manage_list = NewEntry.objects.all()
+    manage_paginator = Paginator(manage_list, 5)
+    manage_page_number = request.GET.get('manage_page')
+    manage_page = manage_paginator.get_page(manage_page_number)
+    start_index_manage = (manage_page.number - 1) * manage_paginator.per_page + 1
+
+    return render(request, 'admindata.html', {
+        'submitted_page': submitted_page,
+        'manage_page': manage_page,
+        'start_index': start_index_submitted,
+        'start_index_manage': start_index_manage,
+        'admin_resumes': True,
+    })
+
+
+
+def orderby_name_adminM(request):
+    submitted_list = NewEntry.objects.all()
+    submitted_paginator = Paginator(submitted_list, 5)
+    submitted_page_number = request.GET.get('page')
+    submitted_page = submitted_paginator.get_page(submitted_page_number)
+    start_index_submitted = (submitted_page.number - 1) * submitted_paginator.per_page + 1
+
+    manage_list = NewEntry.objects.all().order_by('info_name')
+    manage_paginator = Paginator(manage_list, 5)
+    manage_page_number = request.GET.get('manage_page')
+    manage_page = manage_paginator.get_page(manage_page_number)
+    start_index_manage = (manage_page.number - 1) * manage_paginator.per_page + 1
+
+    return render(request, 'admindata.html', {
+        'submitted_page': submitted_page,
+        'manage_page': manage_page,
+        'start_index': start_index_submitted,
+        'start_index_manage': start_index_manage,
+        'admin_resumes': True,
+    })
+
+
+
+def orderby_name_admin_descM(request):
+    submitted_list = NewEntry.objects.all()
+    submitted_paginator = Paginator(submitted_list, 5)
+    submitted_page_number = request.GET.get('page')
+    submitted_page = submitted_paginator.get_page(submitted_page_number)
+    start_index_submitted = (submitted_page.number - 1) * submitted_paginator.per_page + 1
+
+    
+    manage_list = NewEntry.objects.all().order_by('-info_name')
+    manage_paginator = Paginator(manage_list, 5)
+    manage_page_number = request.GET.get('manage_page')
+    manage_page = manage_paginator.get_page(manage_page_number)
+    start_index_manage = (manage_page.number - 1) * manage_paginator.per_page + 1
+
+    return render(request, 'admindata.html', {
+        'submitted_page': submitted_page,
+        'manage_page': manage_page,
+        'start_index': start_index_submitted,
+        'start_index_manage': start_index_manage,
+        'admin_resumes': True,
+    })
+
+
+# search for resume and manage resume in admin
+
+def search_detailR(request):
+    pk = request.POST.get('search', '').strip()
+    submitted_list = NewEntry.objects.filter(
+        Q(info_name__icontains=pk) |
+        Q(info_contact__icontains=pk) |
+        Q(info_dob__icontains=pk)
+    )
+
+    submitted_paginator = Paginator(submitted_list, 5)
+    submitted_page_number = request.GET.get('page')
+    submitted_page = submitted_paginator.get_page(submitted_page_number)
+    start_index = (submitted_page.number - 1) * submitted_paginator.per_page + 1
+
+    manage_list = NewEntry.objects.all()
+    manage_paginator = Paginator(manage_list, 5)
+    manage_page_number = request.GET.get('manage_page')
+    manage_page = manage_paginator.get_page(manage_page_number)
+    start_index_manage = (manage_page.number - 1) * manage_paginator.per_page + 1
+
+    return render(request, 'admindata.html', {
+        'submitted_page': submitted_page,
+        'manage_page': manage_page,
+        'start_index': start_index,
+        'start_index_manage': start_index_manage,
+        'admin_resumes': True,
+    })
+
+
+def search_detailM(request):
+    pk = request.POST.get('search', '').strip()
+    manage_list = NewEntry.objects.filter(
+        Q(info_name__icontains=pk) |
+        Q(info_contact__icontains=pk) |
+        Q(info_dob__icontains=pk)
+    )
+
+    manage_paginator = Paginator(manage_list, 5)
+    manage_page_number = request.GET.get('manage_page')
+    manage_page = manage_paginator.get_page(manage_page_number)
+    start_index_manage = (manage_page.number - 1) * manage_paginator.per_page + 1
+
+    submitted_list = NewEntry.objects.all()
+    submitted_paginator = Paginator(submitted_list, 5)
+    submitted_page_number = request.GET.get('page')
+    submitted_page = submitted_paginator.get_page(submitted_page_number)
+    start_index = (submitted_page.number - 1) * submitted_paginator.per_page + 1
+
+    return render(request, 'admindata.html', {
+        'submitted_page': submitted_page,
+        'manage_page': manage_page,
+        'start_index': start_index,
+        'start_index_manage': start_index_manage,
+        'admin_resumes': True,
+    })
+
+
+# search for resume and manage resume in admin
+
+# for userdashboard
+def asc_for_aResume(request):
+    resume_list = NewEntry.objects.all().order_by('info_name')
+    paginator = Paginator(resume_list, 5)
+    page_number = request.GET.get('page')
+    resumes = paginator.get_page(page_number)
+    return render(request, 'userdetail.html', {
+        'resumes': resumes,
+        'show_resumes': True,
+    })
+
+def desc_for_aResume(request):
+    resume_list = NewEntry.objects.all().order_by('-info_name')
+    paginator = Paginator(resume_list, 5)
+    page_number = request.GET.get('page')
+    resumes = paginator.get_page(page_number)
+    return render(request, 'userdetail.html', {
+        'resumes': resumes,
+        'show_resumes': True,
+    })
+
+def search_aResume(request):
+    if request.method == 'POST':
+        query = request.POST.get('search', '')
+        resume_list = NewEntry.objects.filter(
+            Q(info_name__icontains=query) |
+            Q(info_contact__icontains=query) |
+            Q(info_dob__icontains=query)
+        )
+    else:
+        resume_list = NewEntry.objects.all()
+
+    paginator = Paginator(resume_list, 5)
+    page_number = request.GET.get('page')
+    resumes = paginator.get_page(page_number)
+    return render(request, 'userdetail.html', {
+        'resumes': resumes,
+        'show_resumes': True,
+    })
+
+# for userdashboard

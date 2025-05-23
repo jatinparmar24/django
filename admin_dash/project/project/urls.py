@@ -41,12 +41,18 @@ urlpatterns = [
     path('admin_resumes/', views.admin_resumes, name='admin_resumes'),
     path('search_emp/',views.search_emp,name='search_emp'),
     path('search_with_detail/',views.search_with_detail,name='search_with_detail'),
+    path('orderby_name/', views.orderby_name,name='orderby_name'),
+    path('name_in_desc/', views.name_in_desc,name='name_in_desc'),
+    path('orderby_name_admin/', views.orderby_name_admin,name='orderby_name_admin'),
+    path('orderby_name_admin_desc/', views.orderby_name_admin_desc,name='orderby_name_admin_desc'),
+    path('orderby_name_adminM/', views.orderby_name_adminM,name='orderby_name_adminM'),
+    path('orderby_name_admin_descM/', views.orderby_name_admin_descM,name='orderby_name_admin_descM'),
+    path('search_detailR/',views.search_detailR,name='search_detailR'),
+    path('search_detailM/',views.search_detailM,name='search_detailM'),
+    path('asc_for_aResume/',views.asc_for_aResume,name='asc_for_aResume'),
+    path('desc_for_aResume/',views.desc_for_aResume,name='desc_for_aResume'),
+    path('search_aResume/',views.search_aResume,name='search_aResume'),
+
     
-
-
-
-    
-
-
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

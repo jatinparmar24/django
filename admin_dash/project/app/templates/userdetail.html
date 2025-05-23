@@ -40,7 +40,6 @@
   <table class="styled-table">
     <thead>
     <tr>
-      <th>S.NO</th>
       <th>Name</th>
       <th>Contact</th>
       <th>DOB</th>
@@ -52,7 +51,6 @@
     <tbody>
     {% for i in emp_data %}
       <tr>
-        <td>{{ forloop.counter }}</td>
         <td>{{ i.emp_name }}</td>
         <td>{{ i.emp_contact }}</td>
         <td>{{ i.emp_dob }}</td>
@@ -124,6 +122,20 @@
 <!-- employe info ends here -->
 {% if show_resumes %}
   {% if resumes %}
+
+  <div class="search-order-container">
+  <div class="order-links">
+    <a href="{% url 'asc_for_aResume' %}" class="btn-link">Order In Asc</a>
+    <a href="{% url 'desc_for_aResume' %}" class="btn-link">Order In Desc</a>
+  </div>
+
+  <form action="{% url 'search_aResume' %}" method="post" class="search-form">
+    {% csrf_token %}
+    <input type="text" name="search" class="search-input" placeholder="Search resumes...">
+    <button type="submit" class="search-btn">Search</button>
+  </form>
+  </div>
+
     <table class="styled-table">
       <tr>
         <th>S.NO</th>
@@ -140,7 +152,7 @@
         <td>{{ r.info_name }}</td>
         <td>{{ r.info_contact }}</td>
         <td>{{ r.info_dob }}</td>
-        <td>{{ r.info_resume }}</td>
+        <td><details>{{ r.info_resume }}</details></td>
         <td>
           {% if r.info_image %}
             <img src="{{ r.info_image.url }}" alt="Profile" width="50" height="50" style="object-fit: cover; border-radius: 50%;">
@@ -148,7 +160,7 @@
             No Image
           {% endif %}
         </td>
-        <td>{{ r.admin_opinion|default:"No opinion yet" }}</td>
+        <td><details>{{ r.admin_opinion|default:"No opinion yet" }}</details></td>
       </tr>
       {% endfor %}
     </table>

@@ -152,6 +152,8 @@
     <input type="text" name="search">
     <button>Search</button>
   </form>
+
+  <a href="{% url 'orderby_name' %}">Details In Asc Order</a> <a href="{% url 'name_in_desc' %}">details In Desc Order</a> 
 </div> <br> <br>
 
 
@@ -350,9 +352,22 @@
 {% endif %}
 
 {% if admin_resumes %}
-
 <div class="table-wrapper">
-  <h2>Submitted Resumes</h2>
+     <div class="submitted-resumes-header">
+     <h2>Submitted Resumes</h2>
+     <div class="order-links">
+       <a href="{% url 'orderby_name_admin' %}">Order In ASC Order</a>
+       <a href="{% url 'orderby_name_admin_desc' %}">Order In DESC Order</a>
+     </div>
+   
+     <form action="{% url 'search_detailR' %}" method="post">
+       {% csrf_token %}
+       <input type="text" name="search" placeholder="Search...">
+       <button>Search</button>
+     </form>
+    </div>
+
+
   <table class="submitted-resumes-table">
     <tr>
       <th>S.NO</th>
@@ -364,46 +379,68 @@
     </tr>
     {% for entry in submitted_page %}
       <tr>
-        <td>{{ forloop.counter }}</td>
+        <td>
+         {% if start_index %}
+           {{ forloop.counter0|add:start_index }}
+         {% else %}
+           {{ forloop.counter }}
+         {% endif %}
+       </td>
+
         <td>{{ entry.info_name }}</td>
         <td>{{ entry.info_contact }}</td>
         <td>{{ entry.info_dob }}</td>
         <td>{{ entry.info_resume }}</td>
         <td>
           {% if entry.info_image %}
-            <img src="{{ entry.info_image.url }}" alt="Profile">
+            <img src="{{ entry.info_image.url }}" alt="Profile" style="width:50px; height:50px; object-fit:cover;">
           {% else %}
             No Image
           {% endif %}
         </td>
       </tr>
+    {% empty %}
+      <tr>
+        <td colspan="6">No resumes found.</td>
+      </tr>
     {% endfor %}
   </table>
 
-  <!-- Pagination for Submitted Resumes -->
+  <!-- Pagination controls -->
   <div class="pagination">
-    <span class="step-links">
-      {% if submitted_page.has_previous %}
-        <a href="?submitted_page=1">&laquo; first</a>
-        <a href="?submitted_page={{ submitted_page.previous_page_number }}">previous</a>
-      {% endif %}
+    {% if submitted_page.has_previous %}
+      <a href="?page=1">&laquo; First</a>
+      <a href="?page={{ submitted_page.previous_page_number }}">Previous</a>
+    {% endif %}
 
-      <span class="current">
-        Page {{ submitted_page.number }} of {{ submitted_page.paginator.num_pages }}.
-      </span>
+    <span>Page {{ submitted_page.number }} of {{ submitted_page.paginator.num_pages }}</span>
 
-      {% if submitted_page.has_next %}
-        <a href="?submitted_page={{ submitted_page.next_page_number }}">next</a>
-        <a href="?submitted_page={{ submitted_page.paginator.num_pages }}">last &raquo;</a>
-      {% endif %}
-    </span>
+    {% if submitted_page.has_next %}
+      <a href="?page={{ submitted_page.next_page_number }}">Next</a>
+      <a href="?page={{ submitted_page.paginator.num_pages }}">Last &raquo;</a>
+    {% endif %}
   </div>
 </div>
+
 
 <hr>
 
 <div class="table-wrapper">
-  <h2>Manage Resumes</h2>
+     <div class="manage-resumes-header">
+      <h2>Manage Resumes</h2>
+      <div class="order-links">
+        <a href="{% url 'orderby_name_adminM' %}">Order In ASC Order</a>
+        <a href="{% url 'orderby_name_admin_descM' %}">Order In DESC Order</a>
+      </div>    
+
+      <form action="{% url 'search_detailM' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="search" placeholder="Search...">
+        <button>Search</button>
+      </form>
+    </div>
+
+
   <table class="manage-resumes-table">
     <tr>
       <th>S.No</th>
@@ -429,7 +466,7 @@
             No Image
           {% endif %}
         </td>
-        <td>{{ r.admin_opinion|default:"No opinion yet" }}</td>
+        <td><details>{{ r.admin_opinion|default:"No opinion yet" }}</details></td>
         <td>
           <form method="post" class="opinion-form">
             {% csrf_token %}
