@@ -44,7 +44,7 @@ class Offer(models.Model):
         abstract=True
 
     def is_eligible(self):
-        today=date.today
+        today=date.today()
         if self.start_date <= today and today <= self.end_date:
            return True
         else:
@@ -87,7 +87,8 @@ class FormattedBook(Book):
         proxy = True
 
     def formatted_book_info(self):
-        return f"{self.title} (Published: {self.published_date.strftime('%B %d, %Y')})"  # month,day,year
+        return f"{self.title} (Published: {self.published_date})"  # month,day,year
+
 
 
 class RecentBook(Book):
@@ -98,3 +99,5 @@ class RecentBook(Book):
     def get_last_year_book(self):
         one_year_ago = timezone.now().date() - timedelta(days=365)
         return self.objects.filter(published_date__gte=one_year_ago)
+
+

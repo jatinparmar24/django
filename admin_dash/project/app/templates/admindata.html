@@ -15,13 +15,13 @@
 {% endif %}
 
 
-   <div style="height: 150vh;">
+   <div>
 
      <div class="admin_tab">
       <form action="{% url 'add_emp' %}" method="post" style="display:inline;">
         {% csrf_token %}
         <input type="hidden" name="show_form" value="1">
-        <button type="submit" class="create-employee-link">Create Employee</button>
+        <button type="submit" class="create-employee-link">Add Employee</button>
       </form>
 
       <a href="{% url 'show_all_emp' %}" class="create-employee-link">Show Employee</a> <br>
@@ -185,12 +185,13 @@
   <tbody>
     {% for i in emp_data %}
       <tr>
-        <td>{{ forloop.counter }}</td>
+        <!-- Use 'start_index' from context instead of emp_data.start_index -->
+        <td>{{ forloop.counter0|add:start_index|default:forloop.counter }}</td>
         <td>{{ i.emp_name }}</td>
         <td>{{ i.emp_contact }}</td>
         <td>{{ i.emp_dob }}</td>
         <td>{{ i.emp_email }}</td>
-        <td>{{ i.emp_depart}}</td>
+        <td>{{ i.emp_depart }}</td>
         <td>
           {% if i.emp_image %}
             <img src="{{ i.emp_image.url }}" alt="Profile" width="50" height="50" style="object-fit: cover; border-radius: 50%;">
@@ -204,6 +205,28 @@
     {% endfor %}
   </tbody>
 </table>
+
+<!-- Pagination Controls -->
+<div class="pagination">
+  <span class="step-links">
+    {% if emp_data.has_previous %}
+      <a href="?page=1">&laquo; First</a>
+      <a href="?page={{ emp_data.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    <span class="current">
+      Page {{ emp_data.number }} of {{ emp_data.paginator.num_pages }}.
+    </span>
+
+    {% if emp_data.has_next %}
+      <a href="?page={{ emp_data.next_page_number }}">Next</a>
+      <a href="?page={{ emp_data.paginator.num_pages }}">Last &raquo;</a>
+    {% endif %}
+  </span>
+</div>
+
+
+
 
 
 
@@ -363,6 +386,7 @@
   <h2>Manage Resumes</h2>
   <table class="manage-resumes-table">
     <tr>
+      <th>S.No</th>
       <th>Name</th>
       <th>Contact</th>
       <th>DOB</th>
@@ -373,6 +397,7 @@
     </tr>
     {% for r in resumes %}
       <tr>
+        <td>{{ forloop.counter }}</td>
         <td>{{ r.info_name }}</td>
         <td>{{ r.info_contact }}</td>
         <td>{{ r.info_dob }}</td>

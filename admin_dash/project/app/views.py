@@ -3,6 +3,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from .models import Employee,NewEntry
 from django.db.models import Q
+from django.core.paginator import Paginator
+
 
 
 
@@ -149,21 +151,30 @@ def add_emp(request):
     })
 
 
-
-
 def show_all_emp(request):
-    emp_data=Employee.objects.all()
-    return render(request,'admindata.html',{'emp_data':emp_data,'show_all': True})
+    emp_list = Employee.objects.all()
+    paginator = Paginator(emp_list, 5)
 
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
+    start_index = page_obj.start_index()
 
-def edit_emp(request,id):
+    return render(request, 'admindata.html', {
+        'show_all': True,
+        'emp_data': page_obj,            # ✅ use page_obj here
+        'start_index': start_index,      # ✅ pass correct start_index
+        'edit_employee': None            # optional; use None or don't include if not editing
+    })
+
+def edit_emp(request, emp_id):
     try:
-        emp = Employee.objects.get(id=id)
+        emp = Employee.objects.get(id=emp_id)
     except Employee.DoesNotExist:
-        return redirect('show_employees')
+        return redirect('show_all_emp')  # make sure redirect URL name is correct
 
     if request.method == 'POST':
+        # update fields...
         emp.emp_name = request.POST.get('name')
         emp.emp_contact = request.POST.get('contact')
         emp.emp_dob = request.POST.get('dob')
@@ -175,11 +186,17 @@ def edit_emp(request,id):
         
         emp.save()
 
-    emp_data = Employee.objects.all()
+    emp_list = Employee.objects.all()
+    paginator = Paginator(emp_list, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    start_index = page_obj.start_index()
+
     return render(request, 'admindata.html', {
         'show_all': True,
-        'emp_data': emp_data,
-        'edit_employee': emp
+        'emp_data': page_obj,
+        'edit_employee': emp,
+        'start_index': start_index,
     })
 
 def delete_employee(request, id):
@@ -274,21 +291,57 @@ def admin_resumes(request):
 
 # to search
 
-def search_emp(request):
-    pk=request.POST.get('search')
-    all_data=Employee.objects.filter(Q(emp_name__icontains=pk) | Q(emp_contact__icontains=pk) | Q(emp_dob__icontains=pk) | Q(emp_email__icontains=pk) | Q(emp_depart__icontains=pk))
 
-    return render(request,'admindata.html',{'emp_data':all_data})
+def search_emp(request):
+    pk = request.POST.get('search')
+    all_data = Employee.objects.filter(
+        Q(emp_name__icontains=pk) |
+        Q(emp_contact__icontains=pk) |
+        Q(emp_dob__icontains=pk) |
+        Q(emp_email__icontains=pk) |
+        Q(emp_depart__icontains=pk)
+    )
+
+    paginator = Paginator(all_data, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    start_index = page_obj.start_index()
+
+    return render(request, 'admindata.html', {
+        'emp_data': page_obj,
+        'start_index': start_index,
+        'show_all': True
+    })
+
 
 def search_with_detail(request):
-    name=request.POST.get('name')
-    contact=request.POST.get('contact')
-    dob=request.POST.get('dob')
-    email=request.POST.get('email')
-    depart=request.POST.get('depart')
-    
-    info=Employee.objects.filter(Q(emp_name__icontains=name) | Q(emp_contact__icontains=contact) | Q(emp_dob__icontains=dob) | Q(emp_email__icontains=email) | Q(emp_depart__icontains=depart))
+    name = request.POST.get('name', '').strip()
+    contact = request.POST.get('contact', '').strip()
+    dob = request.POST.get('dob', '').strip()
+    email = request.POST.get('email', '').strip()
+    depart = request.POST.get('depart', '').strip()
 
-    return render(request,'admindata.html',{'emp_data':info})
+    query = Q()
+    if name:
+        query |= Q(emp_name__icontains=name)
+    if contact:
+        query |= Q(emp_contact__icontains=contact)
+    if dob:
+        query |= Q(emp_dob__icontains=dob)
+    if email:
+        query |= Q(emp_email__icontains=email)
+    if depart:
+        query |= Q(emp_depart__icontains=depart)
 
+    filtered_data = Employee.objects.filter(query) if query else Employee.objects.none()
 
+    paginator = Paginator(filtered_data, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    start_index = page_obj.start_index()
+
+    return render(request, 'admindata.html', {
+        'emp_data': page_obj,
+        'start_index': start_index,
+        'show_all': True
+    })
