@@ -11,7 +11,14 @@
 
 {% block content %}
 
-<div >
+<div class="user-dashboard-section">
+  <div class="user-section-content">
+    <h2>Welcome, User!</h2>
+    <p>Explore your submitted resumes and admin feedback right here.</p>
+    <a href="#" class="user-btn">Go to Dashboard</a>
+  </div>
+</div>
+
 
   <div class="admin_tab">
   <a href="{% url 'view_user' %}" class="create-employee-link">View My Info</a>
@@ -186,9 +193,6 @@
 
 
 
-  
-
-</div>
 
 
 

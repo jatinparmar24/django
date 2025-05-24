@@ -6,13 +6,21 @@
 
 
   <section class="admindashborad">
+   <div class="admin-dashboard-section">
+  <div class="admin-section-content">
+    <h2>Welcome to Admin Dashboard</h2>
+    <p>Manage resumes, submissions, and admin feedback efficiently here.</p>
+    <a href="#" class="admin-btn">Go to Dashboard</a>
+  </div>
+</div>
+
     {% if messages %}
   <ul class="messages">
     {% for message in messages %}
       <li class="{{ message.tags }}">{{ message }}</li>
     {% endfor %}
   </ul>
-{% endif %}
+  {% endif %}
 
 
    <div>
@@ -146,29 +154,35 @@
 
 {% if emp_data %}
 
-<div>
-  <form action="{% url 'search_emp' %}" method="post">
+
+
+ <div class="submitted-resumes-header">
+     <div class="order-links">
+       <a href="{% url 'orderby_name' %}">Order In ASC Order</a>
+       <a href="{% url 'name_in_desc' %}">Order In DESC Order</a>
+     </div>
+   
+     <form action="{% url 'search_emp' %}" method="post">
+       {% csrf_token %}
+       <input type="text" name="search" placeholder="Search with Any_Info">
+       <button>Search</button>
+     </form>
+    </div>
+
+
+<div class="single-line-search-form">
+  <form action="{% url 'search_with_detail' %}" method="post" class="search-inline-form">
     {% csrf_token %}
-    <input type="text" name="search">
-    <button>Search</button>
+    <input type="text" name="name" placeholder="Name">
+    <input type="text" name="contact" placeholder="Contact">
+    <input type="text" name="dob" placeholder="DOB">
+    <input type="text" name="email" placeholder="Email">
+    <input type="text" name="depart" placeholder="Department">
+    <button type="submit" class="dashboard-btn">Search</button>
   </form>
-
-  <a href="{% url 'orderby_name' %}">Details In Asc Order</a> <a href="{% url 'name_in_desc' %}">details In Desc Order</a> 
-</div> <br> <br>
-
-
-<div>
-   <form action="{% url 'search_with_detail' %}" method="post">
-          {% csrf_token %}
-          <input type="text" name="name" placeholder="name" >
-          <input type="text" name="contact" placeholder="contact" >
-          <input type="text" name="dob" placeholder="dob" >
-          <input type="text" name="email" placeholder="email" >
-          <input type="text" name="depart" placeholder="depart" >
-          <button>Search</button>
-
-        </form>
 </div>
+
+
 
   <table class="styled-table">
   <thead>
