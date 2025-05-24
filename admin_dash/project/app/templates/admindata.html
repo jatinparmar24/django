@@ -6,38 +6,39 @@
 
 
   <section class="admindashborad">
-   <div class="admin-dashboard-section">
-  <div class="admin-section-content">
-    <h2>Welcome to Admin Dashboard</h2>
-    <p>Manage resumes, submissions, and admin feedback efficiently here.</p>
-    <a href="#" class="admin-btn">Go to Dashboard</a>
-  </div>
-</div>
+    <div class="admin-dashboard-section">
+     <div class="admin-section-content">
+      <h2>Welcome to Admin Dashboard</h2>
+      <p>Manage resumes, submissions, and admin feedback efficiently here.</p>
+      <a href="#" class="admin-btn" style="margin-right: 8%;">Go to Dashboard</a>
+     </div>
+    </div>
 
     {% if messages %}
-  <ul class="messages">
-    {% for message in messages %}
+     <ul class="messages">
+     {% for message in messages %}
       <li class="{{ message.tags }}">{{ message }}</li>
-    {% endfor %}
-  </ul>
-  {% endif %}
+     {% endfor %}
+     </ul>
+    {% endif %}
 
 
    <div>
 
      <div class="admin_tab">
+
       <form action="{% url 'add_emp' %}" method="post" style="display:inline;">
         {% csrf_token %}
         <input type="hidden" name="show_form" value="1">
-        <button type="submit" class="create-employee-link">Add Employee</button>
+        <button type="submit" class="create-employee-link" style="border: none;">Add Employee</button>
       </form>
 
-      <a href="{% url 'show_all_emp' %}" class="create-employee-link">Show Employee</a> <br>
+      <a href="{% url 'show_all_emp' %}" class="create-employee-link" style="border: none;">Show Employee</a> <br>
 
       <form action="{% url 'admin_resumes' %}" method="post" style="display:inline;">
         {% csrf_token %}
         <input type="hidden" name="action" value="toggle_show">
-        <button type="submit" class="create-employee-link">
+        <button type="submit" class="create-employee-link" style="border: none;">
           View All Resumes
         </button>
       </form>

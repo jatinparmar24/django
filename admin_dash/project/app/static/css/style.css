@@ -515,7 +515,7 @@ h3 {
 /* Main Dashboard Container */
 
 .admin-dashboard-section {
-  height: 50vh;
+  height: 40vh;
   background: linear-gradient(135deg, #3498db, #6dd5fa);
   display: flex;
   align-items: center;
@@ -570,8 +570,10 @@ h3 {
 /* Admin Tab Links */
 .admin_tab {
   display: flex;
+  justify-content: center;
   gap: 20px;
-  margin-bottom: 30px;
+  margin-top: 2.4%;
+  margin-bottom: 1px;
   flex-wrap: wrap;
 }
 
@@ -586,7 +588,7 @@ h3 {
 
 .create-employee-link:hover {
   background-color: #0056b3;
-  color: #1a1a1a;
+  color: #fff;
 }
 
 /* Form Container */
@@ -1516,6 +1518,7 @@ input[type="file"] + label.file-label {
     padding: 14px 0;
     font-size: 1.2rem;
   }
+
 }
 
 
@@ -1551,6 +1554,11 @@ input[type="file"] + label.file-label {
 
 
 @media (min-width: 768px) and (max-width: 991.98px) {
+
+  .footer{
+    position: fixed;
+    bottom: 0px;
+  }
 
   .navbar-brand {
     font-size: 1.5rem;
