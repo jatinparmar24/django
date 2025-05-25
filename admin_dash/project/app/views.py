@@ -72,7 +72,7 @@ def login(request):
 def admin_login(request):
     if request.method == 'POST':
         admin_email = "admin@email.com"
-        admin_password = "ad"
+        admin_password = "admin@12"
 
         email = request.POST.get('email')
         password = request.POST.get('password')

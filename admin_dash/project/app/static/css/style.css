@@ -5,6 +5,9 @@
   box-sizing: border-box;
 }
 
+main{
+  flex: 1;
+}
 
 
 body {
@@ -13,6 +16,10 @@ body {
   color: #333;
   background: #fff;
   line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
 }
 
 h1, h2, h3 {
@@ -376,8 +383,9 @@ h3 {
   flex-wrap: wrap;
   justify-content: space-between;
   max-width: 1100px;
-  margin: 0 auto 20px;
+  margin: 0 auto;
 }
+
 
 .footer-about,
 .footer-links,
@@ -1555,10 +1563,6 @@ input[type="file"] + label.file-label {
 
 @media (min-width: 768px) and (max-width: 991.98px) {
 
-  .footer{
-    position: fixed;
-    bottom: 0px;
-  }
 
   .navbar-brand {
     font-size: 1.5rem;
@@ -1724,7 +1728,6 @@ input[type="file"] + label.file-label {
   .reasons-grid {
     grid-template-columns: repeat(3, 1fr) !important;
   }
-
   
 }
 
