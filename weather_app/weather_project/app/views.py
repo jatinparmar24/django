@@ -1,6 +1,7 @@
 import requests
 from django.shortcuts import render
 from .form import CityForm
+from decouple import config
 
 def weather(request):
     weather_data = None
@@ -9,7 +10,7 @@ def weather(request):
         form = CityForm(request.POST)
         if form.is_valid():
             city = form.cleaned_data['city']
-            api_key = 'fd714d3144a39308111969d5676fa3ea' 
+            api_key = config('OPENWEATHER_API_KEY')  
             url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
             response = requests.get(url)
             if response.status_code == 200:
