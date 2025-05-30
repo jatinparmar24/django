@@ -12,12 +12,12 @@ import io
 
 
 
-# serialize and sdeerialize
+# serialize and deserialize
 
 
 
-@csrf_exempt
-def student_list(request,id): 
+@csrf_exempt    # we use this for security purpose for method like {post,put/patch,delete}
+def student_list(request): 
     if request.method=='GET':
         stu = Student.objects.all()
         print(type(stu))
@@ -103,7 +103,6 @@ def student_list(request,id):
 
 
 
-
 def student_detail(request, pk):
     user = Student.objects.get(pk=pk)
     # print(type(user))
@@ -118,4 +117,6 @@ def student_detail(request, pk):
     # when we send json data from views then content type must be "application/json"
     return JsonResponse(serializer.data,safe=False)
     # first argument of JsonResponse should be a dict,otherwise set safe=False
+
+
 
