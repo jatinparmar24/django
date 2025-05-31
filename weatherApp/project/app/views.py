@@ -1,7 +1,17 @@
 import requests
+import pycountry
 from django.shortcuts import render
 from .form import CityForm
 from decouple import config
+
+def get_country_name(code):
+    try:
+        country = pycountry.countries.get(alpha_2=code)
+        if country:
+            return country.name
+    except:
+        pass
+    return code  # fallback: return code if no match
 
 def weather(request):
     weather_data = None
@@ -16,9 +26,10 @@ def weather(request):
 
             if response.status_code == 200:
                 data = response.json()
+                full_country_name = get_country_name(data['sys']['country'])
                 weather_data = {
                     'city': data['name'],
-                    'country': data['sys']['country'],
+                    'country': full_country_name,
                     'temperature': data['main']['temp'],
                     'feels_like': data['main']['feels_like'],
                     'humidity': data['main']['humidity'],
