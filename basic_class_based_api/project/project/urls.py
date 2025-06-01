@@ -20,6 +20,7 @@ from app.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # same url for class based api , mixin,generic
     path('movie_list/',Movie_list.as_view(),name='movie_list'),
     path('movie_details/<int:pk>/',Movie_details.as_view(),name='movie_details'),
 ]
