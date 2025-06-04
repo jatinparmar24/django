@@ -1,0 +1,113 @@
+
+body {
+  margin: 0;
+  font-family: 'Outfit', sans-serif;
+  background-color: #f4f9f9;
+  color: #2e2e2e;
+}
+
+/* Navbar */
+.custom-navbar {
+  background-color: #1e2749;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.custom-navbar .logo {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.custom-navbar .nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.2rem;
+}
+
+.custom-navbar .nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.register-btn {
+  background-color: #a1c4fd;
+  color: #1e2749;
+  padding: 6px 12px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.register-btn:hover {
+  background-color: #91b4ec;
+}
+
+/* Hero */
+.hero-section {
+  background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+  padding: 100px 20px;
+  text-align: center;
+}
+
+.hero-section h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #1e2749;
+}
+
+.hero-section p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+.cta-button {
+  background-color: #1e2749;
+  color: white;
+  padding: 12px 24px;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #3c4e7b;
+}
+
+/* Features */
+.features-section {
+  padding: 60px 20px;
+  background-color: #ffffff;
+  text-align: center;
+}
+
+.features-section h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+}
+
+.features-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.feature-card {
+  background-color: #e7f0fd;
+  padding: 30px;
+  border-radius: 12px;
+  width: 280px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.feature-card h3 {
+  color: #1e2749;
+}

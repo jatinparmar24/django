@@ -9,3 +9,4 @@ from rest_framework import routers, serializers, viewsets
 class StudentViewSet(viewsets.ModelViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
+
