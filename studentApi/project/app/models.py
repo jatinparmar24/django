@@ -9,3 +9,10 @@ class Student(models.Model):
     active = models.BooleanField(default=True) 
     def _str_(self): 
         return self.name
+
+class Teacher(models.Model): 
+    name = models.CharField(max_length=50) 
+    contact = models.IntegerField() 
+    email = models.EmailField() 
+    def _str_(self): 
+        return self.name
