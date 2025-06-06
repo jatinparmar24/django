@@ -1,24 +1,55 @@
-<!-- templates/login.html or register.html -->
-{% extends 'base.html' %}
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+Registration Page
+{% endblock  %}
+
+{% block css %}
+ <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
 {% block content %}
 
-<div class="row justify-content-center">
-  <div class="col-md-6 col-lg-5">
-    <div class="card shadow-lg p-4 rounded">
-      <h3 class="text-center mb-4">{{ title }}</h3>
-      <form method="post" novalidate>
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary w-100">{{ title }}</button>
-      </form>
+<h1>This Is Registration Section</h1>
 
-      {% if title == "Login" %}
-        <p class="mt-3 text-center">Don’t have an account? <a href="{% url 'register' %}">Register here</a></p>
-      {% else %}
-        <p class="mt-3 text-center">Already have an account? <a href="{% url 'login' %}">Login here</a></p>
-      {% endif %}
-    </div>
-  </div>
-</div>
+<form action="{% url 'register_user' %}"  method="POST" enctype="multipart/form-data">
+
+  {% csrf_token %}
+
+  <label for="username">Name:</label>
+  <input type="text" name="username" placeholder="Enter your name" required><br><br>
+
+  <label for="email">Email:</label>
+  <input type="email" name="email" placeholder="Enter your email" required><br><br>
+
+
+  <label for="phone">Contact:</label>
+  <input type="tel" name="phone" pattern="[0-9]{10}" maxlength="10" placeholder="10-digit number" required><br><br>
+
+  <label for="dob">DOB:</label>
+  <input type="date" name="dob" min="1934-01-01" max="2024-01-01" required><br><br>
+
+  <label>Gender:</label><br>
+  <input type="radio" name="gender" value="male"> Male
+  <input type="radio" name="gender" value="female"> Female<br><br>
+
+  
+  <label for="profile-pic">Profile Picture:</label>
+  <input type="file" name="profile-pic" accept=".jpeg,.png"><br><br>
+  
+
+  <label for="password">Password:</label>
+  <input type="password" name="password" required><br><br>
+
+  <label for="cpassword">Confirm Password:</label>
+  <input type="password" name="cpassword" required><br><br>
+
+  <input type="submit" value="Register">
+
+
+</form>
+
 
 {% endblock %}

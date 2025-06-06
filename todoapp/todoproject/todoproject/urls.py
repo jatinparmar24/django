@@ -17,12 +17,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from todoapp import views
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home,name='home'),
-    path('register/', views.register_view, name='register'),
+    path('register_user/', views.register_user, name='register_user'),
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
     # path('dashboard/', views.dashboard, name='dashboard'),  
-]
+]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
