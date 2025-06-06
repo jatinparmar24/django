@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .serializers import StudentSerializer,TeacherSerializer
 from .models import Student,Teacher
 from rest_framework import routers, serializers, viewsets
-from rest_framework.permissions import IsAuthenticated,IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticated,IsAuthenticatedOrReadOnly,IsAdminUser,AllowAny
 
 
 # Create your views here.

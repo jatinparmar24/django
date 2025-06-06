@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'app',
+    'rest_framework.authtoken',
+
 ]
 
 MIDDLEWARE = [
@@ -54,8 +56,9 @@ MIDDLEWARE = [
 # for authentication and permission
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
+        #'rest_framework.authentication.BasicAuthentication',  # it works perfectly but not log out the user or admin
+        #'rest_framework.authentication.SessionAuthentication', # it works perfectly and also log out the user or admin 
+        'rest_framework.authentication.TokenAuthentication',
     ]
 }
 # for authentication and permission
