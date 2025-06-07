@@ -14,5 +14,21 @@ Login Page
 
 <h1>Login page</h1>
 
+<form action="{% url 'login_user' %}"  method="POST" enctype="multipart/form-data">
+
+  {% csrf_token %}
+
+  <label for="email">Email</label>
+  <input type="text" name="email" id="email" placeholder="Enter your email" required 
+         autocomplete="off">
+
+  <label for="password">Password</label>
+  <input type="password" name="password" id="password" placeholder="Enter your password" required 
+         autocomplete="new-password">
+
+  <input type="submit" value="Login">
+
+</form>
+
 
 {% endblock %}

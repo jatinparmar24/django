@@ -1,68 +1,70 @@
-
-from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
-from django.contrib.auth import logout
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.forms import AuthenticationForm
 from .models import User
-# Create your views here.
 
 def home(request):
-    return render(request,'home.html')
-
-
+    return render(request, 'home.html')
 
 
 def register_user(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         email = request.POST.get('email')
+        password = request.POST.get('password')
         phone = request.POST.get('phone')
         dob = request.POST.get('dob')
         gender = request.POST.get('gender')
-        profile = request.FILES.get('profile')  # use FILES for image
-        password = request.POST.get('password')
-        cpassword = request.POST.get('cpassword')
 
-        try:
-            if User.objects.filter(user_email=email).exists():
-                msg = "Email already exists"
-                return render(request, 'register.html', {'key': msg})
+        # Basic example, no validation here, add as needed
+        if User.objects.filter(user_email=email).exists():
+            msg = "Email already registered"
+            return render(request, 'register.html', {'msg': msg})
 
-            if password != cpassword:
-                msg = "Passwords do not match"
-                return render(request, 'register.html', {'key': msg})
-
-            # Create user
-            user = User.objects.create(
-                user_name=username,
-                user_email=email,
-                user_phone=phone,
-                user_dob=dob,
-                user_gender=gender,
-                user_profile=profile,
-                user_pass=password
-            )
-            msg = "Registration successful"
-            print("User created:", user)  
-            return render(request, 'login.html', {'key': msg})
-        
-        except Exception as e:
-            print("Registration error:", e)  
-            msg = "An error occurred: " + str(e)
-            return render(request, 'register.html', {'key': msg})
+        user = User.objects.create(
+            user_name=username,
+            user_email=email,
+            user_pass=password,
+            user_phone=phone,
+            user_dob=dob,
+            user_gender=gender
+        )
+        user.save()
+        return redirect('login_user')
 
     return render(request, 'register.html')
 
 
+def login_user(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+
+        try:
+            user = User.objects.get(user_email=email)
+            if user.user_pass == password:
+                request.session['user_id'] = user.id
+                return redirect('dashboard')
+            else:
+                msg = "Incorrect password"
+        except User.DoesNotExist:
+            msg = "Email not registered"
+
+        return render(request, 'login.html', {'msg': msg})
+
+    return render(request, 'login.html')
 
 
+def dashboard(request):
+    user_id = request.session.get('user_id')
+    if not user_id:
+        return redirect('login_user')
 
-def login_view(request):
-   pass
+    user = User.objects.get(id=user_id)
+    return render(request, 'dashboard.html', {'user_detail': user})
 
 
-
-def logout_view(request):
-    logout(request)
-    return redirect('resgister')
+def logout_user(request):
+    try:
+        del request.session['user_id']
+    except KeyError:
+        pass
+    return redirect('home')
