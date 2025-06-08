@@ -3,70 +3,78 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>To-Do App</title>
   <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
+
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
+    <div class="container">
       <a class="navbar-brand" href="{% url 'home' %}">To-Do App</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarContent"
-        aria-controls="navbarContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="collapse navbar-collapse" id="navbarContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav ms-auto">
           {% if request.session.user_id %}
-            <!-- When user is logged in -->
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'home' %}">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'logout_user' %}">Logout</a>
-            </li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'logout_user' %}">Logout</a></li>
           {% else %}
-            <!-- When user is not logged in -->
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'home' %}">Home</a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'login_user' %}">Login</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'register_user' %}">Register</a>
-            </li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'login_user' %}">Login</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'register_user' %}">Register</a></li>
           {% endif %}
         </ul>
-
-          
-        </form>
       </div>
     </div>
   </nav>
 
-  <!-- Your page content -->
-  <main>
+  <main class="flex-fill">
     {% block content %}{% endblock %}
   </main>
 
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-  ></script>
+ 
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-col about">
+      <h4>About To‑Do App</h4>
+      <p>Your productivity partner—organize tasks, track progress, and achieve more.</p>
+    </div>
+    <div class="footer-col links">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+        <li><a href="{% url 'login_user' %}">Login</a></li>
+        <li><a href="{% url 'register_user' %}">Register</a></li>
+      </ul>
+    </div>
+    <div class="footer-col contact">
+      <h4>Contact Us</h4>
+      <ul>
+        <li>Email: support@todoapp.com</li>
+        <li>Phone: +91‑123‑456‑7890</li>
+      </ul>
+    </div>
+    <div class="footer-col subscribe">
+      <h4>Newsletter</h4>
+      <form action="/subscribe/" method="post">
+        {% csrf_token %}
+        <input type="email" name="email" placeholder="Your email" required>
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 To‑Do App • <a href="/privacy/">Privacy Policy</a> • <a href="/terms/">Terms & Conditions</a></p>
+  </div>
+</footer>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
