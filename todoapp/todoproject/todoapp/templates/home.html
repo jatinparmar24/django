@@ -7,18 +7,33 @@
 
   <!-- Hero Section -->
  {% block content %}
-  <section class="hero-section">
-    <div class="hero-overlay"></div>
+ <section class="hero">
     <div class="hero-content">
-      <h1>Your Tasks, Organized Beautifully</h1>
-      <p>Track progress, set reminders, and accomplish more every day. Simple, intuitive, and fast.</p>
-      {% if request.session.user_id %}
-        <a href="{% url 'dashboard' %}" class="btn btn-primary">Go to Dashboard</a>
-      {% else %}
-        <a href="{% url 'register_user' %}" class="btn btn-primary">Get Started Free</a>
-      {% endif %}
+      <h1><span class="gradient-text">Plan. Focus. Achieve.</span></h1>
+      <p class="tagline">Your Daily Companion for Productivity</p>
+      <p class="description">
+        Streamline your day with a smart task manager that makes getting things done easy and fun.
+      </p>
+
+      <div class="features">
+        <div class="feature card">
+          <span class="emoji">📝</span>
+          <p>Quick Task Entry</p>
+        </div>
+        <div class="feature card">
+          <span class="emoji">📅</span>
+          <p>Daily & Weekly Planner</p>
+        </div>
+        <div class="feature card">
+          <span class="emoji">⏰</span>
+          <p>Smart Reminders</p>
+        </div>
+      </div>
+
+      <a href="#get-started" class="btn">Get Started</a>
     </div>
   </section>
+
 {% endblock %}
 
 
