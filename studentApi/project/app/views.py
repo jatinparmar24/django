@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated,IsAuthenticatedOrReadOnly
 # Create your views here.
 
 class StudentViewSet(viewsets.ModelViewSet):
-    permission_classes = [AllowAny]
+    # permission_classes = [AllowAny]
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
 
@@ -17,7 +17,7 @@ class StudentViewSet(viewsets.ModelViewSet):
 # authentication and permission
 
 class TeacherViewSet(viewsets.ModelViewSet):
-    permission_classes = [AllowAny]
+    # permission_classes = [AllowAny]
     queryset = Teacher.objects.all()
     serializer_class = StudentSerializer
 

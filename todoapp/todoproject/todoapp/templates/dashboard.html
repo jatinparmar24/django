@@ -5,6 +5,58 @@
 
 {% block content %}
 
-<h1>DashBoard</h1>
+
+
+<section class="dashboard-section">
+  <div class="dashboard-container">
+    <h1>Welcome, {{ user.username }}!</h1>
+
+    <div class="summary-cards">
+      <div class="card total-tasks">
+        <h2>Total Tasks</h2>
+        <p>{{ total_tasks }}</p>
+      </div>
+      <div class="card completed-tasks">
+        <h2>Completed</h2>
+        <p>{{ completed_tasks }}</p>
+      </div>
+      <div class="card pending-tasks">
+        <h2>Pending</h2>
+        <p>{{ pending_tasks }}</p>
+      </div>
+    </div>
+
+    <div class="tasks-list">
+      <h2>Your Tasks</h2>
+      <ul>
+        {% for task in tasks %}
+          <li class="task-item {% if task.completed %}completed{% endif %}">
+            <form method="POST" style="display: inline;">
+              {% csrf_token %}
+              <input type="hidden" name="task_id" value="{{ task.id }}">
+              <button type="submit" name="toggle_complete" class="btn-toggle">
+                {% if task.completed %}Mark Incomplete{% else %}Mark Complete{% endif %}
+              </button>
+            </form>
+            <span>{{ task.title }}</span>
+            <div class="actions">
+              <a href="{% url 'edit_task' task.id %}" class="edit-btn">Edit</a>
+
+              <form method="POST" style="display: inline;">
+                {% csrf_token %}
+                <input type="hidden" name="task_id" value="{{ task.id }}">
+                <button type="submit" name="delete_task" class="delete-btn" onclick="return confirm('Are you sure?');">Delete</button>
+              </form>
+            </div>
+          </li>
+        {% empty %}
+          <li>No tasks found. Add some!</li>
+        {% endfor %}
+      </ul>
+      <a href="{% url 'add_task' %}" class="btn-add-task">+ Add New Task</a>
+    </div>
+  </div>
+</section>
 
 {% endblock %}
+

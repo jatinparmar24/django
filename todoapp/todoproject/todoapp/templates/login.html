@@ -12,23 +12,24 @@ Login Page
 
 {% block content %}
 
-<h1>Login page</h1>
+   <section class="login-section">
+    <div class="login-card">
+      <form action="{% url 'login_user' %}" method="POST" enctype="multipart/form-data" class="login-form">
+        {% csrf_token %}
+        <h2>Welcome Back</h2>
+        <p>Please log in to continue</p>
 
-<form action="{% url 'login_user' %}"  method="POST" enctype="multipart/form-data">
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email" placeholder="your@email.com" required autocomplete="off">
 
-  {% csrf_token %}
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" placeholder="••••••••" required autocomplete="new-password">
 
-  <label for="email">Email</label>
-  <input type="text" name="email" id="email" placeholder="Enter your email" required 
-         autocomplete="off">
+        <button type="submit">Log In</button>
+      </form>
+    </div>
+  </section>
 
-  <label for="password">Password</label>
-  <input type="password" name="password" id="password" placeholder="Enter your password" required 
-         autocomplete="new-password">
-
-  <input type="submit" value="Login">
-
-</form>
 
 
 {% endblock %}

@@ -1,5 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import User
+from .models import Task
+from .forms import TaskForm
+
 
 def home(request):
     return render(request, 'home.html')
@@ -58,8 +61,17 @@ def dashboard(request):
     if not user_id:
         return redirect('login_user')
 
+    # Fetch user data (optional)
     user = User.objects.get(id=user_id)
-    return render(request, 'dashboard.html', {'user_detail': user})
+
+    # Fetch tasks belonging to logged-in user
+    tasks = Task.objects.filter(user_id=user_id)
+
+    return render(request, 'dashboard.html', {
+        'user': user,
+        'tasks': tasks,
+    })
+
 
 
 def logout_user(request):
@@ -68,3 +80,31 @@ def logout_user(request):
     except KeyError:
         pass
     return redirect('home')
+
+def add_task(request):
+    if request.method == 'POST':
+        title = request.POST.get('title').strip()
+        if title:
+            Task.objects.create(title=title, completed=False)
+            return redirect('dashboard')
+        else:
+            error = "Task title cannot be empty."
+            return render(request, 'add_task.html', {'error': error, 'title': title})
+
+    return render(request, 'add_task.html')
+
+
+def edit_task(request, task_id):
+    task = get_object_or_404(Task, id=task_id)
+
+    if request.method == 'POST':
+        title = request.POST.get('title').strip()
+        if title:
+            task.title = title
+            task.save()
+            return redirect('dashboard')
+        else:
+            error = "Task title cannot be empty."
+            return render(request, 'edit_task.html', {'task': task, 'error': error})
+
+    return render(request, 'edit_task.html', {'task': task})

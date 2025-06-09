@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="form-section">
+  <div class="form-container">
+    <h1>Confirm Delete</h1>
+    <p>Are you sure you want to delete task: "{{ task.title }}"?</p>
+    <form method="POST">
+      {% csrf_token %}
+      <button type="submit" class="btn-submit delete">Yes, Delete</button>
+      <a href="{% url 'dashboard' %}" class="btn-cancel">Cancel</a>
+    </form>
+  </div>
+</section>
+{% endblock %}

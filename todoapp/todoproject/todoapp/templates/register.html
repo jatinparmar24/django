@@ -12,44 +12,44 @@ Registration Page
 
 {% block content %}
 
-<h1>This Is Registration Section</h1>
+<section class="registration-section">
+  <div class="registration-card">
+    <h1>This Is Registration Section</h1>
+    <form action="{% url 'register_user' %}" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <label for="username">Name:</label>
+      <input type="text" name="username" placeholder="Enter your name" required>
 
-<form action="{% url 'register_user' %}"  method="POST" enctype="multipart/form-data">
+      <label for="email">Email:</label>
+      <input type="email" name="email" placeholder="Enter your email" required>
 
-  {% csrf_token %}
+      <label for="phone">Contact:</label>
+      <input type="tel" name="phone" pattern="[0-9]{10}" maxlength="10" placeholder="10-digit number" required>
 
-  <label for="username">Name:</label>
-  <input type="text" name="username" placeholder="Enter your name" required><br><br>
+      <label for="dob">DOB:</label>
+      <input type="date" name="dob" min="1934-01-01" max="2024-01-01" required>
 
-  <label for="email">Email:</label>
-  <input type="email" name="email" placeholder="Enter your email" required><br><br>
+      <label>Gender:</label>
+      <input type="radio" name="gender" value="male" id="male">
+      <label for="male" style="display:inline; font-weight: normal; margin-right: 10px;">Male</label>
 
+      <input type="radio" name="gender" value="female" id="female">
+      <label for="female" style="display:inline; font-weight: normal;">Female</label>
 
-  <label for="phone">Contact:</label>
-  <input type="tel" name="phone" pattern="[0-9]{10}" maxlength="10" placeholder="10-digit number" required><br><br>
+      <label for="profile-pic">Profile Picture:</label>
+      <input type="file" name="profile-pic" accept=".jpeg,.png">
 
-  <label for="dob">DOB:</label>
-  <input type="date" name="dob" min="1934-01-01" max="2024-01-01" required><br><br>
+      <label for="password">Password:</label>
+      <input type="password" name="password" required>
 
-  <label>Gender:</label><br>
-  <input type="radio" name="gender" value="male"> Male
-  <input type="radio" name="gender" value="female"> Female<br><br>
+      <label for="cpassword">Confirm Password:</label>
+      <input type="password" name="cpassword" required>
 
-  
-  <label for="profile-pic">Profile Picture:</label>
-  <input type="file" name="profile-pic" accept=".jpeg,.png"><br><br>
-  
+      <input type="submit" value="Register">
+    </form>
+  </div>
+</section>
 
-  <label for="password">Password:</label>
-  <input type="password" name="password" required><br><br>
-
-  <label for="cpassword">Confirm Password:</label>
-  <input type="password" name="cpassword" required><br><br>
-
-  <input type="submit" value="Register">
-
-
-</form>
 
 
 {% endblock %}
