@@ -19,7 +19,7 @@ class StudentViewSet(viewsets.ModelViewSet):
 class TeacherViewSet(viewsets.ModelViewSet):
     # permission_classes = [AllowAny]
     queryset = Teacher.objects.all()
-    serializer_class = StudentSerializer
+    serializer_class = TeacherSerializer
 
 
 # to create custom token

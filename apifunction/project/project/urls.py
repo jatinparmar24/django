@@ -28,30 +28,14 @@ from rest_framework_simplejwt.views  import TokenObtainPairView,TokenRefreshView
 router = routers.DefaultRouter()
 router.register(r'students', StudentViewSet),
 router.register(r'teachers',TeacherViewSet),
-
+router.register(r'workers',WorkerViewSet),
+router.register(r'owners',OwnerViewSet),
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('', include(router.urls)),
-
-    # method for token
-    # path('api-token-auth/', views.obtain_auth_token),
-    # method for token
-
-    # method for customtoken
-    # path('api-token-auth/', CustomAuthToken.as_view()),
-
-    # method for token
-
-    # "for simple jwt"
+    path('',include(router.urls)),
+     # "for simple jwt"
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     # "for simple jwt"
-
-
-
-    # for authentication and persmission login
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
-
-
 ]
