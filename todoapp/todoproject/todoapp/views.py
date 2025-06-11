@@ -1,7 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import User
-from .models import Task
-from .forms import TaskForm
+from .models import User,Task
 
 
 def home(request):
@@ -82,10 +80,16 @@ def logout_user(request):
     return redirect('home')
 
 def add_task(request):
+    user_id = request.session.get('user_id')
+    if not user_id:
+        return redirect('login_user')
+
+    user = User.objects.get(id=user_id)
+
     if request.method == 'POST':
-        title = request.POST.get('title').strip()
+        title = request.POST.get('title', '').strip()
         if title:
-            Task.objects.create(title=title, completed=False)
+            Task.objects.create(user=user, title=title, completed=False)
             return redirect('dashboard')
         else:
             error = "Task title cannot be empty."
@@ -94,11 +98,17 @@ def add_task(request):
     return render(request, 'add_task.html')
 
 
+
 def edit_task(request, task_id):
-    task = get_object_or_404(Task, id=task_id)
+    user_id = request.session.get('user_id')
+    if not user_id:
+        return redirect('login_user')
+
+    user = User.objects.get(id=user_id)
+    task = get_object_or_404(Task, id=task_id, user=user) 
 
     if request.method == 'POST':
-        title = request.POST.get('title').strip()
+        title = request.POST.get('title', '').strip()
         if title:
             task.title = title
             task.save()

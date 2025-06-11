@@ -31,7 +31,7 @@
       <ul>
         {% for task in tasks %}
           <li class="task-item {% if task.completed %}completed{% endif %}">
-            <form method="POST" style="display: inline;">
+            <form method="POST">
               {% csrf_token %}
               <input type="hidden" name="task_id" value="{{ task.id }}">
               <button type="submit" name="toggle_complete" class="btn-toggle">
@@ -41,8 +41,7 @@
             <span>{{ task.title }}</span>
             <div class="actions">
               <a href="{% url 'edit_task' task.id %}" class="edit-btn">Edit</a>
-
-              <form method="POST" style="display: inline;">
+              <form method="POST">
                 {% csrf_token %}
                 <input type="hidden" name="task_id" value="{{ task.id }}">
                 <button type="submit" name="delete_task" class="delete-btn" onclick="return confirm('Are you sure?');">Delete</button>
@@ -50,13 +49,14 @@
             </div>
           </li>
         {% empty %}
-          <li>No tasks found. Add some!</li>
+          <li class="empty-message">No tasks found. Add some!</li>
         {% endfor %}
       </ul>
       <a href="{% url 'add_task' %}" class="btn-add-task">+ Add New Task</a>
     </div>
   </div>
 </section>
+
 
 {% endblock %}
 
