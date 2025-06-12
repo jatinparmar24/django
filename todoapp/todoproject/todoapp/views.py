@@ -118,3 +118,12 @@ def edit_task(request, task_id):
             return render(request, 'edit_task.html', {'task': task, 'error': error})
 
     return render(request, 'edit_task.html', {'task': task})
+
+
+    
+
+def delete_task(request, task_id):
+    delete_data=Task.objects.get(id=task_id)
+    delete_data.delete()
+    return redirect('dashboard')
+

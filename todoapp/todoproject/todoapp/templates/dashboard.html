@@ -41,11 +41,11 @@
             <span>{{ task.title }}</span>
             <div class="actions">
               <a href="{% url 'edit_task' task.id %}" class="edit-btn">Edit</a>
-              <form method="POST">
-                {% csrf_token %}
-                <input type="hidden" name="task_id" value="{{ task.id }}">
-                <button type="submit" name="delete_task" class="delete-btn" onclick="return confirm('Are you sure?');">Delete</button>
+              <form method="POST" action="{% url 'delete_task' task.id %}">
+                 {% csrf_token %}
+                 <button type="submit" class="delete-btn" onclick="return confirm('Are you sure?');">Delete</button>
               </form>
+
             </div>
           </li>
         {% empty %}
