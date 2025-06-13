@@ -1,10 +1,11 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render
 from .models import ItemInfo,Product
 from .forms import ItemInfoForm
-# Create your views here.
-
 import razorpay
 from django.views.decorators.csrf import csrf_exempt
+# Create your views here.
+
+
 
 def home(request):
     if request.method=="POST":
