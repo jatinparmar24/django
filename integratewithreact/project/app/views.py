@@ -1,8 +1,8 @@
 # api/views.py
 from rest_framework import viewsets
-from .models import Registration
+from .models import Registrations
 from .serializers import RegistrationSerializer
 
 class RegistrationViewSet(viewsets.ModelViewSet):
-    queryset = Registration.objects.all()
+    queryset = Registrations.objects.all()
     serializer_class = RegistrationSerializer
